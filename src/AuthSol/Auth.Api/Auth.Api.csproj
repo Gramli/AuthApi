@@ -16,4 +16,9 @@
     <Folder Include="EndpointBuilders\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Auth.Core\Auth.Core.csproj" />
+    <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
