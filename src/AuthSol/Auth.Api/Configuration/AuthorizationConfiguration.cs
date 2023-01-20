@@ -6,8 +6,8 @@
         {
             serviceCollection.AddAuthorization(options =>
             {
-                options.AddPolicy("user", policy => policy.RequireRole("user"));
-                options.AddPolicy("developer", policy => policy.RequireRole("developer"));
+                options.AddPolicy("user", policy => policy.RequireRole("user", "developer", "administrator"));
+                options.AddPolicy("developer", policy => policy.RequireRole("developer", "administrator"));
                 options.AddPolicy("administrator", policy => policy.RequireRole("administrator"));
             });
 

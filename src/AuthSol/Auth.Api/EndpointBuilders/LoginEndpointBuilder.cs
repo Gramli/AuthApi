@@ -1,4 +1,5 @@
 ﻿using Auth.Domain.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Auth.Api.EndpointBuilders
 {
@@ -6,7 +7,7 @@ namespace Auth.Api.EndpointBuilders
     {
         public static IEndpointRouteBuilder BuildLoginEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("/login", (LoginCommand loginCommand) =>
+            endpointRouteBuilder.MapPost("/login", [AllowAnonymous](LoginCommand loginCommand) =>
             {
 
             });
