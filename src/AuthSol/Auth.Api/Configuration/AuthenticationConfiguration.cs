@@ -17,7 +17,7 @@ namespace Auth.Api.Configuration
             {
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"])), 
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"])), //TODO FIX
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,

@@ -30,7 +30,7 @@ namespace Auth.Infrastructure.Services
                     new Claim(ClaimTypes.Role, user.Role),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(20),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes256CbcHmacSha512) //TODO FIX
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
