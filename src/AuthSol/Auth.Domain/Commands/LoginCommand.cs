@@ -8,12 +8,12 @@ namespace Auth.Domain.Commands
 {
     public class LoginCommand
     {
-        public string UserName { get; init; }
+        public string Username { get; init; }
         public string Password { get; init; }
 
         public LoginCommand(string username, string password) 
-        {  
-            UserName = username; 
+        {
+            Username = username; 
             Password = password; 
         }
     }

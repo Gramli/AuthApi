@@ -1,5 +1,4 @@
-﻿using Auth.Domain.Http;
-using System.Net;
+﻿using System.Net;
 
 namespace Auth.Domain.Http
 {
