@@ -2,7 +2,7 @@
 using Auth.Domain.Dtos;
 using FluentResults;
 
-namespace Auth.Core.Abstractions
+namespace Auth.Core.Abstractions.Services
 {
     public interface IAccountService
     {

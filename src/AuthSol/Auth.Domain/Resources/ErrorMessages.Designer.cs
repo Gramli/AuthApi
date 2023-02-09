@@ -61,6 +61,15 @@ namespace Auth.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid registration..
+        /// </summary>
+        public static string InvalidRegistration {
+            get {
+                return ResourceManager.GetString("InvalidRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username or email is invalid..
         /// </summary>
         public static string InvalidUsernameOrEmail {

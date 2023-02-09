@@ -1,6 +1,6 @@
 ﻿using Auth.Domain.Dtos;
 
-namespace Auth.Core.Abstractions
+namespace Auth.Core.Abstractions.Services
 {
     public interface ITokenService
     {

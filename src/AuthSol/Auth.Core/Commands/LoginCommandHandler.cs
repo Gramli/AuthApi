@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions;
+using Auth.Core.Abstractions.Commands;
+using Auth.Core.Abstractions.Services;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
 using Auth.Domain.Extensions;
@@ -8,7 +9,7 @@ using Auth.Domain.Resources;
 
 namespace Auth.Core.Commands
 {
-    internal class LoginCommandHandler : IRequestHandler<LogedUserDto, LoginCommand>
+    internal class LoginCommandHandler : ILoginCommandHandler
     {
         private readonly ITokenService _tokenService;
         private readonly IAccountService _accountService;
@@ -18,8 +19,10 @@ namespace Auth.Core.Commands
             _tokenService = Guard.Against.Null(tokenService);
             _accountService = Guard.Against.Null(accountService);
         }
+
         public async Task<HttpDataResponse<LogedUserDto>> HandleAsync(LoginCommand request, CancellationToken cancellationToken)
         {
+            //TODO ADD COMMAND VALIDATION
             var userResult = await _accountService.FindUser(request, cancellationToken);
 
             if(userResult.IsFailed)

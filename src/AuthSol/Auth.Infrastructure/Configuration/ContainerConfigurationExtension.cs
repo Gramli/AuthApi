@@ -1,7 +1,10 @@
-﻿using Auth.Core.Abstractions;
+﻿using Auth.Core.Abstractions.Repositories;
+using Auth.Core.Abstractions.Services;
 using Auth.Domain.Commands;
+using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
+using Auth.Infrastructure.Database.Repositories;
 using Auth.Infrastructure.Extensions;
 using Auth.Infrastructure.Options;
 using Auth.Infrastructure.Services;
@@ -22,8 +25,13 @@ namespace Auth.Infrastructure.Configuration
             return serviceCollection
                 .RegisterMapsterConfiguration()
                 .AddDatabase()
-                .AddSingleton<ITokenService, TokenService>();
+                .AddServices();
         }
+
+        private static IServiceCollection AddServices(this IServiceCollection serviceCollection)
+            => serviceCollection
+                .AddSingleton<ITokenService, TokenService>()
+                .AddScoped<IAccountService, AccountService>();
 
         private static IServiceCollection RegisterMapsterConfiguration(this IServiceCollection serviceCollection)
         {
@@ -34,9 +42,11 @@ namespace Auth.Infrastructure.Configuration
         }
 
         private static IServiceCollection AddDatabase(this IServiceCollection serviceCollection)
-        {
-            return serviceCollection
-                .AddDbContext<UserContext>(opt => opt.UseInMemoryDatabase("Users"));
-        }
+            => serviceCollection
+                .AddDbContext<UserContext>(opt => opt.UseInMemoryDatabase("Users"))
+                .AddScoped<IUserQueriesRepository, UserQueriesRepository>()
+                .AddScoped<ISecretUserQueriesRepository, UserQueriesRepository>()
+                .AddScoped<ISecretUserCommandsRepository, UserCommandsRepository>()
+                .AddScoped<IUserCommandsRepository, UserCommandsRepository>();
     }
 }

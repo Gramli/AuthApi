@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions;
+using Auth.Core.Abstractions.Services;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
 using Auth.Domain.Resources;
@@ -50,6 +50,7 @@ namespace Auth.Infrastructure.Services
 
             var userEntity = registerCommand.Adapt<UserEntity>();
 
+            //TODO ADD DEFAULT USER ROLE
             var userId = await _secretUserCommandsRepository.AddUser(userEntity, cancellationToken);
 
             return Result.Ok(userId);

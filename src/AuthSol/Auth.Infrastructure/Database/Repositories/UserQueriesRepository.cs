@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions;
+using Auth.Core.Abstractions.Repositories;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
@@ -17,7 +17,7 @@ namespace Auth.Infrastructure.Database.Repositories
         }
         public async Task<Result<UserEntity>> FindUser(string username, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName.Equals(username));
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username.Equals(username));
             return user is not null ? Result.Ok(user) : Result.Fail<UserEntity>(""); //TODO FIX
         }
     }
