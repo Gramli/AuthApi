@@ -1,5 +1,6 @@
 using Auth.Api.Configuration;
 using Auth.Api.EndpointBuilders;
+using Auth.Api.Midlewares;
 using Auth.Core.Configuration;
 using Auth.Infrastructure.Configuration;
 
@@ -25,8 +26,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 
-//TODO ADD EXCEPTION MIDDLEWARE
+app.UseMiddleware<ExceptionMiddleware>();
 
-app.BuildUserEndpoints();
+app.BuildUserEndpoints()
+   .BuildServiceEndpoints();
+
+await app.Services.AddDefaultUsers();
 
 app.Run();

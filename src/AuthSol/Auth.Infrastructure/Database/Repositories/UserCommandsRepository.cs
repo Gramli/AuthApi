@@ -3,6 +3,8 @@ using Auth.Core.Abstractions.Repositories;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
+using FluentResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
 {
@@ -18,6 +20,20 @@ namespace Auth.Infrastructure.Database.Repositories
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync(cancellationToken);
             return userEntity.Id;
+        }
+
+        public async Task<Result<bool>> ChangeUserRole(UserEntity user, string role, CancellationToken cancellationToken)
+        {
+            try
+            {
+                user.Role = role;
+                await _context.SaveChangesAsync(cancellationToken);
+                return Result.Ok(true);
+            }
+            catch(DbUpdateException ex)
+            {
+                return Result.Fail(ex.Message);
+            }
         }
     }
 }

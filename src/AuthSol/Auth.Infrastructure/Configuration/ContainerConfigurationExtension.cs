@@ -31,7 +31,8 @@ namespace Auth.Infrastructure.Configuration
         private static IServiceCollection AddServices(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddSingleton<ITokenService, TokenService>()
-                .AddScoped<IAccountService, AccountService>();
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<IUserService, UserService>();
 
         private static IServiceCollection RegisterMapsterConfiguration(this IServiceCollection serviceCollection)
         {

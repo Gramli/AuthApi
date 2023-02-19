@@ -2,6 +2,6 @@
 {
     internal sealed class TokenOptions
     {
-        public string JwtKey { get; init; } = string.Empty;
+        public string Key { get; init; } = string.Empty;
     }
 }

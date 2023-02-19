@@ -2,8 +2,8 @@
 {
     public class UserDto
     {
-        public string Username { get; init; }
-        public string Role { get; init; }
+        public string Username { get; init; } = string.Empty;
+        public string Role { get; init; } = string.Empty;
 
         public UserDto()
         {

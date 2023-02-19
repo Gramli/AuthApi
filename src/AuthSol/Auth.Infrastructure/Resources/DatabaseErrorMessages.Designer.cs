@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Auth.Domain.Resources {
+namespace Auth.Infrastructure.Resources {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace Auth.Domain.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ErrorMessages {
+    internal class DatabaseErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessages() {
+        internal DatabaseErrorMessages() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Auth.Domain.Resources.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Auth.Infrastructure.Resources.DatabaseErrorMessages", typeof(DatabaseErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Auth.Domain.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,38 +61,11 @@ namespace Auth.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change role operation failed..
+        ///   Looks up a localized string similar to User do not exist. Id {0}..
         /// </summary>
-        public static string FailedRoleChange {
+        internal static string UserNotExist {
             get {
-                return ResourceManager.GetString("FailedRoleChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid registration..
-        /// </summary>
-        public static string InvalidRegistration {
-            get {
-                return ResourceManager.GetString("InvalidRegistration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username or email is invalid..
-        /// </summary>
-        public static string InvalidUsernameOrEmail {
-            get {
-                return ResourceManager.GetString("InvalidUsernameOrEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username or password is invalid..
-        /// </summary>
-        public static string InvalidUsernameOrPassword {
-            get {
-                return ResourceManager.GetString("InvalidUsernameOrPassword", resourceCulture);
+                return ResourceManager.GetString("UserNotExist", resourceCulture);
             }
         }
     }

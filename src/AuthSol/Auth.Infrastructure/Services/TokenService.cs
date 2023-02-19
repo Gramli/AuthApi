@@ -16,12 +16,13 @@ namespace Auth.Infrastructure.Services
         public TokenService(IOptions<TokenOptions> tokenOptions)
         {
             _tokenOptions = Guard.Against.Null(tokenOptions);
+            Guard.Against.NullOrEmpty(_tokenOptions?.Value?.Key);
         }
         public string GenerateToken(UserDto user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.ASCII.GetBytes(_tokenOptions.Value.JwtKey); //TODO FIX 
+            var key = Encoding.ASCII.GetBytes(_tokenOptions.Value.Key); 
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -31,7 +32,7 @@ namespace Auth.Infrastructure.Services
                     new Claim(ClaimTypes.Role, user.Role),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(20),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes256CbcHmacSha512)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

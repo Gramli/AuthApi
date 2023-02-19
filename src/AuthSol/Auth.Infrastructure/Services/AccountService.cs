@@ -49,8 +49,6 @@ namespace Auth.Infrastructure.Services
             }
 
             var userEntity = registerCommand.Adapt<UserEntity>();
-
-            //TODO ADD DEFAULT USER ROLE
             var userId = await _secretUserCommandsRepository.AddUser(userEntity, cancellationToken);
 
             return Result.Ok(userId);

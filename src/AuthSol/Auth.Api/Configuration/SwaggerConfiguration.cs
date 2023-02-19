@@ -21,12 +21,12 @@ namespace Auth.Api.Configuration
         {
             return new OpenApiSecurityScheme()
             {
-                Name = "Authorization",
-                Type = SecuritySchemeType.ApiKey,
+                Name = "JWT Bearer token",
+                Type = SecuritySchemeType.Http,
                 Scheme = _bearer,
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "JSON Web Token",
+                Description = "JWT Bearer token Authorization",
             };
         }
 
@@ -41,7 +41,7 @@ namespace Auth.Api.Configuration
                         {
                             Type = ReferenceType.SecurityScheme,
                             Id = _bearer
-                        }
+                        },
                     },
                     new string[] {}
                 }

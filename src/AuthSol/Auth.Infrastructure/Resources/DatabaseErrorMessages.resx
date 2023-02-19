@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FailedRoleChange" xml:space="preserve">
-    <value>Change role operation failed.</value>
-  </data>
-  <data name="InvalidRegistration" xml:space="preserve">
-    <value>Invalid registration.</value>
-  </data>
-  <data name="InvalidUsernameOrEmail" xml:space="preserve">
-    <value>Username or email is invalid.</value>
-  </data>
-  <data name="InvalidUsernameOrPassword" xml:space="preserve">
-    <value>Username or password is invalid.</value>
+  <data name="UserNotExist" xml:space="preserve">
+    <value>User do not exist. Id {0}.</value>
   </data>
 </root>
