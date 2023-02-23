@@ -1,10 +1,12 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Repositories;
+using Auth.Domain.Dtos;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
 using Auth.Infrastructure.Resources;
 using FluentResults;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
@@ -26,6 +28,11 @@ namespace Auth.Infrastructure.Database.Repositories
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return GetUserResult(user);
+        }
+
+        public async Task<IEnumerable<UserDto>> GetUsers(CancellationToken cancellationToken)
+        {
+            return await _context.Users.Select(x => x.Adapt<UserDto>()).ToListAsync();
         }
 
         private Result<UserEntity> GetUserResult(UserEntity? user)

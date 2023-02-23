@@ -19,7 +19,7 @@ namespace Auth.Infrastructure.Services
 
         public async Task<Result<bool>> ChangeUserRole(ChangeRoleCommand changeRoleCommand, CancellationToken cancellationToken)
         {
-            var userResult = await _secretUserQueriesRepository.GetUser(changeRoleCommand.UserId, cancellationToken);
+            var userResult = await _secretUserQueriesRepository.FindUser(changeRoleCommand.UserName, cancellationToken);
             if(userResult.IsFailed) 
             {
                 return Result.Fail(userResult.Errors);

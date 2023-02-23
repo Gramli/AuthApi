@@ -1,13 +1,9 @@
-﻿using FluentResults;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Auth.Domain.Dtos;
 
 namespace Auth.Core.Abstractions.Repositories
 {
     public interface IUserQueriesRepository
     {
+        Task<IEnumerable<UserDto>> GetUsers(CancellationToken cancellationToken);
     }
 }

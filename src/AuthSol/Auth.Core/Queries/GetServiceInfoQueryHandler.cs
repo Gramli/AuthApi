@@ -1,5 +1,6 @@
 ﻿using Auth.Core.Abstractions.Queries;
 using Auth.Domain.Dtos;
+using Auth.Domain.Extensions;
 using Auth.Domain.Http;
 
 namespace Auth.Core.Queries
@@ -8,7 +9,11 @@ namespace Auth.Core.Queries
     {
         public Task<HttpDataResponse<ServiceInfoDto>> HandleAsync(EmptyRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(HttpDataResponses.AsOK(new ServiceInfoDto
+            {
+                Name = "Auth Service",
+                Description = "Successfully get information about service as User"
+            }));
         }
     }
 }
