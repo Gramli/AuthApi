@@ -22,7 +22,7 @@ namespace Auth.Infrastructure.Database.Repositories
             return userEntity.Id;
         }
 
-        public async Task<Result<bool>> ChangeUserRole(UserEntity user, string role, CancellationToken cancellationToken)
+        public async Task<Result<bool>> ChangeUserRole(UserEntity user, RoleEntity role, CancellationToken cancellationToken)
         {
             try
             {

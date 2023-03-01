@@ -1,6 +1,7 @@
 ﻿using Auth.Core.Abstractions.Repositories;
 using Auth.Core.Abstractions.Services;
 using Auth.Domain.Commands;
+using Auth.Domain.Dtos;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
@@ -39,6 +40,11 @@ namespace Auth.Infrastructure.Configuration
             TypeAdapterConfig<RegisterCommand, UserEntity>
             .NewConfig()
             .Map(dest => dest.Password, src => PasswordHasher.HashPassword(src.Password));
+
+            TypeAdapterConfig<UserEntity, UserDto>
+            .NewConfig()
+            .Map(dest => dest.Role, src => src.Role.Role);
+
             return serviceCollection;
         }
 
@@ -48,6 +54,9 @@ namespace Auth.Infrastructure.Configuration
                 .AddScoped<IUserQueriesRepository, UserQueriesRepository>()
                 .AddScoped<ISecretUserQueriesRepository, UserQueriesRepository>()
                 .AddScoped<ISecretUserCommandsRepository, UserCommandsRepository>()
+                .AddScoped<IRoleQueriesRepository, RoleQueriesRepository>()
+                .AddScoped<ISecretRoleQueriesRepository, RoleQueriesRepository>()
+                .AddScoped<ISecretRoleCommandRepository, RoleCommandRepository>()
                 .AddScoped<IUserCommandsRepository, UserCommandsRepository>();
     }
 }

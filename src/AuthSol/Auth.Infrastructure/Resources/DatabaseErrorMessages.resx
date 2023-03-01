@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>Role do not exist. Role {0}.</value>
+  </data>
   <data name="UserNotExist" xml:space="preserve">
     <value>User do not exist. Id {0}.</value>
   </data>

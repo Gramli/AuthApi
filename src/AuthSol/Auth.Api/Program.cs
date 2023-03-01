@@ -31,6 +31,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.BuildUserEndpoints()
    .BuildServiceEndpoints();
 
+await app.Services.AddDefaultRoles();
 await app.Services.AddDefaultUsers();
 
 app.Run();

@@ -61,6 +61,15 @@ namespace Auth.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Role do not exist. Role {0}..
+        /// </summary>
+        internal static string RoleNotExist {
+            get {
+                return ResourceManager.GetString("RoleNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User do not exist. Id {0}..
         /// </summary>
         internal static string UserNotExist {
