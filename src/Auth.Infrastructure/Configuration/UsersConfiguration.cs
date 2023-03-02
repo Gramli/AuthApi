@@ -4,7 +4,7 @@ using Auth.Infrastructure.Database.EFContext.Entities;
 using Auth.Infrastructure.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Auth.Api.Configuration
+namespace Auth.Infrastructure.Configuration
 {
     public static class UsersConfiguration
     {

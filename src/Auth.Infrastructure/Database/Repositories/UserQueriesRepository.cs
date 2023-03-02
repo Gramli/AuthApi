@@ -20,19 +20,25 @@ namespace Auth.Infrastructure.Database.Repositories
         }
         public async Task<Result<UserEntity>> FindUser(string username, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username.Equals(username));
+            var user = await _context.Users
+                .Include(x => x.Role)
+                .SingleOrDefaultAsync(x => x.Username.Equals(username));
             return GetUserResult(user);
         }
 
         public async Task<Result<UserEntity>> GetUser(int id, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var user = await _context.Users
+                .Include(x => x.Role)
+                .SingleOrDefaultAsync(x => x.Id.Equals(id));
             return GetUserResult(user);
         }
 
         public async Task<IEnumerable<UserDto>> GetUsers(CancellationToken cancellationToken)
         {
-            return await _context.Users.Select(x => x.Adapt<UserDto>()).ToListAsync();
+            return await _context.Users
+                .Include(x => x.Role)
+                .Select(x => x.Adapt<UserDto>()).ToListAsync();
         }
 
         private Result<UserEntity> GetUserResult(UserEntity? user)

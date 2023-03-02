@@ -1,9 +1,9 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Repositories;
+using Auth.Domain.Extensions;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Database.EFContext.Entities;
-using File.Domain.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
