@@ -3,13 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33103.201
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Api", "Auth.Api\Auth.Api.csproj", "{9A89C087-CE1C-44B1-B887-7F3E6E887D5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Api", "Auth.Api\Auth.Api.csproj", "{9A89C087-CE1C-44B1-B887-7F3E6E887D5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Infrastructure", "Auth.Infrastructure\Auth.Infrastructure.csproj", "{0B3BFA82-69D0-4483-B08D-45473D29973F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Infrastructure", "Auth.Infrastructure\Auth.Infrastructure.csproj", "{0B3BFA82-69D0-4483-B08D-45473D29973F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Core", "Auth.Core\Auth.Core.csproj", "{F7CDAF09-C337-44FD-9D5B-DEDC011EDB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Core", "Auth.Core\Auth.Core.csproj", "{F7CDAF09-C337-44FD-9D5B-DEDC011EDB66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Domain", "Auth.Domain\Auth.Domain.csproj", "{E7B3ACD4-AA93-402A-A1B5-257F697858F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Domain", "Auth.Domain\Auth.Domain.csproj", "{E7B3ACD4-AA93-402A-A1B5-257F697858F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{51476414-DBF1-482B-8BE5-7FC3D4B009EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{BFE027E1-9FB8-4A01-B40D-1E4562659891}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemTests", "SystemTests", "{D0227BD0-3DC8-4E29-AFEA-CDDB401FB50B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +42,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFE027E1-9FB8-4A01-B40D-1E4562659891} = {51476414-DBF1-482B-8BE5-7FC3D4B009EF}
+		{D0227BD0-3DC8-4E29-AFEA-CDDB401FB50B} = {51476414-DBF1-482B-8BE5-7FC3D4B009EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2AD13CB-F802-47B1-9A57-938FBD120D40}
