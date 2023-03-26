@@ -1,8 +1,8 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
+using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
-using Auth.Domain.Resources;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext.Entities;
 using Auth.Infrastructure.Extensions;

@@ -123,6 +123,9 @@
   <data name="InvalidRegistration" xml:space="preserve">
     <value>Invalid registration.</value>
   </data>
+  <data name="InvalidRequest" xml:space="preserve">
+    <value>Invalid request.</value>
+  </data>
   <data name="InvalidUsernameOrEmail" xml:space="preserve">
     <value>Username or email is invalid.</value>
   </data>

@@ -2,10 +2,11 @@
 using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Repositories;
 using Auth.Core.Abstractions.Services;
+using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using Auth.Domain.Extensions;
 using Auth.Domain.Http;
-using Auth.Domain.Resources;
+using Validot;
 
 namespace Auth.Core.Commands
 {
@@ -13,16 +14,22 @@ namespace Auth.Core.Commands
     {
         private readonly IUserService _userService;
         private readonly IRoleQueriesRepository _roleQueriesRepository;
+        private readonly IValidator<ChangeRoleCommand> _validator;
 
-        public ChangeRoleCommandHandler(IUserService userService, IRoleQueriesRepository roleQueriesRepository)
+        public ChangeRoleCommandHandler(IUserService userService, IRoleQueriesRepository roleQueriesRepository, IValidator<ChangeRoleCommand> validator)
         {
             _userService = Guard.Against.Null(userService);
             _roleQueriesRepository = Guard.Against.Null(roleQueriesRepository);
+            _validator = Guard.Against.Null(validator);
         }
 
         public async Task<HttpDataResponse<bool>> HandleAsync(ChangeRoleCommand request, CancellationToken cancellationToken)
         {
-            //TODO ADD VALIDATIOn
+            if(!_validator.IsValid(request))
+            {
+                return HttpDataResponses.AsBadRequest<bool>(ErrorMessages.InvalidRequest);
+            }
+
             var roles = await _roleQueriesRepository.GetRoles(cancellationToken);
 
             if(!roles.Contains(request.RoleName, StringComparer.OrdinalIgnoreCase))
