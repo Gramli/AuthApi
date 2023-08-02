@@ -23,6 +23,8 @@ Endpoints use different types of authorization policies.
 
 Simply Run **Auth.API** and try it.
 
+![SwaggerUI](./doc/img/login.gif)
+
 # Motivation
 Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture.
 
@@ -51,6 +53,9 @@ Solution contains four layers:
 * **Auth.Domain** - all what should be shared across all projects
 	* DTOs
 	* General Extensions
+
+#### Horizontal Diagram (references)
+![Project Clean Architecture Diagram](./doc/img/cleanArchitecture.jpg)
 
 ## Technologies
 * [ASP.NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
