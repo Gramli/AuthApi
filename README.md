@@ -58,7 +58,7 @@ Solution contains four layers:
 ![Project Clean Architecture Diagram](./doc/img/cleanArchitecture.jpg)
 
 ## Technologies
-* [ASP.NET Core 7](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
+* [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)
 * [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
 * [Mapster](https://github.com/MapsterMapper/Mapster)
 * [FluentResuls](https://github.com/altmann/FluentResults)
