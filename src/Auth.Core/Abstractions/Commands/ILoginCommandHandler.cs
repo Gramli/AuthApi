@@ -3,7 +3,7 @@ using Auth.Domain.Dtos;
 
 namespace Auth.Core.Abstractions.Commands
 {
-    public interface ILoginCommandHandler : IRequestHandler<LogedUserDto, LoginCommand>
+    public interface ILoginCommandHandler : IRequestHandler<LoggedUserDto, LoginCommand>
     {
     }
 }

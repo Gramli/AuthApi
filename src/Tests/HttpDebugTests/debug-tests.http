@@ -1,0 +1,32 @@
+@hostname=localhost
+@port=7190
+@host={{hostname}}:{{port}}
+POST https://{{host}}/user/v1/register
+Content-Type: application/json
+
+{
+  "username": "string",
+  "password": "string",
+  "email": "something@som.com"
+}
+
+###
+
+POST https://{{host}}/user/v1/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "passwAdmin"
+}
+
+###
+
+POST https://{{host}}/user/v1/changeRole
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
+
+{
+  "username": "string",
+  "roleName": "developer"
+}

@@ -22,7 +22,8 @@ namespace Auth.Api.EndpointBuilders
                 await getServiceInfoQueryHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<ServiceInfoDto>()
                     .WithName("GetServiceInfo")
-                    .RequireAuthorization(AuthorizationConfiguration.UserPolicyName);
+                    .RequireAuthorization(AuthorizationConfiguration.UserPolicyName)
+                    .WithOpenApi();
 
             return endpointRouteBuilder;
         }

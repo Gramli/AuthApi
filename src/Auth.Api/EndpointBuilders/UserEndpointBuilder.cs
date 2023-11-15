@@ -24,28 +24,31 @@ namespace Auth.Api.EndpointBuilders
             endpointRouteBuilder.MapPost("v1/login",
                 async (LoginCommand loginCommand, [FromServices] ILoginCommandHandler loginCommandHandler, CancellationToken cancellationToken) =>
                 await loginCommandHandler.SendAsync(loginCommand, cancellationToken))
-                    .Produces<LogedUserDto>()
+                    .Produces<LoggedUserDto>()
                     .WithName("Login")
-                    .AllowAnonymous();
+                    .AllowAnonymous()
+                    .WithOpenApi();
 
             endpointRouteBuilder.MapPost("v1/register",
                 async (RegisterCommand loginCommand, [FromServices] IRegisterCommandHandler registerCommandHandler, CancellationToken cancellationToken) =>
                 await registerCommandHandler.SendAsync(loginCommand, cancellationToken))
-                    .Produces<LogedUserDto>()
+                    .Produces<LoggedUserDto>()
                     .WithName("Register")
-                    .AllowAnonymous();
+                    .AllowAnonymous()
+                    .WithOpenApi();
 
             return endpointRouteBuilder;
         }
 
         private static IEndpointRouteBuilder BuildUserChangeEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("v1/chageRole",
+            endpointRouteBuilder.MapPost("v1/changeRole",
                 async (ChangeRoleCommand changeRoleCommand, [FromServices] IChangeRoleCommandHandler changeRoleCommandHandler, CancellationToken cancellationToken) =>
                 await changeRoleCommandHandler.SendAsync(changeRoleCommand, cancellationToken))
                     .Produces<bool>()
-                    .WithName("ChageRole")
-                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName);
+                    .WithName("ChangeRole")
+                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName)
+                    .WithOpenApi();
 
             return endpointRouteBuilder;
         }
@@ -57,7 +60,8 @@ namespace Auth.Api.EndpointBuilders
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserDto>>()
                     .WithName("GetUsersInfo")
-                    .RequireAuthorization(AuthorizationConfiguration.DeveoperPolicyName);
+                    .RequireAuthorization(AuthorizationConfiguration.DeveloperPolicyName)
+                    .WithOpenApi();
 
             return endpointRouteBuilder;
         }

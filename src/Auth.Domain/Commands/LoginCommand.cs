@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Auth.Domain.Commands
+﻿namespace Auth.Domain.Commands
 {
-    public class LoginCommand
+    public class LoginCommand(string username, string password)
     {
-        public string Username { get; init; }
-        public string Password { get; init; }
-
-        public LoginCommand(string username, string password) 
-        {
-            Username = username; 
-            Password = password; 
-        }
+        public string Username { get; init; } = username;
+        public string Password { get; init; } = password;
     }
 }

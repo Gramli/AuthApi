@@ -17,6 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemTests", "SystemTests", "{D0227BD0-3DC8-4E29-AFEA-CDDB401FB50B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{5500F2CC-A9E8-4C7B-9FB6-1325BAF26BF6}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Debug\debug-tests.http = Tests\Debug\debug-tests.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +51,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BFE027E1-9FB8-4A01-B40D-1E4562659891} = {51476414-DBF1-482B-8BE5-7FC3D4B009EF}
 		{D0227BD0-3DC8-4E29-AFEA-CDDB401FB50B} = {51476414-DBF1-482B-8BE5-7FC3D4B009EF}
+		{5500F2CC-A9E8-4C7B-9FB6-1325BAF26BF6} = {51476414-DBF1-482B-8BE5-7FC3D4B009EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2AD13CB-F802-47B1-9A57-938FBD120D40}
