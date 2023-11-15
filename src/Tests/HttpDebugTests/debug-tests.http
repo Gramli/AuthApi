@@ -22,9 +22,11 @@ Content-Type: application/json
 
 ###
 
+# Generate Token in login request and put it to Authorization header like this:
+# Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
 POST https://{{host}}/user/v1/changeRole
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
+Authorization: Bearer <generated token>
 
 {
   "username": "string",
