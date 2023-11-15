@@ -23,9 +23,11 @@ Endpoints use different types of authorization policies.
 
 Simply Run **Auth.API** and try it.
 
+## Using SwaggerUI
 ![SwaggerUI](./doc/img/login.gif)
 
-Or you can use .http file (supported in VS2022)
+## Using .http file (VS2022)
+
 
 # Motivation
 Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture.
