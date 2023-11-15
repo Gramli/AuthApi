@@ -25,6 +25,8 @@ Simply Run **Auth.API** and try it.
 
 ![SwaggerUI](./doc/img/login.gif)
 
+Or you can use .http file (supported in VS2022)
+
 # Motivation
 Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture.
 
