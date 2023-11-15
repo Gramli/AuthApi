@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemTests", "SystemTests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{5500F2CC-A9E8-4C7B-9FB6-1325BAF26BF6}"
 	ProjectSection(SolutionItems) = preProject
-		Tests\Debug\debug-tests.http = Tests\Debug\debug-tests.http
+		Tests\HttpDebugTests\debug-tests.http = Tests\HttpDebugTests\debug-tests.http
 	EndProjectSection
 EndProject
 Global
