@@ -1,6 +1,8 @@
 @hostname=localhost
 @port=7190
 @host={{hostname}}:{{port}}
+
+### Register request
 POST https://{{host}}/user/v1/register
 Content-Type: application/json
 
@@ -10,8 +12,7 @@ Content-Type: application/json
   "email": "something@som.com"
 }
 
-###
-
+### Login reguest
 POST https://{{host}}/user/v1/login
 Content-Type: application/json
 
@@ -20,10 +21,10 @@ Content-Type: application/json
   "password": "passwAdmin"
 }
 
-###
-
 # Generate Token in login request and put it to Authorization header like this:
 # Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
+
+### Change Role request
 POST https://{{host}}/user/v1/changeRole
 Content-Type: application/json
 Authorization: Bearer <generated token>
@@ -32,3 +33,15 @@ Authorization: Bearer <generated token>
   "username": "string",
   "roleName": "developer"
 }
+
+### Users Info
+
+GET https://{{host}}/user/v1/getUsersInfo
+Content-Type: application/json
+Authorization: Bearer <generated token>
+
+### Service Info
+
+GET https://{{host}}/user/service/v1/getServiceInfo
+Content-Type: application/json
+Authorization: Bearer <generated token>
