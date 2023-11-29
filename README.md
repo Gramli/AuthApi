@@ -27,7 +27,7 @@ Simply Run **Auth.API** and try it.
 ![SwaggerUI](./doc/img/login.gif)
 
 ## Test Using .http file (VS2022)
- * Go to Tests/Debug folder and open **debug-tests.http** file (in VS2022
+ * Go to Tests/HttpDebugTests folder and open **debug-tests.http** file (in VS2022
  * Send Login request
  * Obtain jwtToken from response and use it in another requests in Authorization header
 
