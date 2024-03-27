@@ -2,7 +2,7 @@
 
 # Clean Architecture AuthApi
 
-REST API demonstrates **Authentication** and **Authorization** with **JWT token**. Also shows how to use diferent **Authorization policies** in minimap api endpoints. All using Clean Architecture, minimal API and various of design patterns.
+The REST API demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints, all implemented using Clean Architecture and various design patterns
 
 
 Example API allows to: 
@@ -36,11 +36,11 @@ Main motivation is to write practical example of Authorization and Authenticatio
 
 # Architecture
 
-Projects folows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, but application layer is splitted to Core and Domain projects where Core project holds business rules and Domain project contains business entities.
+The project follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, but the application layer is split into Core and Domain projects. The Core project holds the business rules, while the Domain project contains the business entities..
 
-As Minimal API allows to inject handlers into endpoint map methods, I decided to do not use **[MediatR](https://github.com/jbogard/MediatR)**, but still every endpoint has its own request and handler. Solution folows **[CQRS pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)**, it means that handlers are separated by commands and queries, command handlers handle command requests and query handlers handle query requests. Also repositories (**[Repository pattern](https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)**) are separated by command and queries.
+As Minimal API allows for injecting handlers into endpoint map methods, I decided not to use **[MediatR](https://github.com/jbogard/MediatR)**. Nonetheless, every endpoint still has its own request and handler.The solution folows the **[CQRS pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)**, , meaning that handlers are separated into commands and queries; command handlers handle command requests, and query handlers handle query requests. Additionally, repositories, following the (**[Repository pattern](https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)**), are also separated into commands and queries..
 
-Instead of throwing exceptions, project use **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (using [FluentResuls package](https://github.com/altmann/FluentResults)) and for returning exact http response, every handler returns data wraped into HttpDataResponse object which contains also error messages collection and http response code.
+Instead of throwing exceptions, the project uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (using [FluentResuls package](https://github.com/altmann/FluentResults)). For returning precise HTTP responses, every handler returns data wrapped in an HttpDataResponse object, which also contains a collection of error messages and the HTTP response code.
 
 #### Clean Architecture Layers
 
