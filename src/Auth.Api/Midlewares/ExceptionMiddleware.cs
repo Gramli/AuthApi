@@ -25,7 +25,7 @@ namespace Auth.Api.Midlewares
             }
             catch (Exception generalEx)
             {
-                _logger.LogError(LogEvents.GeneralError, generalEx, "Unexpected Error Occured.");
+                _logger.LogError(LogEvents.GeneralError, generalEx, "Unexpected Error Occurred.");
                 await WriteResponseAsync(generalEx, context);
             }
         }
@@ -50,7 +50,7 @@ namespace Auth.Api.Midlewares
             => generalEx switch
             {
                 TaskCanceledException taskCanceledException => (HttpStatusCode.NoContent, taskCanceledException.Message),
-                _ => (HttpStatusCode.InternalServerError, "Generic error occured on server. Check logs for more info.")
+                _ => (HttpStatusCode.InternalServerError, "Generic error occurred on server. Check logs for more info.")
             };
     }
 }

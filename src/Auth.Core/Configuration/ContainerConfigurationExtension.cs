@@ -5,7 +5,6 @@ using Auth.Core.Extensions;
 using Auth.Core.Queries;
 using Auth.Core.Validation;
 using Auth.Domain.Commands;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Validot;
 
@@ -13,12 +12,12 @@ namespace Auth.Core.Configuration
 {
     public static class ContainerConfigurationExtension
     {
-        public static IServiceCollection AddCore(this IServiceCollection serviceCollection, IConfiguration configuration)
+        public static IServiceCollection AddCore(this IServiceCollection serviceCollection)
             => serviceCollection
-                .AddCoreHandlers(configuration)
-                .AddCoreValidation(configuration);
+                .AddCoreHandlers()
+                .AddCoreValidation();
 
-        private static IServiceCollection AddCoreHandlers(this IServiceCollection serviceCollection, IConfiguration configuration)
+        private static IServiceCollection AddCoreHandlers(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddScoped<ILoginCommandHandler, LoginCommandHandler>()
                 .AddScoped<IRegisterCommandHandler, RegisterCommandHandler>()
@@ -26,7 +25,7 @@ namespace Auth.Core.Configuration
                 .AddScoped<IGetUserInfoQueryHandler, GetUserInfoQueryHandler>()
                 .AddScoped<IGetServiceInfoQueryHandler, GetServiceInfoQueryHandler>();
 
-        private static IServiceCollection AddCoreValidation(this IServiceCollection serviceCollection, IConfiguration configuration)
+        private static IServiceCollection AddCoreValidation(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddValidotSingleton<IValidator<ChangeRoleCommand>, ChangeRoleCommandSpecificationHolder, ChangeRoleCommand>()
                 .AddValidotSingleton<IValidator<RegisterCommand>, RegisterCommandSpecificationHolder, RegisterCommand>()
