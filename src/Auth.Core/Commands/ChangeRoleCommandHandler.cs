@@ -4,8 +4,9 @@ using Auth.Core.Abstractions.Repositories;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
-using Auth.Domain.Extensions;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
+using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands

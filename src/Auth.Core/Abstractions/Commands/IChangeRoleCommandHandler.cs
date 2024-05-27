@@ -1,8 +1,9 @@
 ﻿using Auth.Domain.Commands;
+using SmallApiToolkit.Core.RequestHandlers;
 
 namespace Auth.Core.Abstractions.Commands
 {
-    public interface IChangeRoleCommandHandler : IRequestHandler<bool, ChangeRoleCommand>
+    public interface IChangeRoleCommandHandler : IHttpRequestHandler<bool, ChangeRoleCommand>
     {
     }
 }

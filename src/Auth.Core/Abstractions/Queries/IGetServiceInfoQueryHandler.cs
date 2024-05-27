@@ -1,9 +1,10 @@
 ﻿using Auth.Domain.Dtos;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.RequestHandlers;
+using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Abstractions.Queries
 {
-    public interface IGetServiceInfoQueryHandler : IRequestHandler<ServiceInfoDto, EmptyRequest>
+    public interface IGetServiceInfoQueryHandler : IHttpRequestHandler<ServiceInfoDto, EmptyRequest>
     {
     }
 }
