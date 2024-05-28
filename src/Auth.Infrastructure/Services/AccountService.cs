@@ -11,7 +11,7 @@ using Mapster;
 
 namespace Auth.Infrastructure.Services
 {
-    internal class AccountService : IAccountService
+    internal sealed class AccountService : IAccountService
     {
         private readonly ISecretUserQueriesRepository _secretUserQueriesRepository;
         private readonly ISecretUserCommandsRepository _secretUserCommandsRepository;

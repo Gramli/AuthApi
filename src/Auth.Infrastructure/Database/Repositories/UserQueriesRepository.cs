@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
 {
-    internal class UserQueriesRepository : IUserQueriesRepository, ISecretUserQueriesRepository
+    internal sealed class UserQueriesRepository : IUserQueriesRepository, ISecretUserQueriesRepository
     {
         private readonly UserContext _context;
         public UserQueriesRepository(UserContext userContext)

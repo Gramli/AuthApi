@@ -3,7 +3,7 @@ using Validot;
 
 namespace Auth.Core.Validation
 {
-    internal class LoginCommandSpecificationHandler : ISpecificationHolder<LoginCommand>
+    internal sealed class LoginCommandSpecificationHandler : ISpecificationHolder<LoginCommand>
     {
         public Specification<LoginCommand> Specification { get; }
 

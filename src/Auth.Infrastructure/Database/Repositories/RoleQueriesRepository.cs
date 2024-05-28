@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
 {
-    internal class RoleQueriesRepository : IRoleQueriesRepository, ISecretRoleQueriesRepository
+    internal sealed class RoleQueriesRepository : IRoleQueriesRepository, ISecretRoleQueriesRepository
     {
         private readonly UserContext _context;
         public RoleQueriesRepository(UserContext userContext)

@@ -1,11 +1,11 @@
 ﻿using Auth.Core.Abstractions.Queries;
 using Auth.Domain.Dtos;
-using Auth.Domain.Extensions;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Queries
 {
-    internal class GetServiceInfoQueryHandler : IGetServiceInfoQueryHandler
+    internal sealed class GetServiceInfoQueryHandler : IGetServiceInfoQueryHandler
     {
         public Task<HttpDataResponse<ServiceInfoDto>> HandleAsync(EmptyRequest request, CancellationToken cancellationToken)
         {

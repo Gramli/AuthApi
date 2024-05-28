@@ -1,5 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Repositories;
 using Auth.Domain.Extensions;
 using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
 {
-    internal class RoleCommandRepository : ISecretRoleCommandRepository
+    internal sealed class RoleCommandRepository : ISecretRoleCommandRepository
     {
         private readonly UserContext _context;
         public RoleCommandRepository(UserContext userContext)

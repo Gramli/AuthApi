@@ -3,13 +3,13 @@ using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
-using Auth.Domain.Extensions;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal class RegisterCommandHandler : IRegisterCommandHandler
+    internal sealed class RegisterCommandHandler : IRegisterCommandHandler
     {
         private readonly IAccountService _accountService;
         private readonly IValidator<RegisterCommand> _validator;

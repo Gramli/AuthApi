@@ -2,12 +2,12 @@
 using Auth.Core.Abstractions.Queries;
 using Auth.Core.Abstractions.Repositories;
 using Auth.Domain.Dtos;
-using Auth.Domain.Extensions;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Queries
 {
-    internal class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
+    internal sealed class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
     {
         private readonly IUserQueriesRepository _userQueriesRepository;
 

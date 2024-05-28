@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.Repositories
 {
-    internal class UserCommandsRepository : IUserCommandsRepository, ISecretUserCommandsRepository
+    internal sealed class UserCommandsRepository : IUserCommandsRepository, ISecretUserCommandsRepository
     {
         private readonly UserContext _context;
         public UserCommandsRepository(UserContext userContext)

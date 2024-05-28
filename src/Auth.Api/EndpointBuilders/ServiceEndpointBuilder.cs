@@ -1,9 +1,9 @@
 ﻿using Auth.Api.Configuration;
-using Auth.Api.Extensions;
 using Auth.Core.Abstractions.Queries;
 using Auth.Domain.Dtos;
-using Auth.Domain.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 
 namespace Auth.Api.EndpointBuilders
 {
@@ -17,7 +17,7 @@ namespace Auth.Api.EndpointBuilders
         }
         private static IEndpointRouteBuilder BuildServiceInfoEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapGet("v1/getServiceInfo",
+            endpointRouteBuilder.MapGet("getServiceInfo",
                 async ([FromServices] IGetServiceInfoQueryHandler getServiceInfoQueryHandler, CancellationToken cancellationToken) =>
                 await getServiceInfoQueryHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<ServiceInfoDto>()

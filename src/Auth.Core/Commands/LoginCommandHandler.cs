@@ -4,13 +4,13 @@ using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
-using Auth.Domain.Extensions;
-using Auth.Domain.Http;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal class LoginCommandHandler : ILoginCommandHandler
+    internal sealed class LoginCommandHandler : ILoginCommandHandler
     {
         private readonly ITokenService _tokenService;
         private readonly IAccountService _accountService;

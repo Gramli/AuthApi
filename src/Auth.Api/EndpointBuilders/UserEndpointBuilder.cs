@@ -1,11 +1,11 @@
 ﻿using Auth.Api.Configuration;
-using Auth.Api.Extensions;
 using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Queries;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
-using Auth.Domain.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.Response;
 
 namespace Auth.Api.EndpointBuilders
 {
@@ -21,7 +21,7 @@ namespace Auth.Api.EndpointBuilders
         }
         private static IEndpointRouteBuilder BuildUserAuthEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("v1/login",
+            endpointRouteBuilder.MapPost("login",
                 async (LoginCommand loginCommand, [FromServices] ILoginCommandHandler loginCommandHandler, CancellationToken cancellationToken) =>
                 await loginCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<LoggedUserDto>()
@@ -29,7 +29,7 @@ namespace Auth.Api.EndpointBuilders
                     .AllowAnonymous()
                     .WithOpenApi();
 
-            endpointRouteBuilder.MapPost("v1/register",
+            endpointRouteBuilder.MapPost("register",
                 async (RegisterCommand loginCommand, [FromServices] IRegisterCommandHandler registerCommandHandler, CancellationToken cancellationToken) =>
                 await registerCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<LoggedUserDto>()
@@ -42,7 +42,7 @@ namespace Auth.Api.EndpointBuilders
 
         private static IEndpointRouteBuilder BuildUserChangeEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("v1/changeRole",
+            endpointRouteBuilder.MapPost("changeRole",
                 async (ChangeRoleCommand changeRoleCommand, [FromServices] IChangeRoleCommandHandler changeRoleCommandHandler, CancellationToken cancellationToken) =>
                 await changeRoleCommandHandler.SendAsync(changeRoleCommand, cancellationToken))
                     .Produces<bool>()
@@ -55,7 +55,7 @@ namespace Auth.Api.EndpointBuilders
 
         private static IEndpointRouteBuilder BuildUserInfoEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapGet("v1/getUsersInfo",
+            endpointRouteBuilder.MapGet("getUsersInfo",
                 async ([FromServices] IGetUserInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserDto>>()

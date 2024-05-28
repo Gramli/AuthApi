@@ -3,7 +3,7 @@
 @host={{hostname}}:{{port}}
 
 ### Register request
-POST https://{{host}}/user/v1/register
+POST https://{{host}}/v1/user/register
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Login reguest
-POST https://{{host}}/user/v1/login
+POST https://{{host}}/v1/user/login
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 # Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
 
 ### Change Role request
-POST https://{{host}}/user/v1/changeRole
+POST https://{{host}}/v1/user/changeRole
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
@@ -36,12 +36,12 @@ Authorization: Bearer <generated token>
 
 ### Users Info
 
-GET https://{{host}}/user/v1/getUsersInfo
+GET https://{{host}}/v1/user/getUsersInfo
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
 ### Service Info
 
-GET https://{{host}}/user/service/v1/getServiceInfo
+GET https://{{host}}/v1/user/service/getServiceInfo
 Content-Type: application/json
 Authorization: Bearer <generated token>

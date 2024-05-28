@@ -6,7 +6,7 @@ using FluentResults;
 
 namespace Auth.Infrastructure.Services
 {
-    internal class UserService : IUserService
+    internal sealed class UserService : IUserService
     {
         private readonly ISecretUserQueriesRepository _secretUserQueriesRepository;
         private readonly ISecretUserCommandsRepository _secretUserCommandsRepository;

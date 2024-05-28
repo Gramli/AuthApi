@@ -3,7 +3,7 @@ using Validot;
 
 namespace Auth.Core.Validation
 {
-    internal class ChangeRoleCommandSpecificationHolder : ISpecificationHolder<ChangeRoleCommand>
+    internal sealed class ChangeRoleCommandSpecificationHolder : ISpecificationHolder<ChangeRoleCommand>
     {
         public Specification<ChangeRoleCommand> Specification { get; }
 
