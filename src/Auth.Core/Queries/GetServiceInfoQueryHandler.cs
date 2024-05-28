@@ -5,7 +5,7 @@ using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Queries
 {
-    internal class GetServiceInfoQueryHandler : IGetServiceInfoQueryHandler
+    internal sealed class GetServiceInfoQueryHandler : IGetServiceInfoQueryHandler
     {
         public Task<HttpDataResponse<ServiceInfoDto>> HandleAsync(EmptyRequest request, CancellationToken cancellationToken)
         {

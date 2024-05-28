@@ -13,7 +13,7 @@ namespace Auth.Infrastructure.Configuration
             using var scope = serviceProvider.CreateScope();
             var secretRoleCommandRepository = scope.ServiceProvider.GetRequiredService<ISecretRoleCommandRepository>();
             Guard.Against.Null(secretRoleCommandRepository);
-            await secretRoleCommandRepository.AddRoles(new[] { "user", "developer", "administrator" }, CancellationToken.None);
+            await secretRoleCommandRepository.AddRoles(["user", "developer", "administrator"], CancellationToken.None);
         }
 
         public static async Task AddDefaultUsers(this IServiceProvider serviceProvider)

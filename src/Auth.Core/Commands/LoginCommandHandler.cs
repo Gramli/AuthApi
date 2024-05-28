@@ -10,7 +10,7 @@ using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal class LoginCommandHandler : ILoginCommandHandler
+    internal sealed class LoginCommandHandler : ILoginCommandHandler
     {
         private readonly ITokenService _tokenService;
         private readonly IAccountService _accountService;

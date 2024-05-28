@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Auth.Infrastructure.Services
 {
-    internal class TokenService : ITokenService
+    internal sealed class TokenService : ITokenService
     {
         private readonly IOptions<TokenOptions> _tokenOptions;
         public TokenService(IOptions<TokenOptions> tokenOptions)

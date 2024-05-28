@@ -7,7 +7,7 @@ using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Queries
 {
-    internal class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
+    internal sealed class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
     {
         private readonly IUserQueriesRepository _userQueriesRepository;
 

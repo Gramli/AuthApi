@@ -9,7 +9,7 @@ using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal class RegisterCommandHandler : IRegisterCommandHandler
+    internal sealed class RegisterCommandHandler : IRegisterCommandHandler
     {
         private readonly IAccountService _accountService;
         private readonly IValidator<RegisterCommand> _validator;

@@ -5,7 +5,6 @@ using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using SmallApiToolkit.Core.Extensions;
-using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 using Validot;
 
