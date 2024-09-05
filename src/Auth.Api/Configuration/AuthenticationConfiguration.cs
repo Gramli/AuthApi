@@ -10,6 +10,8 @@ namespace Auth.Api.Configuration
         public static IServiceCollection ConfigureAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             var jwtKey = Guard.Against.NullOrEmpty(configuration["Jwt:Key"]);
+            var issuer = Guard.Against.NullOrEmpty(configuration["Jwt:Issuer"]);
+            var audience = Guard.Against.NullOrEmpty(configuration["Jwt:Audience"]);
 
             serviceCollection.AddAuthentication(options =>
             {
@@ -21,8 +23,10 @@ namespace Auth.Api.Configuration
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
+                    ValidIssuer = issuer,
+                    ValidateIssuer = true,
+                    ValidAudiences = [audience],
+                    ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true
                 };

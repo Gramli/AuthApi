@@ -32,7 +32,9 @@ namespace Auth.Infrastructure.Services
                     new Claim(ClaimTypes.Role, user.Role),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_tokenOptions.Value.ExpirationInMinutes),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Audience = _tokenOptions.Value.Audience,
+                Issuer = _tokenOptions.Value.Issuer,
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
