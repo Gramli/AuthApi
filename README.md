@@ -10,6 +10,7 @@ Example API allows to:
  * **login** user
  * **change user role**
  * get user and service info
+ * add custom **claim using middleware**
 
 Endpoints use different types of authorization policies.
 
@@ -67,6 +68,7 @@ Solution contains four layers:
 * [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)
 * [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
 * [Mapster](https://github.com/MapsterMapper/Mapster)
+* [SmallApiToolkit](https://github.com/Gramli/SmallApiToolkit)
 * [FluentResuls](https://github.com/altmann/FluentResults)
 * [Validot](https://github.com/bartoszlenar/Validot)
 * [GuardClauses](https://github.com/ardalis/GuardClauses)

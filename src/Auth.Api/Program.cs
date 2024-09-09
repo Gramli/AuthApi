@@ -1,5 +1,6 @@
 using Auth.Api.Configuration;
 using Auth.Api.EndpointBuilders;
+using Auth.Api.Midllewares;
 using Auth.Core.Configuration;
 using Auth.Infrastructure.Configuration;
 using SmallApiToolkit.Extensions;
@@ -30,6 +31,7 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
+app.UseMiddleware<ClaimsMiddleware>();
 
 app.MapVersionGroup(1)
    .BuildUserEndpoints()
