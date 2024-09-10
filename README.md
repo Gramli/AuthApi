@@ -2,7 +2,7 @@
 
 # Clean Architecture AuthApi
 
-The REST API demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints, all implemented using Clean Architecture and various design patterns
+The REST API demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints and how to add **custom claims using middleware**, all implemented using Clean Architecture and various design patterns.
 
 
 Example API allows to: 
@@ -10,7 +10,6 @@ Example API allows to:
  * **login** user
  * **change user role**
  * get user and service info
- * add custom **claim using middleware**
 
 Endpoints use different types of authorization policies.
 
