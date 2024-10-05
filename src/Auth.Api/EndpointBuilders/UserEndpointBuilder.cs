@@ -32,7 +32,7 @@ namespace Auth.Api.EndpointBuilders
             endpointRouteBuilder.MapPost("register",
                 async (RegisterCommand loginCommand, [FromServices] IRegisterCommandHandler registerCommandHandler, CancellationToken cancellationToken) =>
                 await registerCommandHandler.SendAsync(loginCommand, cancellationToken))
-                    .Produces<LoggedUserDto>()
+                    .Produces<bool>()
                     .WithName("Register")
                     .AllowAnonymous()
                     .WithOpenApi();

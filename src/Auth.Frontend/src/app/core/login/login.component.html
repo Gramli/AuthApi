@@ -1,0 +1,12 @@
+<div class="flex justify-content-center align-items-center flex-wrap">
+  <div class="w-2 mt-5">
+    <p-card header="Login to Auth.Api">
+        <app-login-or-register submitText="Login" (submitEvent)="onLogin($event)"> </app-login-or-register>
+        <div class="flex flex-wrap align-items-center justify-content-center text-center mt-8">
+            <label class="vertical-align-middle mr-2">To register click here: </label>
+            <p-button label="Register" routerLink="/register" severity="help" size="small"/>
+        </div>
+    </p-card>
+  </div>
+  <p-toast />
+</div>

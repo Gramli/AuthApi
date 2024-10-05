@@ -1,0 +1,60 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmitClick()" novalidate>
+  <div class="field">
+    <label for="userName">User name</label>
+    <input
+      id="userName"
+      type="text"
+      pInputText
+      formControlName="userName"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+    />
+    <small
+      class="p-error block"
+      *ngIf="
+        userForm.get('userName')?.invalid && userForm.get('userName')?.dirty
+      "
+    >
+      First name is required</small
+    >
+  </div>
+  <div *ngIf="showEmail" class="field">
+    <label for="email">Email</label>
+    <input
+      id="lastName"
+      type="text"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+      pInputText
+      formControlName="email"
+    />
+    <small
+    class="p-error block"
+    *ngIf="
+      userForm.get('email')?.invalid && userForm.get('email')?.dirty
+    "
+  >
+    Email is invalid</small
+  >
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+      pPassword
+      [feedback]="false"
+      formControlName="password"
+    />
+    <small
+    class="p-error block"
+    *ngIf="
+      userForm.get('password')?.invalid && userForm.get('password')?.dirty
+    "
+  >
+    Password is invalid</small
+  >
+  </div>
+  <div class="text-center">
+    <button pButton type="submit" [disabled]="userForm.invalid">{{ submitText }}</button>
+  </div>
+</form>
