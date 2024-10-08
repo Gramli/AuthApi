@@ -43,18 +43,18 @@ export class LoginOrRegisterComponent implements OnInit {
 
   protected onSubmitClick(): void {
     const password = this.userForm.get('password')!.value;
-    const username = this.userForm.get('userName')!.value;
+    const userName = this.userForm.get('userName')!.value;
 
     if (this.showEmail) {
       this.submitEvent.emit({
         password,
-        name: username,
+        userName,
         email: this.userForm.get('email')!.value,
       });
     } else {
       this.submitEvent.emit({
         password,
-        name: username,
+        userName,
       });
     }
   }

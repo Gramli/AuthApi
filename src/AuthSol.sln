@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{5500F2CC
 		Tests\HttpDebugTests\debug-tests.http = Tests\HttpDebugTests\debug-tests.http
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallApiToolkit.Core", "..\..\SmallApiToolkit\src\SmallApiToolkit.Core\SmallApiToolkit.Core.csproj", "{BAF3E627-73F4-462A-A89A-29C4EA31161C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallApiToolkit", "..\..\SmallApiToolkit\src\SmallApiToolkit\SmallApiToolkit.csproj", "{657B30DF-D9DE-46FE-B7B5-0C09DC7942C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{E7B3ACD4-AA93-402A-A1B5-257F697858F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7B3ACD4-AA93-402A-A1B5-257F697858F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7B3ACD4-AA93-402A-A1B5-257F697858F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAF3E627-73F4-462A-A89A-29C4EA31161C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAF3E627-73F4-462A-A89A-29C4EA31161C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAF3E627-73F4-462A-A89A-29C4EA31161C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAF3E627-73F4-462A-A89A-29C4EA31161C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657B30DF-D9DE-46FE-B7B5-0C09DC7942C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657B30DF-D9DE-46FE-B7B5-0C09DC7942C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657B30DF-D9DE-46FE-B7B5-0C09DC7942C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657B30DF-D9DE-46FE-B7B5-0C09DC7942C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

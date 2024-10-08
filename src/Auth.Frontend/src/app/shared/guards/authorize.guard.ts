@@ -14,6 +14,7 @@ export class AuthorizeGuard implements CanActivate {
       return true;
     }
 
+    this.userService.logout();
     return this.router.navigate(['login'], { });
   }
   

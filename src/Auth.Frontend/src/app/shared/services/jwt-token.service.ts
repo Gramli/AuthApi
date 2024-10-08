@@ -34,9 +34,9 @@ export class JwtTokenService {
     const token = this.decodedToken();
 
     if(token && token.exp){
-      var expDate = new Date(token.exp);
+      var expDate = new Date(token.exp * 1000);
       var now = new Date();
-      if(expDate < now){
+      if(expDate > now){
         return true;
       }
     }
@@ -46,6 +46,10 @@ export class JwtTokenService {
 
   public safeToken(token: string): void {
     this.localStorageService.set(this.tokenKeyName, token);
+  }
+
+  public removeToken(){
+    this.localStorageService.remove(this.tokenKeyName);
   }
 
   private decodedToken(): AuthApiJwtPayload | undefined {

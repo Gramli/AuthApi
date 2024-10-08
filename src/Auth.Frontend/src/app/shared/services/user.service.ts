@@ -23,7 +23,7 @@ export class UserService extends ApiHttpService {
 
   public login(userLogin: IUserLogin): Observable<IUser | undefined> {
     return super
-      .post<string>('/login', {
+      .post<string>('/v1/user/login', {
         ...userLogin,
       })
       .pipe(
@@ -35,9 +35,13 @@ export class UserService extends ApiHttpService {
       );
   }
 
+  public logout(): void {
+    this.jwtTokenService.removeToken();
+  }
+
   public register(registerUser: IRegisterUser) : Observable<DataResponse<boolean>> {
     return super
-    .post<boolean>('/register', {
+    .post<boolean>('/v1/user/register', {
       ...registerUser,
     });
   }

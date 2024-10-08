@@ -13,6 +13,7 @@ export abstract class ApiHttpService {
   constructor(protected httpClient: HttpClient) { }
 
   public post<T>(path: string, body: any | undefined) : Observable<DataResponse<T>> {
+    console.log(this.createUrl(path));
     return this.httpClient.post<DataResponse<T>>(this.createUrl(path), body, {
 
     });

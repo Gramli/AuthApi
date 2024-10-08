@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="flex justify-content-center flex-wrap">
+  <div class="grid w-8">
+    <div class="col">
+        <h2 class="text-center">Welcome to Auth.Frontend</h2>
+      <div class="flex justify-content-center">
+        <p-image src="assets/authApi_icon.png" alt="Image" width="250"/>
+      </div>
+      <p-card>
+        <p-menu [model]="items" />
+        <h2 class="text-center">You are logged as: Admin</h2>
+        <div class="flex justify-content-center">
+            <p-button class="text-right" label="Logout" severity="danger" />
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

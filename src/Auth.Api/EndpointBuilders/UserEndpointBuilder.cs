@@ -24,7 +24,7 @@ namespace Auth.Api.EndpointBuilders
             endpointRouteBuilder.MapPost("login",
                 async (LoginCommand loginCommand, [FromServices] ILoginCommandHandler loginCommandHandler, CancellationToken cancellationToken) =>
                 await loginCommandHandler.SendAsync(loginCommand, cancellationToken))
-                    .Produces<LoggedUserDto>()
+                    .Produces<string>()
                     .WithName("Login")
                     .AllowAnonymous()
                     .WithOpenApi();

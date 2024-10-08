@@ -23,22 +23,22 @@ namespace Auth.Core.Commands
             _validator = Guard.Against.Null(validator);
         }
 
-        public async Task<HttpDataResponse<LoggedUserDto>> HandleAsync(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<HttpDataResponse<string>> HandleAsync(LoginCommand request, CancellationToken cancellationToken)
         {
             if(!_validator.IsValid(request))
             {
-                return HttpDataResponses.AsBadRequest<LoggedUserDto>(ErrorMessages.InvalidRequest);
+                return HttpDataResponses.AsBadRequest<string>(ErrorMessages.InvalidRequest);
             }
 
             var userResult = await _accountService.FindUser(request, cancellationToken);
 
             if(userResult.IsFailed)
             {
-                return HttpDataResponses.AsBadRequest<LoggedUserDto>(ErrorMessages.InvalidUsernameOrPassword);
+                return HttpDataResponses.AsBadRequest<string>(ErrorMessages.InvalidUsernameOrPassword);
             }
 
             var token = _tokenService.GenerateToken(new UserDto(request.Username, userResult.Value.Role));
-            return HttpDataResponses.AsOK(new LoggedUserDto(request.Username, userResult.Value.Role, token));
+            return HttpDataResponses.AsOK(token);
         }
     }
 }

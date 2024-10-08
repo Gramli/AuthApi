@@ -29,7 +29,7 @@ namespace Auth.Infrastructure.Configuration
             var admin = new UserEntity()
             {
                 Email = "noEmail",
-                Password = PasswordHasher.HashPassword("passwAdmin"),
+                Password = PasswordHasher.HashPassword("admin"),
                 Username = "admin",
                 Role = roles.Single(x => x.Role.Equals("administrator", StringComparison.OrdinalIgnoreCase))
             };
