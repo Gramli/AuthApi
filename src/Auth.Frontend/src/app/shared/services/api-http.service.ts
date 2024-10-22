@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export abstract class ApiHttpService {
+export class ApiHttpService {
 
   protected rootUrl: string = 'https://localhost:7190';
 

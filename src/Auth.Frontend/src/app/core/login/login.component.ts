@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import { ToastModule } from 'primeng/toast';
     CardModule,
     RouterLink, 
     RouterOutlet,
-    ToastModule]
+    ToastModule,
+    ButtonModule]
 })
 export class LoginComponent {
 

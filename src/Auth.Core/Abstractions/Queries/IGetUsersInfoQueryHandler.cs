@@ -4,7 +4,7 @@ using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Abstractions.Queries
 {
-    public interface IGetUserInfoQueryHandler : IHttpRequestHandler<UserInfoDto, EmptyRequest>
+    public interface IGetUsersInfoQueryHandler : IHttpRequestHandler<IEnumerable<UserDto>,EmptyRequest>
     {
     }
 }

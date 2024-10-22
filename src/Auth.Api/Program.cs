@@ -5,6 +5,7 @@ using Auth.Core.Configuration;
 using Auth.Infrastructure.Configuration;
 using SmallApiToolkit.Extensions;
 using SmallApiToolkit.Middleware;
+using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,9 @@ builder.Services.ConfigureAuthorization();
 
 builder.Services
     .AddCore()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration)
+    .AddHttpContextAccessor()
+    .AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
 
 var corsPolicyName = builder.Services.AddCorsByConfiguration(builder.Configuration);
 

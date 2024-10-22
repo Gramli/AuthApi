@@ -104,5 +104,14 @@ namespace Auth.Core.Resources {
                 return ResourceManager.GetString("InvalidUsernameOrPassword", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to get user info..
+        /// </summary>
+        public static string UnableToGetUser {
+            get {
+                return ResourceManager.GetString("UnableToGetUser", resourceCulture);
+            }
+        }
     }
 }

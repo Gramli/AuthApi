@@ -7,11 +7,11 @@ using SmallApiToolkit.Core.Response;
 
 namespace Auth.Core.Queries
 {
-    internal sealed class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
+    internal sealed class GetUsersInfoQueryHandler : IGetUsersInfoQueryHandler
     {
         private readonly IUserQueriesRepository _userQueriesRepository;
 
-        public GetUserInfoQueryHandler(IUserQueriesRepository userQueriesRepository)
+        public GetUsersInfoQueryHandler(IUserQueriesRepository userQueriesRepository)
         {
             _userQueriesRepository = Guard.Against.Null(userQueriesRepository);
         }

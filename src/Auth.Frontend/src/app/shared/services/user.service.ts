@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { JwtTokenService } from './jwt-token.service';
 import { ApiHttpService } from './api-http.service';
-import { HttpClient } from '@angular/common/http';
-import { IRegisterUser, IUser, IUserLogin } from '../model/user.model';
+import { IRegisterUser, IUser, IUserInfo, IUserLogin } from '../model/user.model';
 import { map, Observable } from 'rxjs';
 import { DataResponse } from '../model/api-response.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService extends ApiHttpService {
+export class UserService {
+  public get loggedUser(): IUser | undefined {
+    return this.jwtTokenService.getUser();
+  }
+
   constructor(
     private jwtTokenService: JwtTokenService,
-    httpClient: HttpClient
+    private httpApiService: ApiHttpService
   ) {
-    super(httpClient);
   }
 
   public isAuthenticated(): boolean {
@@ -22,12 +24,12 @@ export class UserService extends ApiHttpService {
   }
 
   public login(userLogin: IUserLogin): Observable<IUser | undefined> {
-    return super
+    return this.httpApiService
       .post<string>('/v1/user/login', {
         ...userLogin,
       })
       .pipe(
-        map((response) => {
+        map(response => {
           this.jwtTokenService.safeToken(response.data);
           const user = this.jwtTokenService.getUser();
           return user;
@@ -40,9 +42,14 @@ export class UserService extends ApiHttpService {
   }
 
   public register(registerUser: IRegisterUser) : Observable<DataResponse<boolean>> {
-    return super
+    return this.httpApiService
     .post<boolean>('/v1/user/register', {
       ...registerUser,
     });
+  }
+
+  public getUserInfo(): Observable<DataResponse<IUserInfo>>{
+    return this.httpApiService
+    .get<IUserInfo>('/v1/user/user-info');
   }
 }

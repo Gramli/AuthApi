@@ -22,8 +22,9 @@ namespace Auth.Core.Configuration
                 .AddScoped<ILoginCommandHandler, LoginCommandHandler>()
                 .AddScoped<IRegisterCommandHandler, RegisterCommandHandler>()
                 .AddScoped<IChangeRoleCommandHandler, ChangeRoleCommandHandler>()
-                .AddScoped<IGetUserInfoQueryHandler, GetUserInfoQueryHandler>()
-                .AddScoped<IGetServiceInfoQueryHandler, GetServiceInfoQueryHandler>();
+                .AddScoped<IGetUsersInfoQueryHandler, GetUsersInfoQueryHandler>()
+                .AddScoped<IGetServiceInfoQueryHandler, GetServiceInfoQueryHandler>()
+                .AddScoped<IGetUserInfoQueryHandler, GetUserInfoQueryHandler>();
 
         private static IServiceCollection AddCoreValidation(this IServiceCollection serviceCollection)
             => serviceCollection

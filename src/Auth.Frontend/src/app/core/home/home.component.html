@@ -1,15 +1,49 @@
 <div class="flex justify-content-center flex-wrap">
   <div class="grid w-8">
     <div class="col">
-        <h2 class="text-center">Welcome to Auth.Frontend</h2>
+      <h2 class="text-center">Welcome to Auth.Frontend</h2>
       <div class="flex justify-content-center">
-        <p-image src="assets/authApi_icon.png" alt="Image" width="250"/>
+        <p-image src="assets/authApi_icon.png" alt="Image" width="250" />
       </div>
       <p-card>
-        <p-menu [model]="items" />
-        <h2 class="text-center">You are logged as: Admin</h2>
-        <div class="flex justify-content-center">
-            <p-button class="text-right" label="Logout" severity="danger" />
+        <div class="grid">
+          <div class="col-3">
+            <p-menu #menu [model]="items" />
+          </div>
+          <div class="col-9">
+            <ng-container [ngSwitch]="state">
+              <div *ngSwitchCase="HomeComponentState.userInfo">
+                <i class="pi pi-user" style="font-size: 1.5rem"
+                  ><span class="mx-2">User Information</span></i
+                >
+                <div class="p-2 m-2">
+                  <table class="text-left">
+                    <tr>
+                      <th>UserName</th>
+                      <td>{{ userInfo?.username}}</td>
+                    </tr>
+                    <tr>
+                      <th>Role</th>
+                      <td>{{ userInfo?.role}}</td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td>{{ userInfo?.email}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div *ngSwitchCase="HomeComponentState.changeRole">
+                changeRole
+              </div>
+              <div *ngSwitchCase="HomeComponentState.serviceInfo">
+                <i class="pi pi-building-columns" style="font-size: 1.5rem"
+                  ><span class="mx-2">Service Information</span></i
+                >
+                <app-service-info></app-service-info>
+              </div>
+            </ng-container>
+          </div>
         </div>
       </p-card>
     </div>

@@ -6,6 +6,7 @@ import { CardModule } from 'primeng/card';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ import { MessageService } from 'primeng/api';
     CardModule,
     RouterLink, 
     RouterOutlet,
-    ToastModule]
+    ToastModule,
+    ButtonModule]
 })
 export class RegisterComponent {
 

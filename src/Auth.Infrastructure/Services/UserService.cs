@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
 using Auth.Domain.Commands;
+using Auth.Domain.Dtos;
 using Auth.Infrastructure.Abstractions;
 using FluentResults;
 
@@ -38,6 +39,18 @@ namespace Auth.Infrastructure.Services
             }
 
             return  await _secretUserCommandsRepository.ChangeUserRole(userResult.Value, roleResult.Value, cancellationToken);
+        }
+
+        public async Task<Result<UserInfoDto>> GetUser(string name, CancellationToken cancellationToken)
+        {
+            var userResult = await _secretUserQueriesRepository.FindUser(name, cancellationToken);
+
+            if (userResult.IsFailed) 
+            {
+                return Result.Fail(userResult.Errors);
+            }
+
+            return Result.Ok(new UserInfoDto(userResult.Value.Username, userResult.Value.Role.Role, userResult.Value.Email));
         }
     }
 }

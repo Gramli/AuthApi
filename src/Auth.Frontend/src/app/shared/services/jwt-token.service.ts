@@ -22,7 +22,7 @@ export class JwtTokenService {
     const token = this.decodedToken();
     if (token) {
       return {
-        name: token.uniqueName,
+        username: token.uniqueName,
         role: token.role,
       };
     }
@@ -50,6 +50,10 @@ export class JwtTokenService {
 
   public removeToken(){
     this.localStorageService.remove(this.tokenKeyName);
+  }
+
+  public getToken(){
+    return this.localStorageService.get(this.tokenKeyName);
   }
 
   private decodedToken(): AuthApiJwtPayload | undefined {

@@ -5,6 +5,7 @@ using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 
 namespace Auth.Api.EndpointBuilders
@@ -55,12 +56,20 @@ namespace Auth.Api.EndpointBuilders
 
         private static IEndpointRouteBuilder BuildUserInfoEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapGet("getUsersInfo",
-                async ([FromServices] IGetUserInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
+            endpointRouteBuilder.MapGet("users-info",
+                async ([FromServices] IGetUsersInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserDto>>()
                     .WithName("GetUsersInfo")
                     .RequireAuthorization(AuthorizationConfiguration.DeveloperPolicyName)
+                    .WithOpenApi();
+
+            endpointRouteBuilder.MapGet("user-info",
+                async ([FromServices] IGetUserInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
+                await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
+                    .Produces<IEnumerable<UserInfoDto>>()
+                    .WithName("GetUserInfo")
+                    .RequireAuthorization(AuthorizationConfiguration.UserPolicyName)
                     .WithOpenApi();
 
             return endpointRouteBuilder;
