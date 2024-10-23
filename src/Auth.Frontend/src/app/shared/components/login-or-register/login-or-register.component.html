@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmitClick()" novalidate>
+<form [formGroup]="userForm()" (ngSubmit)="onSubmitClick()" novalidate>
   <div class="field">
     <label for="userName">User name</label>
     <input
@@ -11,10 +11,10 @@
     <small
       class="p-error block"
       *ngIf="
-        userForm.get('userName')?.invalid && userForm.get('userName')?.dirty
+        userForm().get('userName')?.invalid && userForm().get('userName')?.dirty
       "
     >
-      First name is required</small
+      First name is invalid</small
     >
   </div>
   <div *ngIf="showEmail" class="field">
@@ -29,7 +29,7 @@
     <small
     class="p-error block"
     *ngIf="
-      userForm.get('email')?.invalid && userForm.get('email')?.dirty
+      userForm().get('email')?.invalid && userForm().get('email')?.dirty
     "
   >
     Email is invalid</small
@@ -48,13 +48,13 @@
     <small
     class="p-error block"
     *ngIf="
-      userForm.get('password')?.invalid && userForm.get('password')?.dirty
+      userForm().get('password')?.invalid && userForm().get('password')?.dirty
     "
   >
     Password is invalid</small
   >
   </div>
   <div class="text-center">
-    <button pButton type="submit" [disabled]="userForm.invalid">{{ submitText }}</button>
+    <button pButton type="submit" [disabled]="userForm().invalid">{{ submitText }}</button>
   </div>
 </form>

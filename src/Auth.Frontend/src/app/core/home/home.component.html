@@ -8,39 +8,21 @@
       <p-card>
         <div class="grid">
           <div class="col-3">
-            <p-menu #menu [model]="items" />
+            <p-menu #menu [model]="items()" />
           </div>
           <div class="col-9">
-            <ng-container [ngSwitch]="state">
+            <ng-container [ngSwitch]="state()">
               <div *ngSwitchCase="HomeComponentState.userInfo">
-                <i class="pi pi-user" style="font-size: 1.5rem"
-                  ><span class="mx-2">User Information</span></i
-                >
-                <div class="p-2 m-2">
-                  <table class="text-left">
-                    <tr>
-                      <th>UserName</th>
-                      <td>{{ userInfo?.username}}</td>
-                    </tr>
-                    <tr>
-                      <th>Role</th>
-                      <td>{{ userInfo?.role}}</td>
-                    </tr>
-                    <tr>
-                      <th>Email</th>
-                      <td>{{ userInfo?.email}}</td>
-                    </tr>
-                  </table>
-                </div>
+                  <app-user-info></app-user-info>
               </div>
               <div *ngSwitchCase="HomeComponentState.changeRole">
-                changeRole
+                <app-change-role></app-change-role>
               </div>
               <div *ngSwitchCase="HomeComponentState.serviceInfo">
-                <i class="pi pi-building-columns" style="font-size: 1.5rem"
-                  ><span class="mx-2">Service Information</span></i
-                >
                 <app-service-info></app-service-info>
+              </div>
+              <div *ngSwitchCase="HomeComponentState.allUsersInfo">
+                <app-users-info></app-users-info>
               </div>
             </ng-container>
           </div>

@@ -1,6 +1,4 @@
 ﻿using Auth.Api.Configuration;
-using Auth.Core.Abstractions.Commands;
-using Auth.Core.Abstractions.Queries;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +21,7 @@ namespace Auth.Api.EndpointBuilders
         private static IEndpointRouteBuilder BuildUserAuthEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             endpointRouteBuilder.MapPost("login",
-                async (LoginCommand loginCommand, [FromServices] ILoginCommandHandler loginCommandHandler, CancellationToken cancellationToken) =>
+                async (LoginCommand loginCommand, [FromServices] IHttpRequestHandler<string, LoginCommand> loginCommandHandler, CancellationToken cancellationToken) =>
                 await loginCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<string>()
                     .WithName("Login")
@@ -31,7 +29,7 @@ namespace Auth.Api.EndpointBuilders
                     .WithOpenApi();
 
             endpointRouteBuilder.MapPost("register",
-                async (RegisterCommand loginCommand, [FromServices] IRegisterCommandHandler registerCommandHandler, CancellationToken cancellationToken) =>
+                async (RegisterCommand loginCommand, [FromServices] IHttpRequestHandler<bool, RegisterCommand> registerCommandHandler, CancellationToken cancellationToken) =>
                 await registerCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<bool>()
                     .WithName("Register")
@@ -44,7 +42,7 @@ namespace Auth.Api.EndpointBuilders
         private static IEndpointRouteBuilder BuildUserChangeEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             endpointRouteBuilder.MapPost("changeRole",
-                async (ChangeRoleCommand changeRoleCommand, [FromServices] IChangeRoleCommandHandler changeRoleCommandHandler, CancellationToken cancellationToken) =>
+                async (ChangeRoleCommand changeRoleCommand, [FromServices] IHttpRequestHandler<bool, ChangeRoleCommand> changeRoleCommandHandler, CancellationToken cancellationToken) =>
                 await changeRoleCommandHandler.SendAsync(changeRoleCommand, cancellationToken))
                     .Produces<bool>()
                     .WithName("ChangeRole")
@@ -57,7 +55,7 @@ namespace Auth.Api.EndpointBuilders
         private static IEndpointRouteBuilder BuildUserInfoEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             endpointRouteBuilder.MapGet("users-info",
-                async ([FromServices] IGetUsersInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
+                async ([FromServices] IHttpRequestHandler<IEnumerable<UserDto>, EmptyRequest> getUserInfoCommandHandler, CancellationToken cancellationToken) =>
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserDto>>()
                     .WithName("GetUsersInfo")
@@ -65,7 +63,7 @@ namespace Auth.Api.EndpointBuilders
                     .WithOpenApi();
 
             endpointRouteBuilder.MapGet("user-info",
-                async ([FromServices] IGetUserInfoQueryHandler getUserInfoCommandHandler, CancellationToken cancellationToken) =>
+                async ([FromServices] IHttpRequestHandler<UserInfoDto, EmptyRequest> getUserInfoCommandHandler, CancellationToken cancellationToken) =>
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserInfoDto>>()
                     .WithName("GetUserInfo")

@@ -11,8 +11,8 @@ export class ServiceInfoService {
 
   constructor(private httpApiService: ApiHttpService) { }
 
-  public getUserInfo(): Observable<DataResponse<IServiceInfo>>{
+  public getServiceInfo(): Observable<DataResponse<IServiceInfo>>{
     return this.httpApiService
-    .get<IServiceInfo>('/v1/user/service-info');
+    .get<IServiceInfo>('/v1/service/service-info');
   }
 }

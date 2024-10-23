@@ -1,0 +1,15 @@
+<div class="p-2 m-2">
+    <i class="pi pi-users" style="font-size: 1.5rem">
+        <span class="mx-2">Users Information</span></i
+      >
+      <table class="text-left m-2">
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        <tr *ngFor="let user of users()">
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+        </tr>
+      </table>
+</div>

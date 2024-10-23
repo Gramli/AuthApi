@@ -1,15 +1,15 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal sealed class RegisterCommandHandler : IRegisterCommandHandler
+    internal sealed class RegisterCommandHandler : IHttpRequestHandler<bool, RegisterCommand>
     {
         private readonly IAccountService _accountService;
         private readonly IValidator<RegisterCommand> _validator;

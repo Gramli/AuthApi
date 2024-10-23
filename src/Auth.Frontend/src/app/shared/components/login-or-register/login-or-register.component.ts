@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -26,30 +26,30 @@ export class LoginOrRegisterComponent implements OnInit {
   @Output() submitEvent: EventEmitter<SubmitedUser> =
     new EventEmitter<SubmitedUser>();
 
-  protected userForm: FormGroup = new FormGroup({});
+  protected userForm: WritableSignal<FormGroup> = signal(new FormGroup({}));
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.userForm = this.formBuilder.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+    this.userForm.set(this.formBuilder.group({
+      userName: new FormControl('', [ Validators.required, Validators.pattern('[a-zA-Z]{3,}')]),
+      password: new FormControl('', [ Validators.required]),
+    }));
 
     if (this.showEmail) {
-      this.userForm.addControl('email', new FormControl('',[Validators.required, Validators.pattern('/^[^\s@]+@[^\s@]+\.[^\s@]+$/')]));
+      this.userForm().addControl('email', new FormControl('', [Validators.required, Validators.pattern('.+@.+\..{2,}')]));
     }
   }
 
   protected onSubmitClick(): void {
-    const password = this.userForm.get('password')!.value;
-    const userName = this.userForm.get('userName')!.value;
+    const password = this.userForm().get('password')!.value;
+    const userName = this.userForm().get('userName')!.value;
 
     if (this.showEmail) {
       this.submitEvent.emit({
         password,
         userName,
-        email: this.userForm.get('email')!.value,
+        email: this.userForm().get('email')!.value,
       });
     } else {
       this.submitEvent.emit({

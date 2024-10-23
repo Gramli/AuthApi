@@ -1,15 +1,15 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Queries;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Dtos;
 using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 using System.Security.Principal;
 
 namespace Auth.Core.Queries
 {
-    internal class GetUserInfoQueryHandler : IGetUserInfoQueryHandler
+    internal class GetUserInfoQueryHandler : IHttpRequestHandler<UserInfoDto, EmptyRequest>
     {
         private readonly IPrincipal _principal;
         private readonly IUserService _userService;

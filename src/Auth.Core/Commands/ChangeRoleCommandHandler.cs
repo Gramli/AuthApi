@@ -1,16 +1,16 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Repositories;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal sealed class ChangeRoleCommandHandler : IChangeRoleCommandHandler
+    internal sealed class ChangeRoleCommandHandler : IHttpRequestHandler<bool, ChangeRoleCommand>
     {
         private readonly IUserService _userService;
         private readonly IRoleQueriesRepository _roleQueriesRepository;

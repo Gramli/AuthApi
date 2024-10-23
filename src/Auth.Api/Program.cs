@@ -15,10 +15,9 @@ builder.Services.ConfigureAuthentication(builder.Configuration);
 builder.Services.ConfigureAuthorization();
 
 builder.Services
+    .AddApi()
     .AddCore()
-    .AddInfrastructure(builder.Configuration)
-    .AddHttpContextAccessor()
-    .AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
+    .AddInfrastructure(builder.Configuration);
 
 var corsPolicyName = builder.Services.AddCorsByConfiguration(builder.Configuration);
 
@@ -41,7 +40,8 @@ app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ClaimsMiddleware>();
 
 app.MapVersionGroup(1)
-   .BuildUserEndpoints()
+   .BuildUserEndpoints();
+app.MapVersionGroup(1)
    .BuildServiceEndpoints();
 
 await app.Services.AddDefaultRoles();

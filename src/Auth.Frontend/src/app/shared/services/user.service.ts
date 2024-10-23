@@ -52,4 +52,9 @@ export class UserService {
     return this.httpApiService
     .get<IUserInfo>('/v1/user/user-info');
   }
+
+  public getUsersInfo(): Observable<DataResponse<IUser[]>>{
+    return this.httpApiService
+    .get<IUser[]>('/v1/user/users-info');
+  }
 }

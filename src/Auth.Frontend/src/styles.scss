@@ -3,3 +3,15 @@
 
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
+
+
+table {
+    border-collapse: collapse;
+    width: 60%;
+  }
+tr {
+  border-bottom: 1px solid #ddd;
+}
+tr:hover {
+  background-color: #5ea2e0;
+}

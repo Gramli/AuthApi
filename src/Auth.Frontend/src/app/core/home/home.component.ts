@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
@@ -9,9 +9,11 @@ import { Menu, MenuModule } from 'primeng/menu';
 import { HomeComponentState } from './model';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../shared';
-import { IUser, IUserInfo } from '../../shared/model/user.model';
 import { Router } from '@angular/router';
 import { ServiceInfoComponent } from "../service-info/service-info.component";
+import { UserInfoComponent } from "../user-info/user-info.component";
+import { UsersInfoComponent } from "../users-info/users-info.component";
+import { ChangeRoleComponent } from "../change-role/change-role.component";
 
 @Component({
   selector: 'app-home',
@@ -26,41 +28,41 @@ import { ServiceInfoComponent } from "../service-info/service-info.component";
     ImageModule,
     MenuModule,
     CommonModule,
-    ServiceInfoComponent
+    ServiceInfoComponent,
+    UserInfoComponent,
+    UsersInfoComponent,
+    ChangeRoleComponent
 ],
 })
 export class HomeComponent implements OnInit {
   readonly HomeComponentState = HomeComponentState;
 
   @ViewChild('menu', { static: false }) protected menu: Menu | undefined;
-  protected items: MenuItem[] | undefined;
-  protected state: HomeComponentState = HomeComponentState.userInfo;
-
-  protected userInfo: IUserInfo | undefined;
+  protected items: WritableSignal<MenuItem[] | undefined> = signal(undefined);
+  protected state: WritableSignal<HomeComponentState> = signal(HomeComponentState.userInfo);
 
   constructor(protected userService: UserService, private router: Router){
   }
 
   ngOnInit(): void {
-    this.loadUser();
     this.initMenu();
   }
 
   private initMenu() : void {
-    this.items = [
+    this.items.set([
       {
         label: 'Administration',
         items: [
           {
             label: 'Change role',
             icon: 'pi pi-pen-to-square',
-            command: () => { this.state = HomeComponentState.changeRole},
+            command: () => { this.state.set(HomeComponentState.changeRole);},
             disabled: this.userService.loggedUser?.role !== 'administrator'
           },
           {
             label: 'Users Info',
             icon: 'pi pi-users',
-            command: () => { this.state = HomeComponentState.allUsersInfo},
+            command: () => { this.state.set(HomeComponentState.allUsersInfo);},
             disabled: this.userService.loggedUser?.role !== 'administrator' && this.userService.loggedUser?.role !== 'developer'
           },
         ],
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit {
           {
             label: 'Service Info',
             icon: 'pi pi-building-columns',
-            command: () => { this.state = HomeComponentState.serviceInfo}
+            command: () => { this.state.set(HomeComponentState.serviceInfo);}
           },
         ],
       },
@@ -84,8 +86,7 @@ export class HomeComponent implements OnInit {
             label: 'Info',
             icon: 'pi pi-user',
             command: () => { 
-              this.state = HomeComponentState.userInfo;
-              this.loadUser();
+              this.state.set(HomeComponentState.userInfo);
             },
           },
           {
@@ -98,15 +99,6 @@ export class HomeComponent implements OnInit {
           },
         ],
       },
-    ];
-  }
-
-  private loadUser(): void {
-    this.userService.getUserInfo().subscribe({
-      next: (response)=> {
-        this.userInfo = response.data;
-        console.log(this.userInfo);
-      },
-    });
+    ]);
   }
 }

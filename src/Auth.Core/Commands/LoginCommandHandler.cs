@@ -1,16 +1,16 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Commands;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
 using Auth.Domain.Commands;
 using Auth.Domain.Dtos;
 using SmallApiToolkit.Core.Extensions;
+using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Commands
 {
-    internal sealed class LoginCommandHandler : ILoginCommandHandler
+    internal sealed class LoginCommandHandler : IHttpRequestHandler<string, LoginCommand>
     {
         private readonly ITokenService _tokenService;
         private readonly IAccountService _accountService;
