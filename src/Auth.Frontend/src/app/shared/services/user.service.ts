@@ -57,4 +57,12 @@ export class UserService {
     return this.httpApiService
     .get<IUser[]>('/v1/user/users-info');
   }
+
+  public changeRole(userName: string, roleName: string): Observable<DataResponse<boolean>>{
+    return this.httpApiService
+    .post<boolean>('/v1/user/changeRole', {
+      userName,
+      roleName
+    });
+  }
 }

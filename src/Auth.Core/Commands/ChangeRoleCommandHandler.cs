@@ -10,6 +10,8 @@ using Validot;
 
 namespace Auth.Core.Commands
 {
+    //TODO IMPLEMENT LOGIC TO CHANGE ROLE, SAME USER CANT CHANGE ROLE TO HIMSELF
+    //ADMINISTRATOR CANT DECREASE ANOTHER ADMINISTRATOR
     internal sealed class ChangeRoleCommandHandler : IHttpRequestHandler<bool, ChangeRoleCommand>
     {
         private readonly IUserService _userService;

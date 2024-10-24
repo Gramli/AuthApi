@@ -15,11 +15,16 @@ namespace Auth.Infrastructure.Services
     {
         private readonly ISecretUserQueriesRepository _secretUserQueriesRepository;
         private readonly ISecretUserCommandsRepository _secretUserCommandsRepository;
+        private readonly ISecretRoleQueriesRepository _secretRoleQueriesRepository;
 
-        public AccountService(ISecretUserQueriesRepository secretUserQueriesRepository, ISecretUserCommandsRepository secretUserCommandsRepository)
+        public AccountService(
+            ISecretUserQueriesRepository secretUserQueriesRepository, 
+            ISecretUserCommandsRepository secretUserCommandsRepository,
+            ISecretRoleQueriesRepository secretRoleQueriesRepository)
         {
             _secretUserQueriesRepository = Guard.Against.Null(secretUserQueriesRepository);
             _secretUserCommandsRepository = Guard.Against.Null(secretUserCommandsRepository);
+            _secretRoleQueriesRepository = Guard.Against.Null(secretRoleQueriesRepository);
         }
         public async Task<Result<UserDto>> FindUser(LoginCommand loginCommand, CancellationToken cancellationToken)
         {
@@ -48,7 +53,21 @@ namespace Auth.Infrastructure.Services
                 return Result.Fail<int>(ErrorMessages.InvalidUsernameOrEmail);
             }
 
-            var userEntity = registerCommand.Adapt<UserEntity>();
+            var roleEntityResult = await _secretRoleQueriesRepository.GetRoleEntity("user", cancellationToken);
+
+            if (roleEntityResult.IsFailed) 
+            {
+                return Result.Fail<int>(ErrorMessages.InvalidRequest);
+            }
+
+            var userEntity = new UserEntity
+            {
+                Username = registerCommand.Username,
+                Email = registerCommand.Email,
+                Password = registerCommand.Password,
+                Role = roleEntityResult.Value
+            };
+
             var userId = await _secretUserCommandsRepository.AddUser(userEntity, cancellationToken);
 
             return Result.Ok(userId);

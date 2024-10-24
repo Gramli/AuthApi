@@ -1,4 +1,10 @@
-import { Component, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  ViewChild,
+  WritableSignal,
+} from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
@@ -10,10 +16,11 @@ import { HomeComponentState } from './model';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../shared';
 import { Router } from '@angular/router';
-import { ServiceInfoComponent } from "../service-info/service-info.component";
-import { UserInfoComponent } from "../user-info/user-info.component";
-import { UsersInfoComponent } from "../users-info/users-info.component";
-import { ChangeRoleComponent } from "../change-role/change-role.component";
+import { ServiceInfoComponent } from '../service-info/service-info.component';
+import { UserInfoComponent } from '../user-info/user-info.component';
+import { UsersInfoComponent } from '../users-info/users-info.component';
+import { ChangeRoleComponent } from '../change-role/change-role.component';
+import { IUser } from '../../shared/model/user.model';
 
 @Component({
   selector: 'app-home',
@@ -31,24 +38,27 @@ import { ChangeRoleComponent } from "../change-role/change-role.component";
     ServiceInfoComponent,
     UserInfoComponent,
     UsersInfoComponent,
-    ChangeRoleComponent
-],
+    ChangeRoleComponent,
+  ],
 })
 export class HomeComponent implements OnInit {
   readonly HomeComponentState = HomeComponentState;
 
   @ViewChild('menu', { static: false }) protected menu: Menu | undefined;
   protected items: WritableSignal<MenuItem[] | undefined> = signal(undefined);
-  protected state: WritableSignal<HomeComponentState> = signal(HomeComponentState.userInfo);
+  protected state: WritableSignal<HomeComponentState> = signal(
+    HomeComponentState.userInfo
+  );
 
-  constructor(protected userService: UserService, private router: Router){
-  }
+  constructor(protected userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.initMenu();
+    if (this.userService.loggedUser) {
+      this.initMenu(this.userService.loggedUser);
+    }
   }
 
-  private initMenu() : void {
+  private initMenu(user: IUser): void {
     this.items.set([
       {
         label: 'Administration',
@@ -56,14 +66,19 @@ export class HomeComponent implements OnInit {
           {
             label: 'Change role',
             icon: 'pi pi-pen-to-square',
-            command: () => { this.state.set(HomeComponentState.changeRole);},
-            disabled: this.userService.loggedUser?.role !== 'administrator'
+            command: () => {
+              this.state.set(HomeComponentState.changeRole);
+            },
+            disabled: user.role !== 'administrator',
           },
           {
             label: 'Users Info',
             icon: 'pi pi-users',
-            command: () => { this.state.set(HomeComponentState.allUsersInfo);},
-            disabled: this.userService.loggedUser?.role !== 'administrator' && this.userService.loggedUser?.role !== 'developer'
+            command: () => {
+              this.state.set(HomeComponentState.allUsersInfo);
+            },
+            disabled:
+              user.role !== 'administrator' && user.role !== 'developer',
           },
         ],
       },
@@ -73,7 +88,9 @@ export class HomeComponent implements OnInit {
           {
             label: 'Service Info',
             icon: 'pi pi-building-columns',
-            command: () => { this.state.set(HomeComponentState.serviceInfo);}
+            command: () => {
+              this.state.set(HomeComponentState.serviceInfo);
+            },
           },
         ],
       },
@@ -85,14 +102,14 @@ export class HomeComponent implements OnInit {
             id: 'info',
             label: 'Info',
             icon: 'pi pi-user',
-            command: () => { 
+            command: () => {
               this.state.set(HomeComponentState.userInfo);
             },
           },
           {
             label: 'Logout',
             icon: 'pi pi-sign-out',
-            command: () => { 
+            command: () => {
               this.userService.logout();
               this.router.navigate(['/login']);
             },

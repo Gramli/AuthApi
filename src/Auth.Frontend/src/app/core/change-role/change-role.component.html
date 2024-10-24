@@ -2,4 +2,15 @@
     <i class="pi pi-pen-to-square" style="font-size: 1.5rem">
         <span class="mx-2">Change Role</span></i
       >
+      <form class="m-2 p-2" [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
+        <p-dropdown 
+            formControlName="userName" 
+            [options]="userNames()"
+            placeholder="Select User" />
+        <p-dropdown 
+            formControlName="role" 
+            [options]="roles()"
+            placeholder="Select role" />
+            <p-button [disabled]="formGroup().invalid" type="submit" label="Submit" />
+    </form>
 </div>

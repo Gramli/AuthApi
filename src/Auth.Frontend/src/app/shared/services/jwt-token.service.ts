@@ -4,7 +4,7 @@ import { LocalStorageService } from './local-storage.service';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 interface AuthApiJwtPayload extends JwtPayload {
-  uniqueName: string;
+  unique_name: string;
   role: string;
 }
 
@@ -22,7 +22,7 @@ export class JwtTokenService {
     const token = this.decodedToken();
     if (token) {
       return {
-        username: token.uniqueName,
+        username: token.unique_name,
         role: token.role,
       };
     }
@@ -49,6 +49,7 @@ export class JwtTokenService {
   }
 
   public removeToken(){
+    this._decodedToken = undefined;
     this.localStorageService.remove(this.tokenKeyName);
   }
 
