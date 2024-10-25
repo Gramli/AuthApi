@@ -1,7 +1,8 @@
 ﻿using Ardalis.GuardClauses;
+using Auth.Domain;
 using Auth.Infrastructure.Abstractions;
-using Auth.Infrastructure.Database.EFContext.Entities;
 using Auth.Infrastructure.Extensions;
+using Auth.Infrastructure.UseCases.User.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Auth.Infrastructure.Configuration
@@ -13,7 +14,7 @@ namespace Auth.Infrastructure.Configuration
             using var scope = serviceProvider.CreateScope();
             var secretRoleCommandRepository = scope.ServiceProvider.GetRequiredService<ISecretRoleCommandRepository>();
             Guard.Against.Null(secretRoleCommandRepository);
-            await secretRoleCommandRepository.AddRoles(["user", "developer", "administrator"], CancellationToken.None);
+            await secretRoleCommandRepository.AddRoles(AuthRoles.AllRoles, CancellationToken.None);
         }
 
         public static async Task AddDefaultUsers(this IServiceProvider serviceProvider)
@@ -31,7 +32,7 @@ namespace Auth.Infrastructure.Configuration
                 Email = "noEmail",
                 Password = PasswordHasher.HashPassword("admin"),
                 Username = "admin",
-                Role = roles.Single(x => x.Role.Equals("administrator", StringComparison.OrdinalIgnoreCase))
+                Role = roles.Single(x => x.Role.Equals(AuthRoles.Administrator, StringComparison.OrdinalIgnoreCase))
             };
 
             await secretUserCommandsRepository.AddUser(admin, CancellationToken.None);

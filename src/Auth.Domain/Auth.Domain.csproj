@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
+    <PackageReference Include="FluentResults" Version="3.16.0" />
   </ItemGroup>
 
 </Project>

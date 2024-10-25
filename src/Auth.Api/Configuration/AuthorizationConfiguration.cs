@@ -1,4 +1,6 @@
-﻿namespace Auth.Api.Configuration
+﻿using Auth.Domain;
+
+namespace Auth.Api.Configuration
 {
     public static class AuthorizationConfiguration
     {
@@ -10,9 +12,9 @@
         {
             serviceCollection.AddAuthorization(options =>
             {
-                options.AddPolicy(UserPolicyName, policy => policy.RequireRole("user", "developer", "administrator"));
-                options.AddPolicy(DeveloperPolicyName, policy => policy.RequireRole("developer", "administrator"));
-                options.AddPolicy(AdministratorPolicyName, policy => policy.RequireRole("administrator"));
+                options.AddPolicy(UserPolicyName, policy => policy.RequireRole(AuthRoles.AllRoles));
+                options.AddPolicy(DeveloperPolicyName, policy => policy.RequireRole(AuthRoles.Developer, AuthRoles.Administrator));
+                options.AddPolicy(AdministratorPolicyName, policy => policy.RequireRole(AuthRoles.Administrator));
             });
 
             return serviceCollection;

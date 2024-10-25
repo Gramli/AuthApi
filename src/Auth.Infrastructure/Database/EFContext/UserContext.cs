@@ -1,4 +1,4 @@
-﻿using Auth.Infrastructure.Database.EFContext.Entities;
+﻿using Auth.Infrastructure.UseCases.User.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.Database.EFContext

@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
-using Auth.Domain.Dtos;
+using Auth.Domain.UseCases.User.Dto;
 using Auth.Infrastructure.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

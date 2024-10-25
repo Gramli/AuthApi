@@ -22,11 +22,7 @@ import { ToastModule } from 'primeng/toast';
 export class ChangeRoleComponent implements OnInit {
   formGroup: WritableSignal<FormGroup> = signal(new FormGroup({}));
   userNames: WritableSignal<string[] | undefined> = signal(undefined);
-  roles: WritableSignal<string[]> = signal([
-    'user',
-    'developer',
-    'administrator',
-  ]);
+  roles: WritableSignal<string[] | undefined> = signal(undefined);
 
   constructor(protected userService: UserService, private messageService: MessageService) {}
 
@@ -39,6 +35,7 @@ export class ChangeRoleComponent implements OnInit {
     );
 
     this.loadUsers();
+    this.loadRoles();
   }
 
   protected onSubmit(): void {
@@ -59,6 +56,14 @@ export class ChangeRoleComponent implements OnInit {
         this.userNames.set(response.data
           .filter((user) => user.username !== this.userService.loggedUser?.username)
           .map((user) => user.username));
+      },
+    });
+  }
+
+  private loadRoles(): void {
+    this.userService.getRoles().subscribe({
+      next: (response) => {
+        this.roles.set(response.data);
       },
     });
   }

@@ -1,4 +1,4 @@
-﻿using Auth.Infrastructure.Database.EFContext.Entities;
+﻿using Auth.Infrastructure.UseCases.User.Entities;
 using FluentResults;
 
 namespace Auth.Infrastructure.Abstractions

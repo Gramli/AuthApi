@@ -1,9 +1,11 @@
-﻿using Auth.Core.Commands;
-using Auth.Core.Extensions;
-using Auth.Core.Queries;
-using Auth.Core.Validation;
-using Auth.Domain.Commands;
-using Auth.Domain.Dtos;
+﻿using Auth.Core.Extensions;
+using Auth.Core.UseCases.Service;
+using Auth.Core.UseCases.User.Commands;
+using Auth.Core.UseCases.User.Queries;
+using Auth.Core.UseCases.User.Validation;
+using Auth.Domain.UseCases.Service.Dto;
+using Auth.Domain.UseCases.User.Commands;
+using Auth.Domain.UseCases.User.Dto;
 using Microsoft.Extensions.DependencyInjection;
 using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;

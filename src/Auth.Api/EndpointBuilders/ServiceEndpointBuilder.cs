@@ -1,5 +1,5 @@
 ﻿using Auth.Api.Configuration;
-using Auth.Domain.Dtos;
+using Auth.Domain.UseCases.Service.Dto;
 using Microsoft.AspNetCore.Mvc;
 using SmallApiToolkit.Core.Extensions;
 using SmallApiToolkit.Core.RequestHandlers;

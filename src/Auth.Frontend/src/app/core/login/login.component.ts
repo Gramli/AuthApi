@@ -34,6 +34,7 @@ export class LoginComponent {
           } else {
             this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Api returns OK, but user is null.', life: 3000 });
           }
+          console.log('hm?');
           this.router.navigate(['']);
         },
         error: (error: HttpErrorResponse)=> {

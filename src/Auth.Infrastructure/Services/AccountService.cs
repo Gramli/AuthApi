@@ -1,11 +1,11 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
 using Auth.Core.Resources;
-using Auth.Domain.Commands;
-using Auth.Domain.Dtos;
+using Auth.Domain.UseCases.User.Commands;
+using Auth.Domain.UseCases.User.Dto;
 using Auth.Infrastructure.Abstractions;
-using Auth.Infrastructure.Database.EFContext.Entities;
 using Auth.Infrastructure.Extensions;
+using Auth.Infrastructure.UseCases.User.Entities;
 using FluentResults;
 using Mapster;
 
@@ -64,7 +64,7 @@ namespace Auth.Infrastructure.Services
             {
                 Username = registerCommand.Username,
                 Email = registerCommand.Email,
-                Password = registerCommand.Password,
+                Password = PasswordHasher.HashPassword(registerCommand.Password),
                 Role = roleEntityResult.Value
             };
 

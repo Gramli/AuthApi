@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Dtos;
+﻿using Auth.Domain.UseCases.User.Dto;
 
 namespace Auth.Core.Abstractions.Services
 {
