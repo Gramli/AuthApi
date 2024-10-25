@@ -2,7 +2,7 @@
 
 # Clean Architecture AuthApi
 
-The REST API demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints and how to add **custom claims using middleware**, all implemented using Clean Architecture and various design patterns.
+Full-stack solution demonstrates user login/registration/handling using Angular and .NET. The backend part demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints and how to add **custom claims using middleware**, all implemented using Clean Architecture and various design patterns. The frontend part use standalone components and singnals.
 
 
 Example API allows to: 
@@ -14,14 +14,49 @@ Example API allows to:
 Endpoints use different types of authorization policies.
 
 # Menu
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
 * [Get Started](#get-started)
 * [Motivation](#motivation)
-* [Architecture](#architecture)
+  * [Backend Architecture](#backend-architecture)
+  * [Frontend Example](#frontend-example)
+  * [Technologies](#technologies)
 * [Technologies](#technologies)
+
+# Prerequisites
+* **.NET SDK 8.0+**
+* **Angular CLI 18+**
+* **Node.js 18.19.1+**
+
+# Installation
+
+To install the project using Git Bash:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Gramli/AuthApi.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd FileApi/src
+   ```
+3. Install the backend dependencies:
+   ```bash
+   dotnet restore
+   ```
+4. Navigate to the frontend directory and install dependencies:
+   ```bash
+   cd Auth.Frontend
+   npm install
+   ```
+5. Run the solution in Visual Studio 2019+ by selecting the "Run API and FE" startup item to start both the API and the frontend servers. More about run in next section.
 
 # Get Started
 
-Simply Run **Auth.API** and try it.
+**Expected IDE: Visual Studio 2019+**
+
+### Run only Backend
+Select the **Auth.API** startup item and try it.
 
 ## Test Using SwaggerUI
 ![SwaggerUI](./doc/img/login.gif)
@@ -34,7 +69,7 @@ Simply Run **Auth.API** and try it.
 # Motivation
 Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture.
 
-# Architecture
+## Backend Architecture
 
 The project follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, but the application layer is split into Core and Domain projects. The Core project holds the business rules, while the Domain project contains the business entities..
 
@@ -42,26 +77,7 @@ As Minimal API allows for injecting handlers into endpoint map methods, I decide
 
 Instead of throwing exceptions, the project uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (using [FluentResuls package](https://github.com/altmann/FluentResults)). For returning precise HTTP responses, every handler returns data wrapped in an HttpDataResponse object, which also contains a collection of error messages and the HTTP response code.
 
-#### Clean Architecture Layers
-
-Solution contains four layers: 
-* **Auth.Api** - entry point of the application, top layer
-	*  Endpoints
-	*  Middlewares (or Filters)
-	*  API Configuration
-* **Auth.Infrastructure** - layer for communication with external resources like database, cache, web service.. 
-	*  Repositories Implementation - access to database
-	*  External Services Proxies - proxy classes implementation - to obtain data from external web services
-	*  Infastructure Specific Services - services which are needed to interact with external libraries and frameworks
-* **Auth.Core** - business logic of the application
-	*  Request Handlers/Managers/.. - business implementation
-	*  Abstractions - besides abstractions for business logic are there abstractions for Infrastructure layer (Service, Repository, ..) to be able use them in this (core) layer
-* **Auth.Domain** - all what should be shared across all projects
-	* DTOs
-	* General Extensions
-
-#### Horizontal Diagram (references)
-![Project Clean Architecture Diagram](./doc/img/cleanArchitecture.jpg)
+## Frontend Example
 
 ## Technologies
 * [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)
@@ -73,3 +89,4 @@ Solution contains four layers:
 * [GuardClauses](https://github.com/ardalis/GuardClauses)
 * [Moq](https://github.com/moq/moq4)
 * [Xunit](https://github.com/xunit/xunit)
+* [Angular 18](https://angular.dev)
