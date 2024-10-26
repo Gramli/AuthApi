@@ -41,6 +41,7 @@ export class JwtTokenService {
       }
     }
 
+    this.removeToken();
     return false;
   }
 

@@ -2,7 +2,7 @@
 
 # Clean Architecture AuthApi
 
-Full-stack solution demonstrates user login/registration/handling using Angular and .NET. The backend part demonstrates **Authentication** and **Authorization** with **JWT token**. It also shows how to use different **Authorization policies** in minimal API endpoints and how to add **custom claims using middleware**, all implemented using Clean Architecture and various design patterns. The frontend part use standalone components and singnals.
+This full-stack solution demonstrates user registration, login, and role-based access control using Angular and .NET. The backend showcases **Authentication** and **Authorization** with **JWT tokens**, demonstrating the use of Authorization policies in **minimal API** endpoints and adding custom claims through middleware. These are all implemented following Clean Architecture and various design patterns. The frontend illustrates managing JWT tokens using **guards** and **interceptors**, with all components implemented as **standalone components** and **signals**.
 
 
 Example API allows to: 
@@ -14,14 +14,16 @@ Example API allows to:
 Endpoints use different types of authorization policies.
 
 # Menu
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Get Started](#get-started)
-* [Motivation](#motivation)
-  * [Backend Architecture](#backend-architecture)
-  * [Frontend Example](#frontend-example)
-  * [Technologies](#technologies)
-* [Technologies](#technologies)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Get Started](#get-started)
+    - [Run only Backend](#run-only-backend)
+  - [Test Using SwaggerUI](#test-using-swaggerui)
+  - [Test Using .http file (VS2022)](#test-using-http-file-vs2022)
+- [Motivation](#motivation)
+  - [Backend Architecture](#backend-architecture)
+  - [Frontend Example](#frontend-example)
+  - [Technologies](#technologies)
 
 # Prerequisites
 * **.NET SDK 8.0+**
