@@ -69,9 +69,10 @@ Select the **Auth.API** startup item and try it.
  * Obtain jwtToken from response and use it in another requests in Authorization header
 
 # Motivation
-Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture.
+Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture and also improve my skills with Angular.
 
 ## Backend Architecture
+
 
 The project follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, but the application layer is split into Core and Domain projects. The Core project holds the business rules, while the Domain project contains the business entities..
 
@@ -80,6 +81,8 @@ As Minimal API allows for injecting handlers into endpoint map methods, I decide
 Instead of throwing exceptions, the project uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (using [FluentResuls package](https://github.com/altmann/FluentResults)). For returning precise HTTP responses, every handler returns data wrapped in an HttpDataResponse object, which also contains a collection of error messages and the HTTP response code.
 
 ## Frontend Example
+
+
 
 ## Technologies
 * [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)
