@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SmallApiToolkit\src\SmallApiToolkit\SmallApiToolkit.csproj" />
     <ProjectReference Include="..\Auth.Core\Auth.Core.csproj" />
     <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
     <ProjectReference Include="..\Auth.Infrastructure\Auth.Infrastructure.csproj" />
