@@ -17,12 +17,12 @@ Endpoints use different types of authorization policies.
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Get Started](#get-started)
-    - [Run only Backend](#run-only-backend)
+  - [Run Solution](#run-solution)
   - [Test Using SwaggerUI](#test-using-swaggerui)
   - [Test Using .http file (VS2022)](#test-using-http-file-vs2022)
 - [Motivation](#motivation)
   - [Backend Architecture](#backend-architecture)
-  - [Frontend Example](#frontend-example)
+  - [Frontend Structure](#frontend-structure)
   - [Technologies](#technologies)
 
 # Prerequisites
@@ -31,7 +31,6 @@ Endpoints use different types of authorization policies.
 * **Node.js 18.19.1+**
 
 # Installation
-
 To install the project using Git Bash:
 
 1. Clone the repository:
@@ -40,7 +39,7 @@ To install the project using Git Bash:
    ```
 2. Navigate to the project directory:
    ```bash
-   cd FileApi/src
+   cd AuthApi/src
    ```
 3. Install the backend dependencies:
    ```bash
@@ -51,16 +50,29 @@ To install the project using Git Bash:
    cd Auth.Frontend
    npm install
    ```
-5. Run the solution in Visual Studio 2019+ by selecting the "Run API and FE" startup item to start both the API and the frontend servers. More about run in next section.
 
 # Get Started
 
-**Expected IDE: Visual Studio 2019+**
+## Run Solution
+**Expected IDE**
+- **Backend**: Visual Studio 2019+ or JetBrains Rider 2024.2.7+
+- **Frontend**: Visual Studio Code 1.94.2+ or WebStorm 2024.2.4+
 
-### Run only Backend
-Select the **Auth.API** startup item and try it.
+1. **Run Frontend**
+    1. Open the **Auth.Frontend** project folder:
+       - In WebStorm, use the run or debug button to start the project.
+       - In VS Code, run the project in the terminal using the command `ng serve`.
+    2. In your browser, navigate to [http://localhost:4200/](http://localhost:4200/).
+
+2. **Run Backend**
+    1. Open the **AuthSol.sln** project in Rider or Visual Studio.
+    2. Use the run button to start the backend project.
+
+3. Once both the frontend and backend are running, you’re all set to start using the app. Enjoy! :)
 
 ## Test Using SwaggerUI
+Select the **Auth.API** startup item in VS or Rider and try it.
+
 ![SwaggerUI](./doc/img/login.gif)
 
 ## Test Using .http file (VS2022)
@@ -69,20 +81,27 @@ Select the **Auth.API** startup item and try it.
  * Obtain jwtToken from response and use it in another requests in Authorization header
 
 # Motivation
-Main motivation is to write practical example of Authorization and Authentication with minimal API and Clean Architecture and also improve my skills with Angular.
+The primary goal of this project is to create a practical example of authorization and authentication using Minimal API and Clean Architecture, while also enhancing my skills with Angular.
 
 ## Backend Architecture
+The backend follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, with the application layer split into **Core** and **Domain** projects:
+- The **Core** project contains business rules.
+- The **Domain** project holds business entities.
 
+### Key Patterns and Decisions:
+- **CQRS Pattern**: Separates handlers into commands and queries, with repositories structured similarly.
+- **No MediatR**: Minimal API supports injecting handlers directly into endpoint map methods, eliminating the need for **[MediatR](https://github.com/jbogard/MediatR)**.
+- **Result Pattern**: Uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (via [FluentResults package](https://github.com/altmann/FluentResults)) instead of throwing exceptions. Each handler returns an `HttpDataResponse` object containing data, error messages, and the HTTP response code.
 
-The project follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, but the application layer is split into Core and Domain projects. The Core project holds the business rules, while the Domain project contains the business entities..
+## Frontend Structure
+The Angular frontend is organized into two main folders:
+- **Core**: Contains "feature" components (each with specific feature logic).
+- **Shared**: Stores common components, services, and extensions shared between feature components.
 
-As Minimal API allows for injecting handlers into endpoint map methods, I decided not to use **[MediatR](https://github.com/jbogard/MediatR)**. Nonetheless, every endpoint still has its own request and handler.The solution folows the **[CQRS pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)**, , meaning that handlers are separated into commands and queries; command handlers handle command requests, and query handlers handle query requests. Additionally, repositories, following the (**[Repository pattern](https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application)**), are also separated into commands and queries..
+### JWT Handling
+This example demonstrates JWT token management on the client side. After obtaining the token from the API, it is stored in local storage via the **JwtTokenService**. The **AuthorizeGuard** checks if the client already has a token to protect routes, and **authInterceptor** automatically adds the token header to every request.
 
-Instead of throwing exceptions, the project uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (using [FluentResuls package](https://github.com/altmann/FluentResults)). For returning precise HTTP responses, every handler returns data wrapped in an HttpDataResponse object, which also contains a collection of error messages and the HTTP response code.
-
-## Frontend Example
-
-
+The project uses **PrimeNG** and **PrimeFlex** for styling and layout.
 
 ## Technologies
 * [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)

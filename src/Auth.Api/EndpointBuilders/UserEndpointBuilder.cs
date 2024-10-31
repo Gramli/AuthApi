@@ -52,7 +52,7 @@ namespace Auth.Api.EndpointBuilders
                     .WithOpenApi();
 
             endpointRouteBuilder.MapGet("get-roles",
-                (CancellationToken cancellationToken) =>
+                () =>
                 Results.Json((DataResponse<IEnumerable<string>>)HttpDataResponses.AsOK(AuthRoles.AllRoles), statusCode: (int)HttpStatusCode.OK))
                     .Produces<bool>()
                     .WithName("GetRoles")

@@ -18,14 +18,14 @@ Content-Type: application/json
 
 {
   "username": "admin",
-  "password": "passwAdmin"
+  "password": "admin"
 }
 
-# Generate Token in login request and put it to Authorization header like this:
-# Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
+### Generate Token in login request and put it to Authorization header like this:
+### Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
 
 ### Change Role request
-POST https://{{host}}/v1/user/changeRole
+POST https://{{host}}/v1/user/change-role
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
@@ -36,7 +36,13 @@ Authorization: Bearer <generated token>
 
 ### Users Info
 
-GET https://{{host}}/v1/user/getUsersInfo
+GET https://{{host}}/v1/user/users-info
+Content-Type: application/json
+Authorization: Bearer <generated token>
+
+### User Info
+
+GET https://{{host}}/v1/user/user-info
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
