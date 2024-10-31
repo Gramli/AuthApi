@@ -5,6 +5,7 @@ using Auth.Core.Configuration;
 using Auth.Infrastructure.Configuration;
 using SmallApiToolkit.Extensions;
 using SmallApiToolkit.Middleware;
+using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,11 @@ builder.Services.ConfigureAuthentication(builder.Configuration);
 builder.Services.ConfigureAuthorization();
 
 builder.Services
+    .AddApi()
     .AddCore()
     .AddInfrastructure(builder.Configuration);
+
+var corsPolicyName = builder.Services.AddCorsByConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
@@ -24,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(corsPolicyName);
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -34,7 +40,8 @@ app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ClaimsMiddleware>();
 
 app.MapVersionGroup(1)
-   .BuildUserEndpoints()
+   .BuildUserEndpoints();
+app.MapVersionGroup(1)
    .BuildServiceEndpoints();
 
 await app.Services.AddDefaultRoles();

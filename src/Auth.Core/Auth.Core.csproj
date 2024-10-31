@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" Version="4.5.0" />
-    <PackageReference Include="FluentResults" Version="3.15.2" />
+    <PackageReference Include="Ardalis.GuardClauses" Version="5.0.0" />
+    <PackageReference Include="FluentResults" Version="3.16.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-    <PackageReference Include="SmallApiToolkit.Core" Version="1.0.0.3" />
+    <PackageReference Include="SmallApiToolkit.Core" Version="1.0.0.6" />
     <PackageReference Include="Validot" Version="2.5.0" />
   </ItemGroup>
 

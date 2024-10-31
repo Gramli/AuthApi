@@ -1,11 +1,14 @@
-﻿using Auth.Core.Abstractions.Commands;
-using Auth.Core.Abstractions.Queries;
-using Auth.Core.Commands;
-using Auth.Core.Extensions;
-using Auth.Core.Queries;
-using Auth.Core.Validation;
-using Auth.Domain.Commands;
+﻿using Auth.Core.Extensions;
+using Auth.Core.UseCases.Service;
+using Auth.Core.UseCases.User.Commands;
+using Auth.Core.UseCases.User.Queries;
+using Auth.Core.UseCases.User.Validation;
+using Auth.Domain.UseCases.Service.Dto;
+using Auth.Domain.UseCases.User.Commands;
+using Auth.Domain.UseCases.User.Dto;
 using Microsoft.Extensions.DependencyInjection;
+using SmallApiToolkit.Core.RequestHandlers;
+using SmallApiToolkit.Core.Response;
 using Validot;
 
 namespace Auth.Core.Configuration
@@ -19,11 +22,12 @@ namespace Auth.Core.Configuration
 
         private static IServiceCollection AddCoreHandlers(this IServiceCollection serviceCollection)
             => serviceCollection
-                .AddScoped<ILoginCommandHandler, LoginCommandHandler>()
-                .AddScoped<IRegisterCommandHandler, RegisterCommandHandler>()
-                .AddScoped<IChangeRoleCommandHandler, ChangeRoleCommandHandler>()
-                .AddScoped<IGetUserInfoQueryHandler, GetUserInfoQueryHandler>()
-                .AddScoped<IGetServiceInfoQueryHandler, GetServiceInfoQueryHandler>();
+                .AddScoped<IHttpRequestHandler<string, LoginCommand>, LoginCommandHandler>()
+                .AddScoped<IHttpRequestHandler<bool, RegisterCommand>, RegisterCommandHandler>()
+                .AddScoped<IHttpRequestHandler<bool, ChangeRoleCommand>, ChangeRoleCommandHandler>()
+                .AddScoped<IHttpRequestHandler<IEnumerable<UserDto>, EmptyRequest>, GetUsersInfoQueryHandler>()
+                .AddScoped<IHttpRequestHandler<ServiceInfoDto, EmptyRequest>, GetServiceInfoQueryHandler>()
+                .AddScoped<IHttpRequestHandler<UserInfoDto, EmptyRequest>, GetUserInfoQueryHandler>();
 
         private static IServiceCollection AddCoreValidation(this IServiceCollection serviceCollection)
             => serviceCollection

@@ -1,0 +1,19 @@
+<div class="p-2 m-2">
+  <i class="pi pi-building-columns" style="font-size: 1.5rem">
+    <span class="mx-2">Service Information</span></i
+  >
+  <div class="mt-2">
+    <p-accordion [activeIndex]="0">
+      <p-accordionTab header="Name">
+        <p>
+          {{ serviceInfo()?.name }}
+        </p>
+      </p-accordionTab>
+      <p-accordionTab header="Description">
+        <p>
+          {{ serviceInfo()?.description }}
+        </p>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

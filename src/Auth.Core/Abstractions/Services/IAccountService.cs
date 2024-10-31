@@ -1,5 +1,5 @@
-﻿using Auth.Domain.Commands;
-using Auth.Domain.Dtos;
+﻿using Auth.Domain.UseCases.User.Commands;
+using Auth.Domain.UseCases.User.Dto;
 using FluentResults;
 
 namespace Auth.Core.Abstractions.Services

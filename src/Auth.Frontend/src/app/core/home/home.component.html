@@ -1,0 +1,33 @@
+<div class="flex justify-content-center flex-wrap">
+  <div class="grid w-8">
+    <div class="col">
+      <h2 class="text-center">Welcome to Auth.Frontend</h2>
+      <div class="flex justify-content-center">
+        <p-image src="assets/authApi_icon.png" alt="Image" width="250" />
+      </div>
+      <p-card>
+        <div class="grid">
+          <div class="col-3">
+            <p-menu #menu [model]="items()" />
+          </div>
+          <div class="col-9">
+            <ng-container [ngSwitch]="state()">
+              <div *ngSwitchCase="HomeComponentState.userInfo">
+                  <app-user-info></app-user-info>
+              </div>
+              <div *ngSwitchCase="HomeComponentState.changeRole">
+                <app-change-role></app-change-role>
+              </div>
+              <div *ngSwitchCase="HomeComponentState.serviceInfo">
+                <app-service-info></app-service-info>
+              </div>
+              <div *ngSwitchCase="HomeComponentState.allUsersInfo">
+                <app-users-info></app-users-info>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
-using Auth.Domain.Dtos;
+using Auth.Domain.UseCases.User.Dto;
 using Auth.Infrastructure.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -31,7 +31,7 @@ namespace Auth.Infrastructure.Services
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Role, user.Role),
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(_tokenOptions.Value.ExpirationInMinutes),
+                Expires = DateTime.Now.AddMinutes(_tokenOptions.Value.ExpirationInMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Audience = _tokenOptions.Value.Audience,
                 Issuer = _tokenOptions.Value.Issuer,
