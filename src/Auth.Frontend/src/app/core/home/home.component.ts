@@ -53,8 +53,9 @@ export class HomeComponent implements OnInit {
   constructor(protected userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.userService.loggedUser) {
-      this.initMenu(this.userService.loggedUser);
+    const loggedUser = this.userService.loggedUser;
+    if (loggedUser) {
+      this.initMenu(loggedUser);
     }
   }
 
