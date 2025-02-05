@@ -14,6 +14,8 @@ Example API allows to:
 Endpoints use different types of authorization policies.
 
 # Menu
+- [Clean Architecture AuthApi](#clean-architecture-authapi)
+- [Menu](#menu)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Get Started](#get-started)
@@ -22,13 +24,15 @@ Endpoints use different types of authorization policies.
   - [Test Using .http file (VS2022)](#test-using-http-file-vs2022)
 - [Motivation](#motivation)
   - [Backend Architecture](#backend-architecture)
+    - [Key Patterns and Decisions:](#key-patterns-and-decisions)
   - [Frontend Structure](#frontend-structure)
+    - [JWT Handling](#jwt-handling)
   - [Technologies](#technologies)
 
 # Prerequisites
-* **.NET SDK 8.0+**
-* **Angular CLI 18+**
-* **Node.js 18.19.1+**
+* **.NET SDK 9.0+**
+* **Angular CLI 19+**
+* **Node.js 20.11.1+**
 
 # Installation
 To install the project using Git Bash:
@@ -76,7 +80,7 @@ Select the **Auth.API** startup item in VS or Rider and try it.
 ![SwaggerUI](./doc/img/login.gif)
 
 ## Test Using .http file (VS2022)
- * Go to Tests/HttpDebugTests folder and open **debug-tests.http** file (in VS2022
+ * Go to Tests/HttpDebugTests folder and open **debug-tests.http** file in VS2022
  * Send Login request
  * Obtain jwtToken from response and use it in another requests in Authorization header
 
@@ -104,13 +108,13 @@ This example demonstrates JWT token management on the client side. After obtaini
 The project uses **PrimeNG** and **PrimeFlex** for styling and layout.
 
 ## Technologies
-* [ASP.NET Core 8](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-8.0)
+* [ASP.NET Core 9](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-9.0)
 * [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
 * [Mapster](https://github.com/MapsterMapper/Mapster)
 * [SmallApiToolkit](https://github.com/Gramli/SmallApiToolkit)
 * [FluentResuls](https://github.com/altmann/FluentResults)
 * [Validot](https://github.com/bartoszlenar/Validot)
 * [GuardClauses](https://github.com/ardalis/GuardClauses)
-* [Moq](https://github.com/moq/moq4)
-* [Xunit](https://github.com/xunit/xunit)
-* [Angular 18](https://angular.dev)
+* [Angular 19](https://angular.dev)
+* [PrimeNG](https://primeng.org)
+* [PrimeFlex](https://primeflex.org)

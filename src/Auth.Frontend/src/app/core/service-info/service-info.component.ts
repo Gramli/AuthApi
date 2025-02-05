@@ -4,11 +4,10 @@ import { IServiceInfo } from './service-info.model';
 import { AccordionModule } from 'primeng/accordion';
 
 @Component({
-  selector: 'app-service-info',
-  standalone: true,
-  imports: [AccordionModule],
-  templateUrl: './service-info.component.html',
-  styleUrl: './service-info.component.scss'
+    selector: 'app-service-info',
+    imports: [AccordionModule],
+    templateUrl: './service-info.component.html',
+    styleUrl: './service-info.component.scss'
 })
 export class ServiceInfoComponent implements OnInit {
 

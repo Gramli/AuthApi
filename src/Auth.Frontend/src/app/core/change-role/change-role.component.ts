@@ -13,11 +13,10 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-change-role',
-  standalone: true,
-  imports: [DropdownModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
-  templateUrl: './change-role.component.html',
-  styleUrl: './change-role.component.scss',
+    selector: 'app-change-role',
+    imports: [DropdownModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
+    templateUrl: './change-role.component.html',
+    styleUrl: './change-role.component.scss'
 })
 export class ChangeRoleComponent implements OnInit {
   formGroup: WritableSignal<FormGroup> = signal(new FormGroup({}));

@@ -23,23 +23,22 @@ import { ChangeRoleComponent } from '../change-role/change-role.component';
 import { IUser } from '../../shared/model/user.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  standalone: true,
-  imports: [
-    AvatarModule,
-    AvatarGroupModule,
-    CardModule,
-    ButtonModule,
-    ImageModule,
-    MenuModule,
-    CommonModule,
-    ServiceInfoComponent,
-    UserInfoComponent,
-    UsersInfoComponent,
-    ChangeRoleComponent,
-  ],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    imports: [
+        AvatarModule,
+        AvatarGroupModule,
+        CardModule,
+        ButtonModule,
+        ImageModule,
+        MenuModule,
+        CommonModule,
+        ServiceInfoComponent,
+        UserInfoComponent,
+        UsersInfoComponent,
+        ChangeRoleComponent,
+    ]
 })
 export class HomeComponent implements OnInit {
   readonly HomeComponentState = HomeComponentState;
@@ -53,8 +52,9 @@ export class HomeComponent implements OnInit {
   constructor(protected userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    if (this.userService.loggedUser) {
-      this.initMenu(this.userService.loggedUser);
+    const loggedUser = this.userService.loggedUser;
+    if (loggedUser) {
+      this.initMenu(loggedUser);
     }
   }
 
