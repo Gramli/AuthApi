@@ -14,11 +14,11 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-  selector: 'app-login-or-register',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, InputTextModule, ButtonModule, PasswordModule],
-  templateUrl: './login-or-register.component.html',
-  styleUrl: './login-or-register.component.scss',
+    selector: 'app-login-or-register',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, InputTextModule, ButtonModule, PasswordModule],
+    templateUrl: './login-or-register.component.html',
+    styleUrl: './login-or-register.component.scss',
+    standalone: true,
 })
 export class LoginOrRegisterComponent implements OnInit {
   @Input() showEmail = false;

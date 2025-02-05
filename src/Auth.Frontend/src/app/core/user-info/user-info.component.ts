@@ -3,11 +3,10 @@ import { IUserInfo } from '../../shared/model/user.model';
 import { UserService } from '../../shared';
 
 @Component({
-  selector: 'app-user-info',
-  standalone: true,
-  imports: [],
-  templateUrl: './user-info.component.html',
-  styleUrl: './user-info.component.scss'
+    selector: 'app-user-info',
+    imports: [],
+    templateUrl: './user-info.component.html',
+    styleUrl: './user-info.component.scss'
 })
 export class UserInfoComponent implements OnInit {
   protected userInfo: WritableSignal<IUserInfo | undefined> = signal(undefined);

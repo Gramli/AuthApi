@@ -10,16 +10,15 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    imports: [LoginOrRegisterComponent,
+        CardModule,
+        RouterLink,
+        ToastModule,
+        ButtonModule],
   standalone: true,
-  imports: [LoginOrRegisterComponent,
-    CardModule,
-    RouterLink, 
-    RouterOutlet,
-    ToastModule,
-    ButtonModule]
 })
 export class LoginComponent {
 

@@ -23,23 +23,22 @@ import { ChangeRoleComponent } from '../change-role/change-role.component';
 import { IUser } from '../../shared/model/user.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  standalone: true,
-  imports: [
-    AvatarModule,
-    AvatarGroupModule,
-    CardModule,
-    ButtonModule,
-    ImageModule,
-    MenuModule,
-    CommonModule,
-    ServiceInfoComponent,
-    UserInfoComponent,
-    UsersInfoComponent,
-    ChangeRoleComponent,
-  ],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    imports: [
+        AvatarModule,
+        AvatarGroupModule,
+        CardModule,
+        ButtonModule,
+        ImageModule,
+        MenuModule,
+        CommonModule,
+        ServiceInfoComponent,
+        UserInfoComponent,
+        UsersInfoComponent,
+        ChangeRoleComponent,
+    ]
 })
 export class HomeComponent implements OnInit {
   readonly HomeComponentState = HomeComponentState;

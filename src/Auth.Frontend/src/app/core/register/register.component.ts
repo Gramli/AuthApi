@@ -9,18 +9,17 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss',
+    imports: [
+        LoginOrRegisterComponent,
+        CardModule,
+        RouterLink,
+        ToastModule,
+        ButtonModule,
+    ],
   standalone: true,
-  imports: [
-    LoginOrRegisterComponent,
-    CardModule,
-    RouterLink,
-    RouterOutlet,
-    ToastModule,
-    ButtonModule,
-  ],
 })
 export class RegisterComponent {
   constructor(
