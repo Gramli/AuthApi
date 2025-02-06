@@ -1,6 +1,9 @@
  <img align="left" width="116" height="116" src=".\doc\img\authApi_icon.png" />
 
+
 # Clean Architecture AuthApi
+[![.NET Build and Test](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml)
+[![Angular Build](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml)
 
 This full-stack solution demonstrates user registration, login, and role-based access control using Angular and .NET. The backend showcases **Authentication** and **Authorization** with **JWT tokens**, demonstrating the use of Authorization policies in **minimal API** endpoints and adding custom claims through middleware. These are all implemented following Clean Architecture and various design patterns. The frontend illustrates managing JWT tokens using **guards** and **interceptors**, with all components implemented as **standalone components** and **signals**.
 
