@@ -40,6 +40,8 @@ app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ClaimsMiddleware>();
 
 app.MapVersionGroup(1)
+   .BuildAuthEndpoints();
+app.MapVersionGroup(1)
    .BuildUserEndpoints();
 app.MapVersionGroup(1)
    .BuildServiceEndpoints();

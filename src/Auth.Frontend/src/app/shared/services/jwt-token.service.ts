@@ -4,6 +4,7 @@ import { LocalStorageService } from './local-storage.service';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 interface AuthApiJwtPayload extends JwtPayload {
+  id: number;
   unique_name: string;
   role: string;
 }
@@ -22,6 +23,7 @@ export class JwtTokenService {
     const token = this.decodedToken();
     if (token) {
       return {
+        id: token.id,
         username: token.unique_name,
         role: token.role,
       };

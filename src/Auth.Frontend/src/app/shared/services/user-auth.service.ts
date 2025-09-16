@@ -13,7 +13,7 @@ import { DataResponse } from '../model/api-response.model';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserAuthService {
   public get loggedUser(): IUser | undefined {
     return this.jwtTokenService.getUser();
   }
@@ -32,7 +32,7 @@ export class UserService {
 
   public login(userLogin: IUserLogin): Observable<IUser | undefined> {
     return this.httpApiService
-      .post<string>('/v1/user/login', {
+      .post<string>('/v1/auth/login', {
         ...userLogin,
       })
       .pipe(
@@ -51,30 +51,12 @@ export class UserService {
   public register(
     registerUser: IRegisterUser
   ): Observable<DataResponse<boolean>> {
-    return this.httpApiService.post<boolean>('/v1/user/register', {
+    return this.httpApiService.post<boolean>('/v1/auth/register', {
       ...registerUser,
     });
   }
 
   public getUserInfo(): Observable<DataResponse<IUserInfo>> {
-    return this.httpApiService.get<IUserInfo>('/v1/user/user-info');
-  }
-
-  public getUsersInfo(): Observable<DataResponse<IUser[]>> {
-    return this.httpApiService.get<IUser[]>('/v1/user/users-info');
-  }
-
-  public changeRole(
-    userName: string,
-    roleName: string
-  ): Observable<DataResponse<boolean>> {
-    return this.httpApiService.post<boolean>('/v1/user/change-role', {
-      userName,
-      roleName,
-    });
-  }
-
-  public getRoles(): Observable<DataResponse<string[]>> {
-    return this.httpApiService.get<string[]>('/v1/user/get-roles');
+    return this.httpApiService.get<IUserInfo>('/v1/auth/user');
   }
 }

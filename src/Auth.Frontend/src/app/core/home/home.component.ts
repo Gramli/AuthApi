@@ -14,13 +14,13 @@ import { ImageModule } from 'primeng/image';
 import { Menu, MenuModule } from 'primeng/menu';
 import { HomeComponentState } from './model';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../shared';
 import { Router } from '@angular/router';
 import { ServiceInfoComponent } from '../service-info/service-info.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { UsersInfoComponent } from '../users-info/users-info.component';
 import { ChangeRoleComponent } from '../change-role/change-role.component';
 import { IUser } from '../../shared/model/user.model';
+import { UserAuthService } from '../../shared';
 
 @Component({
     selector: 'app-home',
@@ -49,10 +49,10 @@ export class HomeComponent implements OnInit {
     HomeComponentState.userInfo
   );
 
-  constructor(protected userService: UserService, private router: Router) {}
+  constructor(private userAuthService: UserAuthService, private router: Router) {}
 
   ngOnInit(): void {
-    const loggedUser = this.userService.loggedUser;
+    const loggedUser = this.userAuthService.loggedUser;
     if (loggedUser) {
       this.initMenu(loggedUser);
     }
@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
             label: 'Logout',
             icon: 'pi pi-sign-out',
             command: () => {
-              this.userService.logout();
+              this.userAuthService.logout();
               this.router.navigate(['/login']);
             },
           },

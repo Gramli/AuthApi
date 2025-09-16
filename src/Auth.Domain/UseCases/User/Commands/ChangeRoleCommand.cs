@@ -1,8 +1,12 @@
 ﻿namespace Auth.Domain.UseCases.User.Commands
 {
-    public sealed class ChangeRoleCommand
+    public sealed class ChangeRoleCommand : ChangeRoleBody
     {
-        public string UserName { get; init; } = string.Empty;
-        public string RoleName { get; init; } = string.Empty;
+        public required int Id { get; init; }
+
+    }
+    public class ChangeRoleBody
+    {
+        public required string RoleName { get; init; } = string.Empty;
     }
 }

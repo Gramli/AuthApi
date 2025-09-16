@@ -8,6 +8,7 @@ namespace Auth.Core.Abstractions.Services
     {
         Task<Result<bool>> ChangeUserRole(ChangeRoleCommand changeRoleCommand, CancellationToken cancellationToken);
         Task<Result<UserInfoDto>> GetAuthorizedUser(CancellationToken cancellationToken);
-        Task<Result<UserInfoDto>> GetUser(string name, CancellationToken cancellationToken);
+        Task<Result<UserInfoDto>> FindUser(string name, CancellationToken cancellationToken);
+        Task<Result<UserInfoDto>> GetUser(int id, CancellationToken cancellationToken);
     }
 }

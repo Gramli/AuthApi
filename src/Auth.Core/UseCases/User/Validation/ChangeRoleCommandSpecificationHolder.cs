@@ -13,9 +13,9 @@ namespace Auth.Core.UseCases.User.Validation
                 .Member(m => m.RoleName, m => m
                     .NotEmpty()
                     .NotWhiteSpace())
-                .Member(m => m.UserName, m => m
-                    .NotEmpty()
-                    .NotWhiteSpace());
+                .Member(m => m.Id, m => m
+                    .NonZero()
+                    .NonNegative());
 
             Specification = changeRoleCommandSpecification;
         }

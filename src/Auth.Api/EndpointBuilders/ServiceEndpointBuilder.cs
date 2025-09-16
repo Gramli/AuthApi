@@ -17,7 +17,7 @@ namespace Auth.Api.EndpointBuilders
         }
         private static IEndpointRouteBuilder BuildServiceInfoEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapGet("service-info",
+            endpointRouteBuilder.MapGet("/info",
                 async ([FromServices] IHttpRequestHandler<ServiceInfoDto, EmptyRequest> getServiceInfoQueryHandler, CancellationToken cancellationToken) =>
                 await getServiceInfoQueryHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<ServiceInfoDto>()

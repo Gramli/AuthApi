@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { IUser } from '../../shared/model/user.model';
-import { UserService } from '../../shared';
+import { AdminUserService, UserAuthService } from '../../shared';
 
 @Component({
     selector: 'app-users-info',
@@ -12,7 +12,7 @@ import { UserService } from '../../shared';
 export class UsersInfoComponent implements OnInit {
   protected users: WritableSignal<IUser[] | undefined> = signal(undefined);
 
-  constructor(protected userService: UserService){
+  constructor(protected adminUserService: AdminUserService){
   }
 
   ngOnInit(): void {
@@ -20,7 +20,7 @@ export class UsersInfoComponent implements OnInit {
   }
 
   private loadUsers(): void {
-    this.userService.getUsersInfo().subscribe({
+    this.adminUserService.getUsers().subscribe({
       next: (response)=> {
         this.users.set(response.data);
       },
