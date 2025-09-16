@@ -31,7 +31,6 @@ namespace Auth.Api.EndpointBuilders
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserInfoDto>>()
                     .WithName("UserInfo")
-                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName)
                     .WithOpenApi();
 
             endpointRouteBuilder.MapPost("register",
