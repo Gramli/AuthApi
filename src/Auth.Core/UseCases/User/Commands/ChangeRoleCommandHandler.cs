@@ -75,7 +75,7 @@ namespace Auth.Core.UseCases.User.Commands
                 return Result.Fail(authorizedUserResult.Errors);
             }
 
-            var requestUserResult = await _userService.GetUser(request.UserName, cancellationToken);
+            var requestUserResult = await _userService.GetUser(request.Id, cancellationToken);
 
             if(requestUserResult.IsFailed)
             {

@@ -12,7 +12,7 @@ namespace Auth.Infrastructure.Configuration
         public static async Task AddDefaultRoles(this IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
-            var secretRoleCommandRepository = scope.ServiceProvider.GetRequiredService<ISecretRoleCommandRepository>();
+            var secretRoleCommandRepository = scope.ServiceProvider.GetRequiredService<IRoleCommandRepository>();
             Guard.Against.Null(secretRoleCommandRepository);
             await secretRoleCommandRepository.AddRoles(AuthRoles.AllRoles, CancellationToken.None);
         }
@@ -20,8 +20,8 @@ namespace Auth.Infrastructure.Configuration
         public static async Task AddDefaultUsers(this IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
-            var secretUserCommandsRepository = scope.ServiceProvider.GetRequiredService<ISecretUserCommandsRepository>();
-            var secretRoleQueriesRepository = scope.ServiceProvider.GetRequiredService<ISecretRoleQueriesRepository>();
+            var secretUserCommandsRepository = scope.ServiceProvider.GetRequiredService<IUserCommandsRepository>();
+            var secretRoleQueriesRepository = scope.ServiceProvider.GetRequiredService<IRoleQueriesRepository>();
             Guard.Against.Null(secretUserCommandsRepository);
             Guard.Against.Null(secretRoleQueriesRepository);
 

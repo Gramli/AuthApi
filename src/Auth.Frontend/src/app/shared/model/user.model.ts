@@ -10,6 +10,7 @@ export interface IRegisterUser extends IUserLogin {
 export type SubmitedUser = IUserLogin | IRegisterUser;
 
 export interface IUser{
+    id: number;
     username: string;
     role: string;
 }

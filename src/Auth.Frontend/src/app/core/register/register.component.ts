@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { LoginOrRegisterComponent, UserService } from '../../shared';
+import { LoginOrRegisterComponent, UserAuthService } from '../../shared';
 import { Router } from '@angular/router';
 import { IRegisterUser, SubmitedUser } from '../../shared/model/user.model';
 import { CardModule } from 'primeng/card';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -23,7 +23,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class RegisterComponent {
   constructor(
-    private userService: UserService,
+    private userAuthService: UserAuthService,
     private messageService: MessageService,
     private router: Router
   ) {}
@@ -32,7 +32,7 @@ export class RegisterComponent {
     if (user) {
       const regUser = user as IRegisterUser;
       if (regUser) {
-        this.userService.register(regUser).subscribe({
+        this.userAuthService.register(regUser).subscribe({
           next: (response) => {
             if (response.data) {
               this.messageService.add({

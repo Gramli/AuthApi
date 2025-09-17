@@ -13,13 +13,15 @@ export class ApiHttpService {
   constructor(protected httpClient: HttpClient) { }
 
   public post<T>(path: string, body: any | undefined) : Observable<DataResponse<T>> {
-    return this.httpClient.post<DataResponse<T>>(this.createUrl(path), body, {
-
-    });
+    return this.httpClient.post<DataResponse<T>>(this.createUrl(path), body, {});
   }
 
   public get<T>(path: string) : Observable<DataResponse<T>>{
     return this.httpClient.get<DataResponse<T>>(this.createUrl(path));
+  }
+
+  public patch<T>(path: string, body: any | undefined) : Observable<DataResponse<T>> {
+    return this.httpClient.patch<DataResponse<T>>(this.createUrl(path), body, {});
   }
 
   protected createUrl(path: string) : string{

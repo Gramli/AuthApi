@@ -8,9 +8,10 @@ import {
 } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
-import { UserService } from '../../shared';
+import { AdminUserService, UserAuthService } from '../../shared';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { IUser } from '../../shared/model/user.model';
 
 @Component({
     selector: 'app-change-role',
@@ -20,15 +21,15 @@ import { ToastModule } from 'primeng/toast';
 })
 export class ChangeRoleComponent implements OnInit {
   formGroup: WritableSignal<FormGroup> = signal(new FormGroup({}));
-  userNames: WritableSignal<string[] | undefined> = signal(undefined);
+  userNames: WritableSignal<IUser[] | undefined> = signal(undefined);
   roles: WritableSignal<string[] | undefined> = signal(undefined);
 
-  constructor(protected userService: UserService, private messageService: MessageService) {}
+  constructor(protected adminUserService: AdminUserService, private userAuthService: UserAuthService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.formGroup.set(
       new FormGroup({
-        userName: new FormControl<string | null>(null, [Validators.required]),
+        user: new FormControl<IUser | null>(null, [Validators.required]),
         role: new FormControl<string | null>(null, [Validators.required]),
       })
     );
@@ -38,11 +39,12 @@ export class ChangeRoleComponent implements OnInit {
   }
 
   protected onSubmit(): void {
-    const userName = this.formGroup().get('userName')?.value;
+    const user = this.formGroup().get('user')?.value;
     const role = this.formGroup().get('role')?.value;
-    if (role && userName) {
-      this.userService.changeRole(userName, role).subscribe({
-        next: (response) => {
+
+    if (role && user) {
+      this.adminUserService.changeRole(user.id, role).subscribe({
+        next: () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You are successfuly change role', life: 3000 });
         },
       });
@@ -50,17 +52,16 @@ export class ChangeRoleComponent implements OnInit {
   }
 
   private loadUsers(): void {
-    this.userService.getUsersInfo().subscribe({
+    this.adminUserService.getUsers().subscribe({
       next: (response) => {
         this.userNames.set(response.data
-          .filter((user) => user.username !== this.userService.loggedUser?.username)
-          .map((user) => user.username));
+          .filter((user) => user.username !== this.userAuthService.loggedUser?.username));
       },
     });
   }
 
   private loadRoles(): void {
-    this.userService.getRoles().subscribe({
+    this.adminUserService.getRoles().subscribe({
       next: (response) => {
         this.roles.set(response.data);
       },

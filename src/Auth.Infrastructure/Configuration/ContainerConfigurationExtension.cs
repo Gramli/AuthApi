@@ -2,7 +2,6 @@
 using Auth.Core.Abstractions.Services;
 using Auth.Domain.UseCases.User.Commands;
 using Auth.Domain.UseCases.User.Dto;
-using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Extensions;
 using Auth.Infrastructure.Options;
@@ -51,12 +50,12 @@ namespace Auth.Infrastructure.Configuration
         private static IServiceCollection AddDatabase(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddDbContext<UserContext>(opt => opt.UseInMemoryDatabase("Users"))
-                .AddScoped<IUserQueriesRepository, UserQueriesRepository>()
-                .AddScoped<ISecretUserQueriesRepository, UserQueriesRepository>()
-                .AddScoped<ISecretUserCommandsRepository, UserCommandsRepository>()
-                .AddScoped<IRoleQueriesRepository, RoleQueriesRepository>()
-                .AddScoped<ISecretRoleQueriesRepository, RoleQueriesRepository>()
-                .AddScoped<ISecretRoleCommandRepository, RoleCommandRepository>()
-                .AddScoped<IUserCommandsRepository, UserCommandsRepository>();
+                .AddScoped<Abstractions.IUserQueriesRepository, UserQueriesRepository>()
+                .AddScoped<Core.Abstractions.Repositories.IUserQueriesRepository, UserQueriesRepository>()
+                .AddScoped<Abstractions.IUserCommandsRepository, UserCommandsRepository>()
+                .AddScoped<Abstractions.IRoleQueriesRepository, RoleQueriesRepository>()
+                .AddScoped<Core.Abstractions.Repositories.IRoleQueriesRepository, RoleQueriesRepository>()
+                .AddScoped<Abstractions.IRoleCommandRepository, RoleCommandRepository>()
+                .AddScoped<Abstractions.IUserCommandsRepository, UserCommandsRepository>();
     }
 }

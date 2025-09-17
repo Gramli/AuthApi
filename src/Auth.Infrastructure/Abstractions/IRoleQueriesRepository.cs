@@ -3,7 +3,7 @@ using FluentResults;
 
 namespace Auth.Infrastructure.Abstractions
 {
-    internal interface ISecretRoleQueriesRepository
+    internal interface IRoleQueriesRepository
     {
         Task<IEnumerable<RoleEntity>> GetRoleEntities(CancellationToken cancellationToken);
         Task<Result<RoleEntity>> GetRoleEntity(string roleName, CancellationToken cancellationToken);

@@ -1,6 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Repositories;
-using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.UseCases.User.Entities;
 using FluentResults;
@@ -8,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.UseCases.User.Repositories
 {
-    internal sealed class UserCommandsRepository : IUserCommandsRepository, ISecretUserCommandsRepository
+    internal sealed class UserCommandsRepository : Abstractions.IUserCommandsRepository
     {
         private readonly UserContext _context;
         public UserCommandsRepository(UserContext userContext)

@@ -13,6 +13,6 @@ export class ServiceInfoService {
 
   public getServiceInfo(): Observable<DataResponse<IServiceInfo>>{
     return this.httpApiService
-    .get<IServiceInfo>('/v1/service/service-info');
+    .get<IServiceInfo>('/v1/service/info');
   }
 }

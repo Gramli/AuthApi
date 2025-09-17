@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { IUserInfo } from '../../shared/model/user.model';
-import { UserService } from '../../shared';
+import { UserAuthService } from '../../shared';
 
 @Component({
     selector: 'app-user-info',
@@ -11,7 +11,7 @@ import { UserService } from '../../shared';
 export class UserInfoComponent implements OnInit {
   protected userInfo: WritableSignal<IUserInfo | undefined> = signal(undefined);
 
-  constructor(protected userService: UserService){
+  constructor(protected userAuthService: UserAuthService){
   }
 
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   private loadUser(): void {
-    this.userService.getUserInfo().subscribe({
+    this.userAuthService.getUserInfo().subscribe({
       next: (response)=> {
         this.userInfo.set(response.data);
       },

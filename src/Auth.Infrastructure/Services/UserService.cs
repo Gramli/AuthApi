@@ -10,15 +10,15 @@ namespace Auth.Infrastructure.Services
 {
     internal sealed class UserService : IUserService
     {
-        private readonly ISecretUserQueriesRepository _secretUserQueriesRepository;
-        private readonly ISecretUserCommandsRepository _secretUserCommandsRepository;
-        private readonly ISecretRoleQueriesRepository _secretRoleQueriesRepository;
+        private readonly IUserQueriesRepository _secretUserQueriesRepository;
+        private readonly IUserCommandsRepository _secretUserCommandsRepository;
+        private readonly IRoleQueriesRepository _secretRoleQueriesRepository;
         private readonly IPrincipal _principal;
 
         public UserService(
-            ISecretUserQueriesRepository secretUserQueriesRepository,
-            ISecretUserCommandsRepository secretUserCommandsRepository, 
-            ISecretRoleQueriesRepository secretRoleQueriesRepository,
+            IUserQueriesRepository secretUserQueriesRepository,
+            IUserCommandsRepository secretUserCommandsRepository, 
+            IRoleQueriesRepository secretRoleQueriesRepository,
             IPrincipal principal)
         {
             _secretUserQueriesRepository = Guard.Against.Null(secretUserQueriesRepository);
@@ -30,7 +30,7 @@ namespace Auth.Infrastructure.Services
 
         public async Task<Result<bool>> ChangeUserRole(ChangeRoleCommand changeRoleCommand, CancellationToken cancellationToken)
         {
-            var userResult = await _secretUserQueriesRepository.FindUser(changeRoleCommand.UserName, cancellationToken);
+            var userResult = await _secretUserQueriesRepository.GetUser(changeRoleCommand.Id, cancellationToken);
             if(userResult.IsFailed) 
             {
                 return Result.Fail(userResult.Errors);
@@ -46,7 +46,7 @@ namespace Auth.Infrastructure.Services
             return  await _secretUserCommandsRepository.ChangeUserRole(userResult.Value, roleResult.Value, cancellationToken);
         }
 
-        public async Task<Result<UserInfoDto>> GetUser(string name, CancellationToken cancellationToken)
+        public async Task<Result<UserInfoDto>> FindUser(string name, CancellationToken cancellationToken)
         {
             var userResult = await _secretUserQueriesRepository.FindUser(name, cancellationToken);
 
@@ -55,7 +55,7 @@ namespace Auth.Infrastructure.Services
                 return Result.Fail(userResult.Errors);
             }
 
-            return Result.Ok(new UserInfoDto(userResult.Value.Username, userResult.Value.Role.Role, userResult.Value.Email));
+            return Result.Ok(new UserInfoDto(userResult.Value.Id, userResult.Value.Username, userResult.Value.Role.Role, userResult.Value.Email));
         }
 
         public async Task<Result<UserInfoDto>> GetAuthorizedUser(CancellationToken cancellationToken)
@@ -65,7 +65,19 @@ namespace Auth.Infrastructure.Services
                 return Result.Fail("No identity name!");
             }
 
-            return await GetUser(_principal!.Identity!.Name!, cancellationToken);
+            return await FindUser(_principal!.Identity!.Name!, cancellationToken);
+        }
+
+        public async Task<Result<UserInfoDto>> GetUser(int id, CancellationToken cancellationToken)
+        {
+            var userResult = await _secretUserQueriesRepository.GetUser(id, cancellationToken);
+
+            if (userResult.IsFailed)
+            {
+                return Result.Fail(userResult.Errors);
+            }
+
+            return Result.Ok(new UserInfoDto(userResult.Value.Id, userResult.Value.Username, userResult.Value.Role.Role, userResult.Value.Email));
         }
     }
 }

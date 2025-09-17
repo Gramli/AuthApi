@@ -3,7 +3,7 @@ using FluentResults;
 
 namespace Auth.Infrastructure.Abstractions
 {
-    internal interface ISecretUserQueriesRepository
+    internal interface IUserQueriesRepository
     {
         Task<Result<UserEntity>> GetUser(int id, CancellationToken cancellationToken);
         Task<Result<UserEntity>> FindUser(string username, CancellationToken cancellationToken);

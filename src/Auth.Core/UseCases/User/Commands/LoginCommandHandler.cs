@@ -37,7 +37,7 @@ namespace Auth.Core.UseCases.User.Commands
                 return HttpDataResponses.AsBadRequest<string>(ErrorMessages.InvalidUsernameOrPassword);
             }
 
-            var token = _tokenService.GenerateToken(new UserDto(request.Username, userResult.Value.Role));
+            var token = _tokenService.GenerateToken(new UserDto(userResult.Value.Id, request.Username, userResult.Value.Role));
             return HttpDataResponses.AsOK(token);
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Auth.Infrastructure.Abstractions
 {
-    internal interface ISecretRoleCommandRepository
+    internal interface IRoleCommandRepository
     {
         Task AddRoles(IEnumerable<string> roles, CancellationToken cancellationToken);
     }

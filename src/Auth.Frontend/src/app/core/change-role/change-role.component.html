@@ -4,8 +4,9 @@
       >
       <form class="m-2 p-2" [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
         <p-dropdown 
-            formControlName="userName" 
+            formControlName="user" 
             [options]="userNames()"
+            optionLabel="username"
             placeholder="Select User" />
         <p-dropdown 
             formControlName="role" 
