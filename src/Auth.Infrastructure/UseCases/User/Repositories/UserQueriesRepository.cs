@@ -1,7 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using Auth.Core.Abstractions.Repositories;
 using Auth.Domain.UseCases.User.Dto;
-using Auth.Infrastructure.Abstractions;
 using Auth.Infrastructure.Database.EFContext;
 using Auth.Infrastructure.Resources;
 using Auth.Infrastructure.UseCases.User.Entities;
@@ -11,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.UseCases.User.Repositories
 {
-    internal sealed class UserQueriesRepository : IUserQueriesRepository, ISecretUserQueriesRepository
+    internal sealed class UserQueriesRepository : Core.Abstractions.Repositories.IUserQueriesRepository, Abstractions.IUserQueriesRepository
     {
         private readonly UserContext _context;
         public UserQueriesRepository(UserContext userContext)

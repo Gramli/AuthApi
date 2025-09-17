@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallApiToolkit.Core.Extensions;
 using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
+using SmallApiToolkit.Extensions;
 
 namespace Auth.Api.EndpointBuilders
 {
@@ -13,12 +14,13 @@ namespace Auth.Api.EndpointBuilders
         public static IEndpointRouteBuilder BuildAuthEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             return endpointRouteBuilder
+                .MapVersionGroup(1)
                 .MapGroup("auth")
                 .BuildUserAuthEndpoints();
         }
         private static IEndpointRouteBuilder BuildUserAuthEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            endpointRouteBuilder.MapPost("login",
+            endpointRouteBuilder.MapPost("/login",
                 async (LoginCommand loginCommand, [FromServices] IHttpRequestHandler<string, LoginCommand> loginCommandHandler, CancellationToken cancellationToken) =>
                 await loginCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<string>()
@@ -33,7 +35,7 @@ namespace Auth.Api.EndpointBuilders
                     .WithName("UserInfo")
                     .WithOpenApi();
 
-            endpointRouteBuilder.MapPost("register",
+            endpointRouteBuilder.MapPost("/register",
                 async (RegisterCommand loginCommand, [FromServices] IHttpRequestHandler<bool, RegisterCommand> registerCommandHandler, CancellationToken cancellationToken) =>
                 await registerCommandHandler.SendAsync(loginCommand, cancellationToken))
                     .Produces<bool>()

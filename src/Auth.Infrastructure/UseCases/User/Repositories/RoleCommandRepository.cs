@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Infrastructure.UseCases.User.Repositories
 {
-    internal sealed class RoleCommandRepository : ISecretRoleCommandRepository
+    internal sealed class RoleCommandRepository : IRoleCommandRepository
     {
         private readonly UserContext _context;
         public RoleCommandRepository(UserContext userContext)

@@ -10,15 +10,15 @@ namespace Auth.Infrastructure.Services
 {
     internal sealed class UserService : IUserService
     {
-        private readonly ISecretUserQueriesRepository _secretUserQueriesRepository;
-        private readonly ISecretUserCommandsRepository _secretUserCommandsRepository;
-        private readonly ISecretRoleQueriesRepository _secretRoleQueriesRepository;
+        private readonly IUserQueriesRepository _secretUserQueriesRepository;
+        private readonly IUserCommandsRepository _secretUserCommandsRepository;
+        private readonly IRoleQueriesRepository _secretRoleQueriesRepository;
         private readonly IPrincipal _principal;
 
         public UserService(
-            ISecretUserQueriesRepository secretUserQueriesRepository,
-            ISecretUserCommandsRepository secretUserCommandsRepository, 
-            ISecretRoleQueriesRepository secretRoleQueriesRepository,
+            IUserQueriesRepository secretUserQueriesRepository,
+            IUserCommandsRepository secretUserCommandsRepository, 
+            IRoleQueriesRepository secretRoleQueriesRepository,
             IPrincipal principal)
         {
             _secretUserQueriesRepository = Guard.Against.Null(secretUserQueriesRepository);

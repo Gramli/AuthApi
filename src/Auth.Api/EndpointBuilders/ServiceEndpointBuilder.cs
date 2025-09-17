@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallApiToolkit.Core.Extensions;
 using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
+using SmallApiToolkit.Extensions;
 
 namespace Auth.Api.EndpointBuilders
 {
@@ -12,6 +13,7 @@ namespace Auth.Api.EndpointBuilders
         public static IEndpointRouteBuilder BuildServiceEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             return endpointRouteBuilder
+                .MapVersionGroup(1)
                 .MapGroup("service")
                 .BuildServiceInfoEndpoints();
         }

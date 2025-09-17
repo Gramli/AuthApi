@@ -5,7 +5,6 @@ using Auth.Core.Configuration;
 using Auth.Infrastructure.Configuration;
 using SmallApiToolkit.Extensions;
 using SmallApiToolkit.Middleware;
-using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,12 +38,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ClaimsMiddleware>();
 
-app.MapVersionGroup(1)
-   .BuildAuthEndpoints();
-app.MapVersionGroup(1)
-   .BuildUserEndpoints();
-app.MapVersionGroup(1)
-   .BuildServiceEndpoints();
+app.BuildAuthEndpoints();
+app.BuildUserEndpoints();
+app.BuildServiceEndpoints();
 
 await app.Services.AddDefaultRoles();
 await app.Services.AddDefaultUsers();

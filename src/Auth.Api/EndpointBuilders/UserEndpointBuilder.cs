@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmallApiToolkit.Core.Extensions;
 using SmallApiToolkit.Core.RequestHandlers;
 using SmallApiToolkit.Core.Response;
+using SmallApiToolkit.Extensions;
 using System.Net;
 
 namespace Auth.Api.EndpointBuilders
@@ -15,6 +16,7 @@ namespace Auth.Api.EndpointBuilders
         public static IEndpointRouteBuilder BuildUserEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             return endpointRouteBuilder
+                .MapVersionGroup(1)
                 .MapGroup("users")
                 .BuildUserRoleEndpoints()
                 .BuildUserInfoEndpoints();
