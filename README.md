@@ -5,7 +5,7 @@
 [![.NET Build and Test](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml)
 [![Angular Build](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml)
 
-This full-stack solution demonstrates user registration, login, and role-based access control using Angular and .NET. The backend showcases **Authentication** and **Authorization** with **JWT tokens**, demonstrating the use of Authorization policies in **minimal API** endpoints and adding custom claims through middleware. These are all implemented following Clean Architecture and various design patterns. The frontend illustrates managing JWT tokens using **guards** and **interceptors**, with all components implemented as **standalone components** and **signals**.
+This full-stack solution demonstrates user registration, login, and role-based access control using Angular and .NET. The backend showcases **Authentication** and **Authorization** with **JWT tokens**, demonstrating the use of Authorization policies in **minimal API** endpoints, adding custom claims through middleware, and an example of using **HTTP response caching** via an extension method. These are all implemented following Clean Architecture and various design patterns. The frontend illustrates managing JWT tokens using **guards** and **interceptors**, with all components implemented as **standalone components** and **signals**.
 
 
 Example API allows to: 
@@ -28,6 +28,7 @@ Endpoints use different types of authorization policies.
 - [Motivation](#motivation)
   - [Backend Architecture](#backend-architecture)
     - [Key Patterns and Decisions:](#key-patterns-and-decisions)
+    - [Features](#features)
   - [Frontend Structure](#frontend-structure)
     - [JWT Handling](#jwt-handling)
   - [Technologies](#technologies)
@@ -99,6 +100,10 @@ The backend follows **[Clean Architecture](https://learn.microsoft.com/en-us/dot
 - **CQRS Pattern**: Separates handlers into commands and queries, with repositories structured similarly.
 - **No MediatR**: Minimal API supports injecting handlers directly into endpoint map methods, eliminating the need for **[MediatR](https://github.com/jbogard/MediatR)**.
 - **Result Pattern**: Uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (via [FluentResults package](https://github.com/altmann/FluentResults)) instead of throwing exceptions. Each handler returns an `HttpDataResponse` object containing data, error messages, and the HTTP response code.
+
+### Features
+- **Response caching** - adding http response caching using extension method *AddResponseCachePolicy*
+- **Claims Middleware** - adding custom claims through middleware *ClaimsMiddleware*
 
 ## Frontend Structure
 The Angular frontend is organized into two main folders:

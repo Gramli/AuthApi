@@ -37,6 +37,7 @@ namespace Auth.Api.EndpointBuilders
                 Results.Json((DataResponse<IEnumerable<string>>)HttpDataResponses.AsOK(AuthRoles.AllRoles), statusCode: (int)HttpStatusCode.OK))
                     .Produces<bool>()
                     .WithName("GetRoles")
+                    .AddResponseCacheHourPolicy()
                     .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName)
                     .WithOpenApi();
 
