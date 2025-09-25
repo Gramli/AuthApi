@@ -24,6 +24,7 @@ namespace Auth.Api.EndpointBuilders
                 await getServiceInfoQueryHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<ServiceInfoDto>()
                     .WithName("GetServiceInfo")
+                    .AddResponseCacheHourPolicy()
                     .RequireAuthorization(AuthorizationConfiguration.UserPolicyName)
                     .WithOpenApi();
 
