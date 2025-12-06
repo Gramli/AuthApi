@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 
 namespace Auth.Api.Configuration
 {
@@ -13,7 +12,10 @@ namespace Auth.Api.Configuration
             {
                 options.SwaggerDoc(_version, CreateInfo());
                 options.AddSecurityDefinition(_bearer, CreateScheme());
-                options.AddSecurityRequirement(CreateRequirement());
+                options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference(_bearer, document)] = []
+                });
             });
         }
 
@@ -25,33 +27,14 @@ namespace Auth.Api.Configuration
                 Type = SecuritySchemeType.Http,
                 Scheme = _bearer,
                 BearerFormat = "JWT",
-                In = ParameterLocation.Header,
                 Description = "JWT Bearer token Authorization",
-            };
-        }
-
-        private static OpenApiSecurityRequirement CreateRequirement()
-        {
-            return new OpenApiSecurityRequirement()
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = _bearer
-                        },
-                    },
-                    new string[] {}
-                }
             };
         }
 
         private static OpenApiInfo CreateInfo()
         {
-            return new OpenApiInfo() 
-            { 
+            return new OpenApiInfo()
+            {
                 Version = _version,
             };
         }

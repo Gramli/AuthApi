@@ -26,11 +26,10 @@ namespace Auth.Api.EndpointBuilders
         {
             endpointRouteBuilder.MapPatch("/{id}/role",
                 async (int id, ChangeRoleBody changeRoleCommand, [FromServices] IHttpRequestHandler<bool, ChangeRoleCommand> changeRoleCommandHandler, CancellationToken cancellationToken) =>
-                await changeRoleCommandHandler.SendAsync(new ChangeRoleCommand { Id = id, RoleName = changeRoleCommand.RoleName}, cancellationToken))
+                await changeRoleCommandHandler.SendAsync(new ChangeRoleCommand { Id = id, RoleName = changeRoleCommand.RoleName }, cancellationToken))
                     .Produces<bool>()
                     .WithName("ChangeRole")
-                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName)
-                    .WithOpenApi();
+                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName);
 
             endpointRouteBuilder.MapGet("/roles",
                 () =>
@@ -38,9 +37,7 @@ namespace Auth.Api.EndpointBuilders
                     .Produces<bool>()
                     .WithName("GetRoles")
                     .AddResponseCacheHourPolicy()
-                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName)
-                    .WithOpenApi();
-
+                    .RequireAuthorization(AuthorizationConfiguration.AdministratorPolicyName);
             return endpointRouteBuilder;
         }
 
@@ -51,8 +48,7 @@ namespace Auth.Api.EndpointBuilders
                 await getUserInfoCommandHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
                     .Produces<IEnumerable<UserDto>>()
                     .WithName("GetUsersInfo")
-                    .RequireAuthorization(AuthorizationConfiguration.DeveloperPolicyName)
-                    .WithOpenApi();
+                    .RequireAuthorization(AuthorizationConfiguration.DeveloperPolicyName);
 
             return endpointRouteBuilder;
         }

@@ -25,8 +25,7 @@ namespace Auth.Api.EndpointBuilders
                     .Produces<ServiceInfoDto>()
                     .WithName("GetServiceInfo")
                     .AddResponseCacheHourPolicy()
-                    .RequireAuthorization(AuthorizationConfiguration.UserPolicyName)
-                    .WithOpenApi();
+                    .RequireAuthorization(AuthorizationConfiguration.UserPolicyName);
 
             return endpointRouteBuilder;
         }
