@@ -116,7 +116,7 @@ This example demonstrates JWT token management on the client side. After obtaini
 The project uses **PrimeNG** and **PrimeFlex** for styling and layout.
 
 ## Technologies
-* [ASP.NET Core 9](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-9.0)
+* [ASP.NET Core 10](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-10.0)
 * [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
 * [Mapster](https://github.com/MapsterMapper/Mapster)
 * [SmallApiToolkit](https://github.com/Gramli/SmallApiToolkit)
