@@ -34,7 +34,7 @@ Endpoints use different types of authorization policies.
   - [Technologies](#technologies)
 
 # Prerequisites
-* **.NET SDK 9.0+**
+* **.NET SDK 10.0+**
 * **Angular CLI 19+**
 * **Node.js 20.11.1+**
 
