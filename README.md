@@ -35,8 +35,8 @@ Endpoints use different types of authorization policies.
 
 # Prerequisites
 * **.NET SDK 10.0+**
-* **Angular CLI 19+**
-* **Node.js 20.11.1+**
+* **Angular CLI 21+**
+* **Node.js 24.11.x+**
 
 # Installation
 To install the project using Git Bash:
@@ -123,6 +123,6 @@ The project uses **PrimeNG** and **PrimeFlex** for styling and layout.
 * [FluentResuls](https://github.com/altmann/FluentResults)
 * [Validot](https://github.com/bartoszlenar/Validot)
 * [GuardClauses](https://github.com/ardalis/GuardClauses)
-* [Angular 19](https://angular.dev)
+* [Angular 21](https://angular.dev)
 * [PrimeNG](https://primeng.org)
 * [PrimeFlex](https://primeflex.org)

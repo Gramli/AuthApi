@@ -3,17 +3,23 @@
     <span class="mx-2">Service Information</span></i
   >
   <div class="mt-2">
-    <p-accordion [activeIndex]="0">
-      <p-accordionTab header="Name">
-        <p>
-          {{ serviceInfo()?.name }}
-        </p>
-      </p-accordionTab>
-      <p-accordionTab header="Description">
-        <p>
-          {{ serviceInfo()?.description }}
-        </p>
-      </p-accordionTab>
+    <p-accordion value="0">
+      <p-accordion-panel value="0">
+        <p-accordion-header>Name</p-accordion-header>
+        <p-accordion-content>
+          <p>
+            {{ serviceInfo()?.name }}
+          </p>
+        </p-accordion-content>
+      </p-accordion-panel>
+      <p-accordion-panel value="1">
+        <p-accordion-header>Description</p-accordion-header>
+        <p-accordion-content>
+          <p>
+            {{ serviceInfo()?.description }}
+          </p>
+        </p-accordion-content>
+      </p-accordion-panel>
     </p-accordion>
   </div>
 </div>

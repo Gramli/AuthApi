@@ -11,20 +11,28 @@
             <p-menu #menu [model]="items()" />
           </div>
           <div class="col-9">
-            <ng-container [ngSwitch]="state()">
-              <div *ngSwitchCase="HomeComponentState.userInfo">
+            @switch (state()) {
+              @case (HomeComponentState.userInfo) {
+                <div>
                   <app-user-info></app-user-info>
-              </div>
-              <div *ngSwitchCase="HomeComponentState.changeRole">
-                <app-change-role></app-change-role>
-              </div>
-              <div *ngSwitchCase="HomeComponentState.serviceInfo">
-                <app-service-info></app-service-info>
-              </div>
-              <div *ngSwitchCase="HomeComponentState.allUsersInfo">
-                <app-users-info></app-users-info>
-              </div>
-            </ng-container>
+                </div>
+              }
+              @case (HomeComponentState.changeRole) {
+                <div>
+                  <app-change-role></app-change-role>
+                </div>
+              }
+              @case (HomeComponentState.serviceInfo) {
+                <div>
+                  <app-service-info></app-service-info>
+                </div>
+              }
+              @case (HomeComponentState.allUsersInfo) {
+                <div>
+                  <app-users-info></app-users-info>
+                </div>
+              }
+            }
           </div>
         </div>
       </p-card>

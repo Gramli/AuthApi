@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { IUser } from '../../shared/model/user.model';
 import { AdminUserService, UserAuthService } from '../../shared';
 
 @Component({
     selector: 'app-users-info',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './users-info.component.html',
     styleUrl: './users-info.component.scss'
 })
