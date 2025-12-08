@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
 import {
   FormBuilder,
@@ -15,7 +15,7 @@ import { PasswordModule } from 'primeng/password';
 
 @Component({
     selector: 'app-login-or-register',
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, InputTextModule, ButtonModule, PasswordModule],
+    imports: [FormsModule, ReactiveFormsModule, InputTextModule, ButtonModule, PasswordModule],
     templateUrl: './login-or-register.component.html',
     styleUrl: './login-or-register.component.scss',
     standalone: true,

@@ -13,7 +13,7 @@ import { CardModule } from 'primeng/card';
 import { ImageModule } from 'primeng/image';
 import { Menu, MenuModule } from 'primeng/menu';
 import { HomeComponentState } from './model';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { ServiceInfoComponent } from '../service-info/service-info.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
@@ -27,18 +27,17 @@ import { UserAuthService } from '../../shared';
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     imports: [
-        AvatarModule,
-        AvatarGroupModule,
-        CardModule,
-        ButtonModule,
-        ImageModule,
-        MenuModule,
-        CommonModule,
-        ServiceInfoComponent,
-        UserInfoComponent,
-        UsersInfoComponent,
-        ChangeRoleComponent,
-    ]
+    AvatarModule,
+    AvatarGroupModule,
+    CardModule,
+    ButtonModule,
+    ImageModule,
+    MenuModule,
+    ServiceInfoComponent,
+    UserInfoComponent,
+    UsersInfoComponent,
+    ChangeRoleComponent
+]
 })
 export class HomeComponent implements OnInit {
   readonly HomeComponentState = HomeComponentState;

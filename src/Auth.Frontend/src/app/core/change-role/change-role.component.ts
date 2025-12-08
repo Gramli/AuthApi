@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { AdminUserService, UserAuthService } from '../../shared';
 import { MessageService } from 'primeng/api';
@@ -15,7 +15,7 @@ import { IUser } from '../../shared/model/user.model';
 
 @Component({
     selector: 'app-change-role',
-    imports: [DropdownModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
+    imports: [SelectModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
     templateUrl: './change-role.component.html',
     styleUrl: './change-role.component.scss'
 })

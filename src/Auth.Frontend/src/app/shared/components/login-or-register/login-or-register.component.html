@@ -7,54 +7,59 @@
       pInputText
       formControlName="userName"
       class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-    />
-    <small
-      class="p-error block"
-      *ngIf="
+      />
+      @if (
         userForm().get('userName')?.invalid && userForm().get('userName')?.dirty
-      "
-    >
-      First name is invalid</small
-    >
-  </div>
-  <div *ngIf="showEmail" class="field">
-    <label for="email">Email</label>
-    <input
-      id="lastName"
-      type="text"
-      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-      pInputText
-      formControlName="email"
-    />
-    <small
-    class="p-error block"
-    *ngIf="
-      userForm().get('email')?.invalid && userForm().get('email')?.dirty
-    "
-  >
-    Email is invalid</small
-  >
-  </div>
-  <div class="field">
-    <label for="password">Password</label>
-    <input
-      id="password"
-      type="password"
-      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-      pPassword
-      [feedback]="false"
-      formControlName="password"
-    />
-    <small
-    class="p-error block"
-    *ngIf="
-      userForm().get('password')?.invalid && userForm().get('password')?.dirty
-    "
-  >
-    Password is invalid</small
-  >
-  </div>
-  <div class="text-center">
-    <button pButton type="submit" [disabled]="userForm().invalid">{{ submitText }}</button>
-  </div>
-</form>
+        ) {
+        <small
+          class="p-error block"
+          >
+          First name is invalid</small
+          >
+      }
+    </div>
+    @if (showEmail) {
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="lastName"
+          type="text"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          pInputText
+          formControlName="email"
+          />
+          @if (
+            userForm().get('email')?.invalid && userForm().get('email')?.dirty
+            ) {
+            <small
+              class="p-error block"
+              >
+              Email is invalid</small
+              >
+          }
+        </div>
+      }
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+          pPassword
+          [feedback]="false"
+          formControlName="password"
+          />
+          @if (
+            userForm().get('password')?.invalid && userForm().get('password')?.dirty
+            ) {
+            <small
+              class="p-error block"
+              >
+              Password is invalid</small
+              >
+          }
+        </div>
+        <div class="text-center">
+          <button pButton type="submit" [disabled]="userForm().invalid">{{ submitText }}</button>
+        </div>
+      </form>

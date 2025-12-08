@@ -3,12 +3,12 @@
         <span class="mx-2">Change Role</span></i
       >
       <form class="m-2 p-2" [formGroup]="formGroup()" (ngSubmit)="onSubmit()">
-        <p-dropdown 
+        <p-select
             formControlName="user" 
             [options]="userNames()"
             optionLabel="username"
             placeholder="Select User" />
-        <p-dropdown 
+        <p-select 
             formControlName="role" 
             [options]="roles()"
             placeholder="Select role" />
