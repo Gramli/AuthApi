@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/Debug/">
+    <File Path="Tests/HttpDebugTests/debug-tests.http" />
+  </Folder>
+  <Folder Name="/Tests/SystemTests/" />
+  <Folder Name="/Tests/UnitTests/" />
+  <Project Path="Auth.Api/Auth.Api.csproj" />
+  <Project Path="Auth.Core/Auth.Core.csproj" />
+  <Project Path="Auth.Domain/Auth.Domain.csproj" />
+  <Project Path="Auth.Infrastructure/Auth.Infrastructure.csproj" />
+</Solution>
