@@ -1,5 +1,4 @@
-﻿using Auth.Core.Abstractions.Repositories;
-using Auth.Core.Abstractions.Services;
+﻿using Auth.Core.Abstractions.Services;
 using Auth.Domain.UseCases.User.Commands;
 using Auth.Domain.UseCases.User.Dto;
 using Auth.Infrastructure.Database.EFContext;
@@ -19,8 +18,14 @@ namespace Auth.Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            //just for example purpose => security issue, jwt secret is NOT in app config!
-            serviceCollection.Configure<TokenOptions>(configuration.GetSection("jwt"));
+            serviceCollection.Configure<TokenOptions>(options =>
+            {
+                var bearerSection = configuration.GetSection("Authentication:Schemes:Bearer");
+                options.Key = bearerSection["Key"] ?? string.Empty;
+                options.ExpirationInMinutes = bearerSection.GetValue<int>("ExpirationInMinutes");
+                options.Issuer = bearerSection["ValidIssuer"] ?? string.Empty;
+                options.Audience = bearerSection.GetSection("ValidAudiences").Get<string[]>()?.FirstOrDefault() ?? string.Empty;
+            });
 
             return serviceCollection
                 .RegisterMapsterConfiguration()
