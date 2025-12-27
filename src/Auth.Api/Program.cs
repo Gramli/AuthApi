@@ -1,3 +1,4 @@
+using Auth.Api.BasicAuthentication;
 using Auth.Api.Configuration;
 using Auth.Api.EndpointBuilders;
 using Auth.Api.Midllewares;

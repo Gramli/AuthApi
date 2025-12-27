@@ -1,128 +1,200 @@
- <img align="left" width="116" height="116" src=".\doc\img\authApi_icon.png" />
+<div align="center">
 
+<img src="./doc/img/authApi_icon.png" alt="" align="center" height="96" />
 
 # Clean Architecture AuthApi
+
 [![.NET Build and Test](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml)
 [![Angular Build](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml)
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet)
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat-square&logo=angular)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE.md)
 
-This full-stack solution demonstrates user registration, login, and role-based access control using Angular and .NET. The backend showcases **Authentication** and **Authorization** with **JWT tokens**, demonstrating the use of Authorization policies in **minimal API** endpoints, adding custom claims through middleware, and an example of using **HTTP response caching** via an extension method. These are all implemented following Clean Architecture and various design patterns. The frontend illustrates managing JWT tokens using **guards** and **interceptors**, with all components implemented as **standalone components** and **signals**.
+⭐ If you like this project, star it on GitHub — it helps a lot!
 
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Architecture](#architecture) • [Technologies](#technologies)
 
-Example API allows to: 
- * **register** user
- * **login** user
- * **change user role**
- * get user and service info
+</div>
 
-Endpoints use different types of authorization policies.
+A full-stack authentication and authorization solution demonstrating Clean Architecture principles with .NET 10 and Angular 21. This project showcases multiple authentication methods (JWT Bearer and Basic Authentication), role-based access control, and modern frontend patterns.
 
-# Menu
-- [Clean Architecture AuthApi](#clean-architecture-authapi)
-- [Menu](#menu)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Get Started](#get-started)
-  - [Run Solution](#run-solution)
-  - [Test Using SwaggerUI](#test-using-swaggerui)
-  - [Test Using .http file (VS2022)](#test-using-http-file-vs2022)
-- [Motivation](#motivation)
-  - [Backend Architecture](#backend-architecture)
-    - [Key Patterns and Decisions:](#key-patterns-and-decisions)
-    - [Features](#features)
-  - [Frontend Structure](#frontend-structure)
-    - [JWT Handling](#jwt-handling)
-  - [Technologies](#technologies)
+## Overview
 
-# Prerequisites
-* **.NET SDK 10.0+**
-* **Angular CLI 21+**
-* **Node.js 24.11.x+**
+This application demonstrates enterprise-grade authentication and authorization patterns using a clean architecture approach. The backend implements **dual authentication schemes** (JWT Bearer tokens and Basic Authentication) with **minimal APIs**, while the frontend showcases modern Angular practices with standalone components and signals.
 
-# Installation
-To install the project using Git Bash:
+**Key capabilities:**
+- User registration and login with JWT tokens
+- Basic Authentication for service-to-service or admin access
+- Role-based authorization with custom policies
+- Custom claims middleware
+- HTTP response caching
+- Angular guards and interceptors for client-side auth
+
+> [!TIP]
+> The project uses in-memory Entity Framework for quick setup and testing. Perfect for learning and prototyping!
+
+## Features
+
+### Authentication Methods
+
+- **JWT Bearer Authentication**: Secure token-based authentication for user sessions with configurable expiration and validation
+- **Basic Authentication**: HTTP Basic auth scheme for service accounts, admin tools, or simple API access
+- **Swagger Integration**: Pre-configured UI with support for both authentication methods, allowing easy API testing
+
+### Application Features
+
+- **CQRS Pattern**: Command-Query separation without the complexity of MediatR
+- **Result Pattern**: No exceptions for flow control; uses [FluentResults](https://github.com/altmann/FluentResults) for explicit error handling
+- **Response Caching**: HTTP response caching configured via extension methods
+- **Custom Claims Middleware**: Dynamically enriches user claims during request processing
+- **In-Memory Database**: Entity Framework Core InMemory provider for quick setup and testing
+- **Standalone Components**: Modern Angular architecture without NgModules
+- **Signals**: Reactive state management with Angular signals
+- **JWT Token Management**: Automatic token storage and injection via interceptors
+- **Route Guards**: Protect routes based on authentication state
+- **PrimeNG UI**: Professional UI components with PrimeFlex layout utilities
+
+## Getting started
+
+### Prerequisites
+
+- **.NET SDK 10.0+** - [Download](https://dotnet.microsoft.com/download)
+- **Node.js 24.11.x+** - [Download](https://nodejs.org/)
+- **Angular CLI 21+** - Install via `npm install -g @angular/cli`
+- **IDE**: Visual Studio 2019+, JetBrains Rider 2024.2.7+, or VS Code
+
+### Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Gramli/AuthApi.git
-   ```
-2. Navigate to the project directory:
-   ```bash
    cd AuthApi/src
    ```
-3. Install the backend dependencies:
+
+2. Install backend dependencies:
    ```bash
    dotnet restore
    ```
-4. Navigate to the frontend directory and install dependencies:
+
+3. Install frontend dependencies:
    ```bash
    cd Auth.Frontend
    npm install
    ```
 
-# Get Started
+### Running the application
 
-## Run Solution
-**Expected IDE**
-- **Backend**: Visual Studio 2019+ or JetBrains Rider 2024.2.7+
-- **Frontend**: Visual Studio Code 1.94.2+ or WebStorm 2024.2.4+
+<details open>
+<summary><h4>Run both backend and frontend</h4></summary>
 
-1. **Run Frontend**
-    1. Open the **Auth.Frontend** project folder:
-       - In WebStorm, use the run or debug button to start the project.
-       - In VS Code, run the project in the terminal using the command `ng serve`.
-    2. In your browser, navigate to [http://localhost:4200/](http://localhost:4200/).
+1. **Start the backend**:
+   ```bash
+   # From the src directory
+   dotnet run --project Auth.Api/Auth.Api.csproj
+   ```
+   The API will be available at `https://localhost:7190` or `http://localhost:5166`.
 
-2. **Run Backend**
-    1. Open the **AuthSol.sln** project in Rider or Visual Studio.
-    2. Use the run button to start the backend project.
+2. **Start the frontend** (in a new terminal):
+   ```bash
+   # From the Auth.Frontend directory
+   ng serve
+   ```
+   Navigate to [http://localhost:4200](http://localhost:4200) in your browser.
 
-3. Once both the frontend and backend are running, you’re all set to start using the app. Enjoy! :)
+</details>
 
-## Test Using SwaggerUI
-Select the **Auth.API** startup item in VS or Rider and try it.
+<details>
+<summary><h4>Test using Swagger UI</h4></summary>
 
-![SwaggerUI](./doc/img/login.gif)
+1. Open your IDE (Visual Studio or Rider) and run the **Auth.Api** project
+2. Navigate to the Swagger UI (automatically opens, or go to `/swagger`)
+3. Authenticate using either method:
 
-## Test Using .http file (VS2022)
- * Go to Tests/HttpDebugTests folder and open **debug-tests.http** file in VS2022
- * Send Login request
- * Obtain jwtToken from response and use it in another requests in Authorization header
+   **Option 1: JWT Bearer Authentication**
+   - Use the `/api/auth/login` endpoint to get a JWT token
+   - Click the "Authorize" button and select "Bearer"
+   - Enter the token in the format: `Bearer <your-token>`
 
-# Motivation
-The primary goal of this project is to create a practical example of authorization and authentication using Minimal API and Clean Architecture, while also enhancing my skills with Angular.
+   **Option 2: Basic Authentication**
+   - Click the "Authorize" button and select "Basic"
+   - Enter credentials (default: username: `admin`, password: `admin`)
+   - Configured in `appsettings.json` under `Authentication:Schemes:Basic`
 
-## Backend Architecture
-The backend follows **[Clean Architecture](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures#clean-architecture)**, with the application layer split into **Core** and **Domain** projects:
-- The **Core** project contains business rules.
-- The **Domain** project holds business entities.
+4. Try the protected endpoints with your chosen authentication method
 
-### Key Patterns and Decisions:
-- **CQRS Pattern**: Separates handlers into commands and queries, with repositories structured similarly.
-- **No MediatR**: Minimal API supports injecting handlers directly into endpoint map methods, eliminating the need for **[MediatR](https://github.com/jbogard/MediatR)**.
-- **Result Pattern**: Uses the **[Result pattern](https://www.forevolve.com/en/articles/2018/03/19/operation-result/)** (via [FluentResults package](https://github.com/altmann/FluentResults)) instead of throwing exceptions. Each handler returns an `HttpDataResponse` object containing data, error messages, and the HTTP response code.
+![Swagger UI Demo](./doc/img/login.gif)
 
-### Features
-- **Response caching** - adding http response caching using extension method *AddResponseCachePolicy*
-- **Claims Middleware** - adding custom claims through middleware *ClaimsMiddleware*
+> [!NOTE]
+> Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
 
-## Frontend Structure
-The Angular frontend is organized into two main folders:
-- **Core**: Contains "feature" components (each with specific feature logic).
-- **Shared**: Stores common components, services, and extensions shared between feature components.
+</details>
 
-### JWT Handling
-This example demonstrates JWT token management on the client side. After obtaining the token from the API, it is stored in local storage via the **JwtTokenService**. The **AuthorizeGuard** checks if the client already has a token to protect routes, and **authInterceptor** automatically adds the token header to every request.
+<details>
+<summary><h4>Test using .http files</h4></summary>
 
-The project uses **PrimeNG** and **PrimeFlex** for styling and layout.
+1. Navigate to `Tests/HttpDebugTests/debug-tests.http`
+2. Send the Login request to obtain a JWT token
+3. Copy the token from the response
+4. Use the token in subsequent requests by adding it to the `Authorization` header:
+   ```http
+   Authorization: Bearer <your-token>
+   ```
+
+Alternatively, test Basic Authentication by adding:
+```http
+Authorization: Basic YWRtaW46YWRtaW4=
+```
+(Base64 encoded `admin:admin`)
+
+</details>
+
+## Architecture
+
+This project follows **Clean Architecture** principles with clear separation of concerns.
+
+### Design patterns and decisions
+
+**CQRS without MediatR**: Minimal APIs support direct handler injection, eliminating the need for a mediator library. Handlers are split into commands (writes) and queries (reads).
+
+**Result Pattern**: Uses [FluentResults](https://github.com/altmann/FluentResults) instead of exceptions. Each handler returns an `HttpDataResponse` containing data, error messages, and HTTP status codes.
+
+**Validation**: [Validot](https://github.com/bartoszlenar/Validot) provides declarative, performant validation rules integrated via dependency injection.
+
+**Mapping**: [Mapster](https://github.com/MapsterMapper/Mapster) handles object-to-object mapping with high performance and low ceremony.
+
+### Backend features
+
+- **Dual Authentication**: Both JWT Bearer and Basic Authentication schemes configured and available simultaneously
+- **Authorization Policies**: Different endpoints demonstrate various policy-based authorization patterns
+- **Response Caching**: Extension method `AddResponseCachePolicy` adds HTTP response caching to endpoints
+- **Claims Middleware**: `ClaimsMiddleware` dynamically enriches user claims during request processing
+- **In-Memory Database**: Entity Framework Core InMemory provider for quick setup and testing
+
+### Frontend architecture
+
+The Angular frontend is organized into:
+
+- **Core**: Feature components with specific business logic (login, register, user management)
+- **Shared**: Reusable components, services, guards, and interceptors
+
+**JWT Token Flow**:
+1. User logs in via API
+2. `JwtTokenService` stores token in local storage
+3. `AuthorizeGuard` protects routes by checking token presence
+4. `authInterceptor` automatically adds `Authorization` header to all HTTP requests
 
 ## Technologies
-* [ASP.NET Core 10](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-10.0)
-* [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli)
-* [Mapster](https://github.com/MapsterMapper/Mapster)
-* [SmallApiToolkit](https://github.com/Gramli/SmallApiToolkit)
-* [FluentResuls](https://github.com/altmann/FluentResults)
-* [Validot](https://github.com/bartoszlenar/Validot)
-* [GuardClauses](https://github.com/ardalis/GuardClauses)
-* [Angular 21](https://angular.dev)
-* [PrimeNG](https://primeng.org)
-* [PrimeFlex](https://primeflex.org)
+
+**Backend**:
+- [ASP.NET Core 10](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-10.0) - Minimal APIs
+- [Entity Framework Core InMemory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli) - Data persistence
+- [Mapster](https://github.com/MapsterMapper/Mapster) - Object mapping
+- [SmallApiToolkit](https://github.com/Gramli/SmallApiToolkit) - API utilities
+- [FluentResults](https://github.com/altmann/FluentResults) - Result pattern
+- [Validot](https://github.com/bartoszlenar/Validot) - Validation
+- [GuardClauses](https://github.com/ardalis/GuardClauses) - Defensive programming
+
+**Frontend**:
+- [Angular 21](https://angular.dev) - Framework with standalone components
+- [PrimeNG](https://primeng.org) - UI component library
+- [PrimeFlex](https://primeflex.org) - CSS utility framework
