@@ -84,8 +84,7 @@ This application demonstrates enterprise-grade authentication and authorization 
 
 ### Running the application
 
-<details open>
-<summary><h4>Run both backend and frontend</h4></summary>
+#### Run both backend and frontend:
 
 1. **Start the backend**:
    ```bash
@@ -101,10 +100,8 @@ This application demonstrates enterprise-grade authentication and authorization 
    ```
    Navigate to [http://localhost:4200](http://localhost:4200) in your browser.
 
-</details>
 
-<details>
-<summary><h4>Test using Swagger UI</h4></summary>
+#### Test using Swagger UI:
 
 1. Open your IDE (Visual Studio or Rider) and run the **Auth.Api** project
 2. Navigate to the Swagger UI (automatically opens, or go to `/swagger`)
@@ -127,10 +124,7 @@ This application demonstrates enterprise-grade authentication and authorization 
 > [!NOTE]
 > Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
 
-</details>
-
-<details>
-<summary><h4>Test using .http files</h4></summary>
+#### Test using .http files:
 
 1. Navigate to `Tests/HttpDebugTests/debug-tests.http`
 2. Send the Login request to obtain a JWT token
@@ -145,8 +139,6 @@ Alternatively, test Basic Authentication by adding:
 Authorization: Basic YWRtaW46YWRtaW4=
 ```
 (Base64 encoded `admin:admin`)
-
-</details>
 
 ## Architecture
 

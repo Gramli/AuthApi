@@ -32,10 +32,10 @@ if (app.Environment.IsDevelopment())
 app.UseCors(corsPolicyName);
 
 app.UseAuthentication();
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ClaimsMiddleware>();
 

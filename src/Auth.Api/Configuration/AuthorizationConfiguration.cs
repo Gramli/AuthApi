@@ -2,7 +2,6 @@
 using Auth.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
 
 namespace Auth.Api.Configuration
 {
