@@ -119,8 +119,6 @@ This application demonstrates enterprise-grade authentication and authorization 
 
 4. Try the protected endpoints with your chosen authentication method
 
-![Swagger UI Demo](./doc/img/login.gif)
-
 > [!NOTE]
 > Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
 
@@ -133,12 +131,11 @@ This application demonstrates enterprise-grade authentication and authorization 
    ```http
    Authorization: Bearer <your-token>
    ```
-
-Alternatively, test Basic Authentication by adding:
-```http
-Authorization: Basic YWRtaW46YWRtaW4=
-```
-(Base64 encoded `admin:admin`)
+   Alternatively, test Basic Authentication by adding:
+   ```http
+   Authorization: Basic YWRtaW46YWRtaW4=
+   ```
+   (Base64 encoded `admin:admin`)
 
 ## Architecture
 
