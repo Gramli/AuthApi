@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Auth.Domain;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -7,45 +8,65 @@ using System.Text.Encodings.Web;
 
 namespace Auth.Api.BasicAuthentication
 {
-    public sealed class BasicAuthenticationHandler : AuthenticationHandler<BasicAuthOptions>
+public sealed class BasicAuthenticationHandler : AuthenticationHandler<BasicAuthOptions>
+{
+    public BasicAuthenticationHandler(
+        IOptionsMonitor<BasicAuthOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder)
+        : base(options, logger, encoder)
     {
-        public BasicAuthenticationHandler(
-            IOptionsMonitor<BasicAuthOptions> options,
-            ILoggerFactory logger,
-            UrlEncoder encoder)
-            : base(options, logger, encoder)
+    }
+
+    protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+    {
+        if (!Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
         {
+            return AuthenticateResult.Fail("Missing Authorization header");
         }
 
-        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+        if (!AuthenticationHeaderValue.TryParse(authorizationHeader.ToString(), out var authHeader))
         {
-            if (!Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
-            {
-                return AuthenticateResult.Fail("Unauthorized"); ;
-            }
+            return AuthenticateResult.Fail("Invalid Authorization header");
+        }
 
-            var authHeader = AuthenticationHeaderValue.Parse(authorizationHeader);
-            var credentialBytes = Convert.FromBase64String(authHeader.Parameter ?? string.Empty);
-            var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':', 2);
-            var username = credentials[0];
-            if (credentials.Length != 2 || username != this.Options.UserName || credentials[1] != this.Options.Password)
-            {
-                return AuthenticateResult.Fail("Forbidden");
-            }
-
-            var claims = new List<Claim>()
+        if (string.IsNullOrEmpty(authHeader?.Parameter))
         {
-            new("Username", username),
-            new("Role", "Administrator")
+            return AuthenticateResult.Fail("Missing Authorization Header parameter");
+        }
+
+        Span<byte> bytesBuffer = stackalloc byte[authHeader!.Parameter!.Length];
+        if (!Convert.TryFromBase64String(authHeader.Parameter, bytesBuffer, out var bytesWritten))
+        {
+            return AuthenticateResult.Fail("Invalid Base64 string");
+        }
+
+        var credentials = Encoding.UTF8.GetString(bytesBuffer[..bytesWritten]).Split(':', 2);
+
+        if (credentials is null || credentials.Length == 0)
+        {
+            return AuthenticateResult.Fail("Empty Authorization value");
+        }
+
+        var username = credentials[0];
+        if (credentials.Length != 2 || username != this.Options.UserName || credentials[1] != this.Options.Password)
+        {
+            return AuthenticateResult.Fail("Invalid credentials");
+        }
+
+        var claims = new List<Claim>()
+        {
+            new(ClaimTypes.Name, username),
+            new(ClaimTypes.Role, AuthRoles.Administrator)
         };
 
-            var claimsIdentity = new ClaimsIdentity(claims, Scheme.Name);
-            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+        var claimsIdentity = new ClaimsIdentity(claims, Scheme.Name);
+        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-            return AuthenticateResult.Success(
-                new AuthenticationTicket(
-                    claimsPrincipal,
-                    Scheme.Name));
-        }
+        return AuthenticateResult.Success(
+            new AuthenticationTicket(
+                claimsPrincipal,
+                Scheme.Name));
     }
+}
 }

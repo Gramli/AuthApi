@@ -24,8 +24,11 @@ namespace Auth.Api.Configuration
                 options.TokenValidationParameters.ValidateIssuerSigningKey = true;
             }).AddScheme<BasicAuthOptions, BasicAuthenticationHandler>(BasicSchemeDefaults.AuthenticationScheme, (options) =>
             {
-                options.UserName = configuration["Authentication:Schemes:Basic:UserName"] ?? string.Empty;
-                options.Password = configuration["Authentication:Schemes:Basic:Password"] ?? string.Empty;
+                var name = configuration["Authentication:Schemes:Basic:UserName"];
+                var password = configuration["Authentication:Schemes:Basic:Password"];
+
+                options.UserName = Guard.Against.NullOrEmpty(name);
+                options.Password = Guard.Against.NullOrEmpty(password);
             });
 
             return serviceCollection;
