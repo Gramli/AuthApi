@@ -27,9 +27,16 @@ namespace Auth.Api.EndpointBuilders
                     .AddResponseCacheHourPolicy()
                     .RequireAuthorization(AuthorizationConfiguration.UserPolicyName);
 
+            endpointRouteBuilder.MapGet("/info-basic",
+                async ([FromServices] IHttpRequestHandler<ServiceInfoDto, EmptyRequest> getServiceInfoQueryHandler, CancellationToken cancellationToken) =>
+                await getServiceInfoQueryHandler.SendAsync(EmptyRequest.Instance, cancellationToken))
+                    .Produces<ServiceInfoDto>()
+                    .WithName("GetServiceInfoBasic")
+                    .AddResponseCacheHourPolicy()
+                    .RequireAuthorization(AuthorizationConfiguration.BasicPolicyName);
+
             return endpointRouteBuilder;
         }
-
 
     }
 }

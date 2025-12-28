@@ -1,23 +1,43 @@
-﻿using Auth.Domain;
+﻿using Auth.Api.BasicAuthentication;
+using Auth.Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Auth.Api.Configuration
 {
-    public static class AuthorizationConfiguration
+public static class AuthorizationConfiguration
+{
+    public static readonly string BasicPolicyName = "basicPolicy";
+    public static readonly string UserPolicyName = "userPolicy";
+    public static readonly string DeveloperPolicyName = "developerPolicy";
+    public static readonly string AdministratorPolicyName = "administratorPolicy";
+
+    public static IServiceCollection ConfigureAuthorization(this IServiceCollection serviceCollection)
     {
-        public static readonly string UserPolicyName = "userPolicy";
-        public static readonly string DeveloperPolicyName = "developerPolicy";
-        public static readonly string AdministratorPolicyName = "administratorPolicy";
-
-        public static IServiceCollection ConfigureAuthorization(this IServiceCollection serviceCollection)
+        serviceCollection.AddAuthorization(options =>
         {
-            serviceCollection.AddAuthorization(options =>
+            options.AddBearerPolicy(UserPolicyName, AuthRoles.AllRoles);
+            options.AddBearerPolicy(DeveloperPolicyName, [AuthRoles.Developer, AuthRoles.Administrator]);
+            options.AddBearerPolicy(AdministratorPolicyName, [AuthRoles.Administrator]);
+            options.AddPolicy(BasicPolicyName, options =>
             {
-                options.AddPolicy(UserPolicyName, policy => policy.RequireRole(AuthRoles.AllRoles));
-                options.AddPolicy(DeveloperPolicyName, policy => policy.RequireRole(AuthRoles.Developer, AuthRoles.Administrator));
-                options.AddPolicy(AdministratorPolicyName, policy => policy.RequireRole(AuthRoles.Administrator));
+                options.RequireAuthenticatedUser();
+                options.AddAuthenticationSchemes(BasicSchemeDefaults.AuthenticationScheme);
             });
+        });
 
-            return serviceCollection;
-        }
+        return serviceCollection;
     }
+
+    public static void AddBearerPolicy(this AuthorizationOptions authorizationOptions, string policyName, IEnumerable<string> roles)
+    {
+        authorizationOptions.AddPolicy(policyName, policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            policy.RequireRole(roles);
+
+        });
+    }
+}
 }

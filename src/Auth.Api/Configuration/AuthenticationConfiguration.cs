@@ -1,38 +1,40 @@
 ﻿using Ardalis.GuardClauses;
+using Auth.Api.BasicAuthentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 namespace Auth.Api.Configuration
 {
-    public static class AuthenticationConfiguration
+public static class AuthenticationConfiguration
+{
+    public static IServiceCollection ConfigureAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        public static IServiceCollection ConfigureAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
+        var jwtKey = Guard.Against.NullOrEmpty(configuration["Authentication:Schemes:Bearer:Key"]);
+
+        serviceCollection.AddAuthentication(options =>
         {
-            var jwtKey = Guard.Against.NullOrEmpty(configuration["Jwt:Key"]);
-            var issuer = Guard.Against.NullOrEmpty(configuration["Jwt:Issuer"]);
-            var audience = Guard.Against.NullOrEmpty(configuration["Jwt:Audience"]);
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+        {
+            options.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
+            options.TokenValidationParameters.ValidateIssuerSigningKey = true;
+            options.TokenValidationParameters.ValidateIssuer = true;
+            options.TokenValidationParameters.ValidateAudience = true;
+            options.TokenValidationParameters.ValidateLifetime = true;
+        }).AddScheme<BasicAuthOptions, BasicAuthenticationHandler>(BasicSchemeDefaults.AuthenticationScheme, (options) =>
+        {
+            var name = configuration["Authentication:Schemes:Basic:UserName"];
+            var password = configuration["Authentication:Schemes:Basic:Password"];
 
-            serviceCollection.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey)),
-                    ValidIssuer = issuer,
-                    ValidateIssuer = true,
-                    ValidAudiences = [audience],
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true
-                };
-            });
+            options.UserName = Guard.Against.NullOrEmpty(name);
+            options.Password = Guard.Against.NullOrEmpty(password);
+        });
 
-            return serviceCollection;
-        }
+        return serviceCollection;
     }
+}
 }

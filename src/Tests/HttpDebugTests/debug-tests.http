@@ -3,7 +3,7 @@
 @host={{hostname}}:{{port}}
 
 ### Register request
-POST https://{{host}}/v1/user/register
+POST https://{{host}}/v1/auth/register
 Content-Type: application/json
 
 {
@@ -12,8 +12,8 @@ Content-Type: application/json
   "email": "something@som.com"
 }
 
-### Login reguest
-POST https://{{host}}/v1/user/login
+### Login request
+POST https://{{host}}/v1/auth/login
 Content-Type: application/json
 
 {
@@ -25,7 +25,7 @@ Content-Type: application/json
 ### Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJuYmYiOjE3MDAwNzgzODUsImV4cCI6MTcwMDA3OTU4NSwiaWF0IjoxNzAwMDc4Mzg1fQ.stURuZ1faZ6zvGHkrjgxY71le9IkGcNHTv5-PgFe5jw
 
 ### Change Role request
-POST https://{{host}}/v1/user/change-role
+POST https://{{host}}/v1/users/<id>/role
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
@@ -36,18 +36,24 @@ Authorization: Bearer <generated token>
 
 ### Users Info
 
-GET https://{{host}}/v1/user/users-info
+GET https://{{host}}/v1/users
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
 ### User Info
 
-GET https://{{host}}/v1/user/user-info
+GET https://{{host}}/v1/auth/user
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
 ### Service Info
 
-GET https://{{host}}/v1/user/service/getServiceInfo
+GET https://{{host}}/v1/service/info
 Content-Type: application/json
 Authorization: Bearer <generated token>
+
+### Service Info Basic
+
+GET https://{{host}}/v1/service/info-basic
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=

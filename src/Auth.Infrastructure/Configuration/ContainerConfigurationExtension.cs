@@ -1,4 +1,4 @@
-﻿using Auth.Core.Abstractions.Repositories;
+﻿using Ardalis.GuardClauses;
 using Auth.Core.Abstractions.Services;
 using Auth.Domain.UseCases.User.Commands;
 using Auth.Domain.UseCases.User.Dto;
@@ -19,8 +19,14 @@ namespace Auth.Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            //just for example purpose => security issue, jwt secret is NOT in app config!
-            serviceCollection.Configure<TokenOptions>(configuration.GetSection("jwt"));
+            serviceCollection.Configure<TokenOptions>(options =>
+            {
+                var bearerSection = configuration.GetSection("Authentication:Schemes:Bearer");
+                options.Key = Guard.Against.Null(bearerSection["Key"]);
+                options.ExpirationInMinutes = Guard.Against.Null(bearerSection.GetValue<int>("ExpirationInMinutes"));
+                options.Issuer = Guard.Against.Null(bearerSection["ValidIssuer"]);
+                options.Audience = Guard.Against.Null(bearerSection.GetSection("ValidAudiences").Get<string[]>()?.FirstOrDefault());
+            });
 
             return serviceCollection
                 .RegisterMapsterConfiguration()
