@@ -10,9 +10,9 @@
 ![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat-square&logo=angular)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE.md)
 
-⭐ If you like this project, star it on GitHub — it helps a lot!
+⭐ If you like this project, star it on GitHub!
 
-[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Architecture](#architecture) • [Technologies](#technologies)
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Running Tests](#running-tests) • [Limitations](#limitations) • [Architecture](#architecture) • [Technologies](#technologies)
 
 </div>
 
@@ -20,7 +20,7 @@ A full-stack authentication and authorization solution demonstrating Clean Archi
 
 ## Overview
 
-This application demonstrates enterprise-grade authentication and authorization patterns using a clean architecture approach. The backend implements **dual authentication schemes** (JWT Bearer tokens and Basic Authentication) with **minimal APIs**, while the frontend showcases modern Angular practices with standalone components and signals.
+This application demonstrates authentication and authorization patterns using a clean architecture approach. The backend implements **dual authentication schemes** (JWT Bearer tokens and Basic Authentication) with **minimal APIs**, while the frontend showcases modern Angular practices with standalone components and signals.
 
 **Key capabilities:**
 - User registration and login with JWT tokens
@@ -52,16 +52,16 @@ This application demonstrates enterprise-grade authentication and authorization 
 - **Signals**: Reactive state management with Angular signals
 - **JWT Token Management**: Automatic token storage and injection via interceptors
 - **Route Guards**: Protect routes based on authentication state
-- **PrimeNG UI**: Professional UI components with PrimeFlex layout utilities
+- **PrimeNG UI**: UI components with PrimeFlex layout utilities
 
 ## Getting started
 
 ### Prerequisites
 
 - **.NET SDK 10.0+** - [Download](https://dotnet.microsoft.com/download)
-- **Node.js 24.11.x+** - [Download](https://nodejs.org/)
+- **Node.js 20.x or 22.x** (LTS versions) - [Download](https://nodejs.org/)
 - **Angular CLI 21+** - Install via `npm install -g @angular/cli`
-- **IDE**: Visual Studio 2019+, JetBrains Rider 2024.2.7+, or VS Code
+- **IDE**: Visual Studio, JetBrains Rider, or VS Code
 
 ### Installation
 
@@ -82,6 +82,20 @@ This application demonstrates enterprise-grade authentication and authorization 
    npm install
    ```
 
+### Default Credentials
+
+The application automatically seeds a default administrator account on startup:
+
+**Default User:**
+- **Username**: `admin`
+- **Password**: `admin`
+- **Role**: Administrator
+
+You can use these credentials for:
+- JWT Bearer Authentication: Login via `/api/auth/login` to get a token
+- Basic Authentication: Direct HTTP Basic auth for API access
+- New users can register via `/api/auth/register` endpoint
+
 ### Running the application
 
 #### Run both backend and frontend:
@@ -95,7 +109,8 @@ This application demonstrates enterprise-grade authentication and authorization 
 
 2. **Start the frontend** (in a new terminal):
    ```bash
-   # From the Auth.Frontend directory
+   # From the src directory, navigate to Auth.Frontend
+   cd Auth.Frontend
    ng serve
    ```
    Navigate to [http://localhost:4200](http://localhost:4200) in your browser.
@@ -107,27 +122,47 @@ This application demonstrates enterprise-grade authentication and authorization 
 2. Navigate to the Swagger UI (automatically opens, or go to `/swagger`)
 3. Authenticate using either method:
 
-   **Option 1: JWT Bearer Authentication**
-   - Use the `/api/auth/login` endpoint to get a JWT token
+   **Option 1: JWT Bearer Authentication** (Recommended for user sessions)
+   - Use the `/api/auth/login` endpoint with credentials (`admin`/`admin`)
    - Click the "Authorize" button and select "Bearer"
    - Enter the token in the format: `Bearer <your-token>`
+   - **When to use**: User authentication, web/mobile applications, token expiration needed
 
-   **Option 2: Basic Authentication**
+   **Option 2: Basic Authentication** (For service-to-service communication)
    - Click the "Authorize" button and select "Basic"
-   - Enter credentials (default: username: `admin`, password: `admin`)
-   - Configured in `appsettings.json` under `Authentication:Schemes:Basic`
+   - Enter credentials (username: `admin`, password: `admin`)
+   - **When to use**: Server-to-server calls, admin tools, quick testing without token management
 
 4. Try the protected endpoints with your chosen authentication method
+
+### API Endpoints
+
+Key endpoints available:
+
+**Authentication** (Public):
+- `POST /v1/auth/register` - Register new user
+- `POST /v1/auth/login` - Login and get JWT token
+- `GET /v1/auth/user` - Get current user info (authenticated)
+
+**User Management** (Requires authentication):
+- `GET /v1/users` - Get all users (admin only)
+- `POST /v1/users/{id}/role` - Change user role (admin only)
+
+**Service** (Requires authentication):
+- Additional service endpoints (check Swagger UI for full list)
+
+For complete API documentation, run the application and visit the Swagger UI at `/swagger`.
 
 > [!NOTE]
 > Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
 
 #### Test using .http files:
 
-1. Navigate to `Tests/HttpDebugTests/debug-tests.http`
-2. Send the Login request to obtain a JWT token
-3. Copy the token from the response
-4. Use the token in subsequent requests by adding it to the `Authorization` header:
+1. Navigate to [Tests/HttpDebugTests/debug-tests.http](src/Tests/HttpDebugTests/debug-tests.http)
+2. The file includes examples with default credentials (`admin`/`admin`)
+3. Send the Login request to obtain a JWT token
+4. Copy the token from the response
+5. Use the token in subsequent requests by adding it to the `Authorization` header:
    ```http
    Authorization: Bearer <your-token>
    ```
@@ -141,23 +176,30 @@ This application demonstrates enterprise-grade authentication and authorization 
 
 This project follows **Clean Architecture** principles with clear separation of concerns.
 
+**Layer Responsibilities:**
+
+- **Auth.Api**: Entry point - endpoints, middleware, configuration, authentication schemes
+- **Auth.Core**: Business logic - use cases, validation, command/query handlers
+- **Auth.Domain**: Domain models - entities, commands, queries, domain rules
+- **Auth.Infrastructure**: External concerns - database, repositories, external services
+
 ### Design patterns and decisions
 
-**CQRS without MediatR**: Minimal APIs support direct handler injection, eliminating the need for a mediator library. Handlers are split into commands (writes) and queries (reads).
+**CQRS without MediatR**: Command-Query separation is achieved through direct handler injection in Minimal APIs. This reduces complexity and abstraction layers while maintaining separation between writes (commands) and reads (queries). Simpler and more maintainable for small-to-medium projects.
 
-**Result Pattern**: Uses [FluentResults](https://github.com/altmann/FluentResults) instead of exceptions. Each handler returns an `HttpDataResponse` containing data, error messages, and HTTP status codes.
+**Result Pattern**: Uses [FluentResults](https://github.com/altmann/FluentResults) instead of exceptions for flow control, providing explicit error handling and better type safety.
 
 **Validation**: [Validot](https://github.com/bartoszlenar/Validot) provides declarative, performant validation rules integrated via dependency injection.
 
 **Mapping**: [Mapster](https://github.com/MapsterMapper/Mapster) handles object-to-object mapping with high performance and low ceremony.
 
-### Backend features
+### Backend Architecture
 
-- **Dual Authentication**: Both JWT Bearer and Basic Authentication schemes configured and available simultaneously
-- **Authorization Policies**: Different endpoints demonstrate various policy-based authorization patterns
-- **Response Caching**: Extension method `AddResponseCachePolicy` adds HTTP response caching to endpoints
-- **Claims Middleware**: `ClaimsMiddleware` dynamically enriches user claims during request processing
-- **In-Memory Database**: Entity Framework Core InMemory provider for quick setup and testing
+- **Dual Authentication**: JWT Bearer for user sessions, Basic Auth for service-to-service communication
+- **Authorization Policies**: Role-based access control with custom policies
+- **Response Caching**: HTTP response caching for improved performance
+- **Claims Middleware**: Dynamic user claims enrichment
+- **Database Seeding**: Automatic creation of default roles and admin user on startup
 
 ### Frontend architecture
 
