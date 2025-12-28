@@ -12,7 +12,7 @@
 
 ⭐ If you like this project, star it on GitHub!
 
-[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Running Tests](#running-tests) • [Limitations](#limitations) • [Architecture](#architecture) • [Technologies](#technologies)
+[Overview](#overview) • [Features](#features) • [Getting started](#getting-started) • [Architecture](#architecture) • [Technologies](#technologies)
 
 </div>
 
@@ -96,6 +96,12 @@ You can use these credentials for:
 - Basic Authentication: Direct HTTP Basic auth for API access
 - New users can register via `/api/auth/register` endpoint
 
+> [!NOTE]
+> Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
+
+> [!NOTE]
+> JWT Authentication default user credentials can be configured in [Auth.Infrastructure.Configuration.UsersConfiguration.cs](https://github.com/Gramli/AuthApi/blob/feature/multiple-auth-schemes/src/Auth.Infrastructure/Configuration/UsersConfiguration.cs) file.
+
 ### Running the application
 
 #### Run both backend and frontend:
@@ -134,27 +140,6 @@ You can use these credentials for:
    - **When to use**: Server-to-server calls, admin tools, quick testing without token management
 
 4. Try the protected endpoints with your chosen authentication method
-
-### API Endpoints
-
-Key endpoints available:
-
-**Authentication** (Public):
-- `POST /v1/auth/register` - Register new user
-- `POST /v1/auth/login` - Login and get JWT token
-- `GET /v1/auth/user` - Get current user info (authenticated)
-
-**User Management** (Requires authentication):
-- `GET /v1/users` - Get all users (admin only)
-- `POST /v1/users/{id}/role` - Change user role (admin only)
-
-**Service** (Requires authentication):
-- Additional service endpoints (check Swagger UI for full list)
-
-For complete API documentation, run the application and visit the Swagger UI at `/swagger`.
-
-> [!NOTE]
-> Basic Authentication credentials can be configured in [appsettings.json](src/Auth.Api/appsettings.json) under the `Authentication:Schemes:Basic` section.
 
 #### Test using .http files:
 
