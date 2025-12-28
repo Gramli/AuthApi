@@ -1,4 +1,5 @@
-﻿using Auth.Core.Abstractions.Services;
+﻿using Ardalis.GuardClauses;
+using Auth.Core.Abstractions.Services;
 using Auth.Domain.UseCases.User.Commands;
 using Auth.Domain.UseCases.User.Dto;
 using Auth.Infrastructure.Database.EFContext;
@@ -21,10 +22,10 @@ namespace Auth.Infrastructure.Configuration
             serviceCollection.Configure<TokenOptions>(options =>
             {
                 var bearerSection = configuration.GetSection("Authentication:Schemes:Bearer");
-                options.Key = bearerSection["Key"] ?? string.Empty;
-                options.ExpirationInMinutes = bearerSection.GetValue<int>("ExpirationInMinutes");
-                options.Issuer = bearerSection["ValidIssuer"] ?? string.Empty;
-                options.Audience = bearerSection.GetSection("ValidAudiences").Get<string[]>()?.FirstOrDefault() ?? string.Empty;
+                options.Key = Guard.Against.Null(bearerSection["Key"]);
+                options.ExpirationInMinutes = Guard.Against.Null(bearerSection.GetValue<int>("ExpirationInMinutes"));
+                options.Issuer = Guard.Against.Null(bearerSection["ValidIssuer"]);
+                options.Audience = Guard.Against.Null(bearerSection.GetSection("ValidAudiences").Get<string[]>()?.FirstOrDefault());
             });
 
             return serviceCollection

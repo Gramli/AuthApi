@@ -42,7 +42,7 @@ Authorization: Bearer <generated token>
 
 ### User Info
 
-GET https://{{host}}/v1/auth/user/
+GET https://{{host}}/v1/auth/user
 Content-Type: application/json
 Authorization: Bearer <generated token>
 
