@@ -22,6 +22,9 @@ public static class AuthenticationConfiguration
         {
             options.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
             options.TokenValidationParameters.ValidateIssuerSigningKey = true;
+            options.TokenValidationParameters.ValidateIssuer = true;
+            options.TokenValidationParameters.ValidateAudience = true;
+            options.TokenValidationParameters.ValidateLifetime = true;
         }).AddScheme<BasicAuthOptions, BasicAuthenticationHandler>(BasicSchemeDefaults.AuthenticationScheme, (options) =>
         {
             var name = configuration["Authentication:Schemes:Basic:UserName"];
