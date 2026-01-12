@@ -1,13 +1,25 @@
 version: 2
 updates:
-- package-ecosystem: nuget
+- package-ecosystem: "nuget"
   directory: "/src"
   schedule:
-    interval: weekly
+    interval: "weekly"
   open-pull-requests-limit: 5
+  groups:
+    all-minor-patch:
+      update-types:
+        - "minor"
+        - "patch"
 
 - package-ecosystem: npm
   directory: "/src/Auth.Frontend"
   schedule:
-    interval: weekly
-  open-pull-requests-limit: 5
+    interval: "weekly"
+  open-pull-requests-limit: 5  
+  groups:
+    angular:
+      patterns:
+        - "@angular/*"
+      update-types:
+        - "minor"
+        - "patch"
