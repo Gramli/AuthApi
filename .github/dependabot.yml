@@ -6,8 +6,8 @@ updates:
     interval: weekly
   open-pull-requests-limit: 5
 
-- package-ecosystem: "npm"
+- package-ecosystem: npm
   directory: "/src/Auth.Frontend"
   schedule:
-    interval: "weekly"
+    interval: weekly
   open-pull-requests-limit: 5
