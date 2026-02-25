@@ -22,5 +22,7 @@ jobs:
           node-version: 24.11.x
       - name: Install dependencies
         run: npm ci
+      - name: Run Vitest tests
+        run: npm run test
       - name: Build Example
         run: npm run build
