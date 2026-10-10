@@ -1,5 +1,5 @@
 
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { IUser } from '../../shared/model/user.model';
 import { AdminUserService, UserAuthService } from '../../shared';
 
@@ -7,6 +7,7 @@ import { AdminUserService, UserAuthService } from '../../shared';
     selector: 'app-users-info',
     imports: [],
     templateUrl: './users-info.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './users-info.component.scss'
 })
 export class UsersInfoComponent implements OnInit {

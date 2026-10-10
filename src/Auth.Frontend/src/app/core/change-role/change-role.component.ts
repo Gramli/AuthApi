@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,17 +6,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SelectModule } from 'primeng/select';
-import { ButtonModule } from 'primeng/button';
+import { SelectModule } from '@openng/optimus-ui/select';
+import { ButtonModule } from '@openng/optimus-ui/button';
 import { AdminUserService, UserAuthService } from '../../shared';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { MessageService } from '@openng/optimus-ui/api';
+import { ToastModule } from '@openng/optimus-ui/toast';
 import { IUser } from '../../shared/model/user.model';
 
 @Component({
     selector: 'app-change-role',
     imports: [SelectModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
     templateUrl: './change-role.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './change-role.component.scss'
 })
 export class ChangeRoleComponent implements OnInit {

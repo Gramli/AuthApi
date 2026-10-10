@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,16 +8,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
 import { SubmitedUser } from '../../model/user.model';
-import { ButtonModule } from 'primeng/button';
-import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { PasswordModule } from '@openng/optimus-ui/password';
 
 @Component({
     selector: 'app-login-or-register',
     imports: [FormsModule, ReactiveFormsModule, InputTextModule, ButtonModule, PasswordModule],
     templateUrl: './login-or-register.component.html',
     styleUrl: './login-or-register.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
 })
 export class LoginOrRegisterComponent implements OnInit {

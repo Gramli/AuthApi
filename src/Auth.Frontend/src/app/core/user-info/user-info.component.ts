@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { IUserInfo } from '../../shared/model/user.model';
 import { UserAuthService } from '../../shared';
 
@@ -6,6 +6,7 @@ import { UserAuthService } from '../../shared';
     selector: 'app-user-info',
     imports: [],
     templateUrl: './user-info.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './user-info.component.scss'
 })
 export class UserInfoComponent implements OnInit {
