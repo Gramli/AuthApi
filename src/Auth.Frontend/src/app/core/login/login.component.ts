@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LoginOrRegisterComponent, UserAuthService } from '../../shared';
 import { IUserLogin } from '../../shared/model/user.model';
-import { MessageService } from 'primeng/api';
+import { MessageService } from '@openng/optimus-ui/api';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CardModule } from 'primeng/card';
+import { CardModule } from '@openng/optimus-ui/card';
 import { RouterLink } from '@angular/router';
-import { ToastModule } from 'primeng/toast';
-import { ButtonModule } from 'primeng/button';
+import { ToastModule } from '@openng/optimus-ui/toast';
+import { ButtonModule } from '@openng/optimus-ui/button';
 
 @Component({
     selector: 'app-login',
@@ -18,6 +18,7 @@ import { ButtonModule } from 'primeng/button';
         RouterLink,
         ToastModule,
         ButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class LoginComponent {

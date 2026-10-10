@@ -7,7 +7,7 @@
 [![.NET Build and Test](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/dotnet.yml)
 [![Angular Build](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml/badge.svg)](https://github.com/Gramli/AuthApi/actions/workflows/angular.yml)
 ![.NET](https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet)
-![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat-square&logo=angular)
+![Angular](https://img.shields.io/badge/Angular-22-DD0031?style=flat-square&logo=angular)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE.md)
 
 ⭐ If you like this project, star it on GitHub!
@@ -59,8 +59,8 @@ This application demonstrates authentication and authorization patterns using a 
 ### Prerequisites
 
 - **.NET SDK 10.0+** - [Download](https://dotnet.microsoft.com/download)
-- **Node.js 20.x or 22.x** (LTS versions) - [Download](https://nodejs.org/)
-- **Angular CLI 21+** - Install via `npm install -g @angular/cli`
+- **Node.js 24.21.0** (LTS) - [Download](https://nodejs.org/)
+- **Angular CLI 22** - Included in the frontend's npm dependencies
 - **IDE**: Visual Studio, JetBrains Rider, or VS Code
 
 ### Installation
@@ -104,12 +104,27 @@ You can use these credentials for:
 
 ### Running the application
 
+On Windows, run this from the repository root to open the backend and frontend in
+separate command windows:
+
+```powershell
+.\scripts\start-dev.ps1
+```
+
+To start either application separately, use `.\scripts\start-backend.ps1` or
+`.\scripts\start-frontend.ps1`. Install the dependencies first as described above.
+The backend builds in Debug configuration first and starts only if the build
+succeeds, using `--no-build` and the `https` launch profile at
+`https://localhost:7190`, matching the frontend's API URL. If the development certificate is not trusted yet, run
+`dotnet dev-certs https --trust` once. Use Ctrl+C in each window to stop its server;
+the windows stay open so you can inspect the output.
+
 #### Run both backend and frontend:
 
 1. **Start the backend**:
    ```bash
    # From the src directory
-   dotnet run --project Auth.Api/Auth.Api.csproj
+   dotnet run --project Auth.Api/Auth.Api.csproj --launch-profile https
    ```
    The API will be available at `https://localhost:7190` or `http://localhost:5166`.
 
@@ -117,7 +132,7 @@ You can use these credentials for:
    ```bash
    # From the src directory, navigate to Auth.Frontend
    cd Auth.Frontend
-   ng serve
+   npm start
    ```
    Navigate to [http://localhost:4200](http://localhost:4200) in your browser.
 
@@ -211,6 +226,6 @@ The Angular frontend is organized into:
 - [GuardClauses](https://github.com/ardalis/GuardClauses) - Defensive programming
 
 **Frontend**:
-- [Angular 21](https://angular.dev) - Framework with standalone components
-- [PrimeNG](https://primeng.org) - UI component library
+- [Angular 22](https://angular.dev) - Framework with standalone components
+- [Optimus UI](https://github.com/openng-org/optimus-ui) - MIT-licensed Angular UI component library
 - [PrimeFlex](https://primeflex.org) - CSS utility framework

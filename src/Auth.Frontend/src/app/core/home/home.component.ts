@@ -4,14 +4,15 @@ import {
   signal,
   ViewChild,
   WritableSignal,
+  ChangeDetectionStrategy
 } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { AvatarModule } from 'primeng/avatar';
-import { AvatarGroupModule } from 'primeng/avatargroup';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { ImageModule } from 'primeng/image';
-import { Menu, MenuModule } from 'primeng/menu';
+import { MenuItem } from '@openng/optimus-ui/api';
+import { AvatarModule } from '@openng/optimus-ui/avatar';
+import { AvatarGroupModule } from '@openng/optimus-ui/avatargroup';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { CardModule } from '@openng/optimus-ui/card';
+import { ImageModule } from '@openng/optimus-ui/image';
+import { Menu, MenuModule } from '@openng/optimus-ui/menu';
 import { HomeComponentState } from './model';
 
 import { Router } from '@angular/router';
@@ -26,6 +27,7 @@ import { UserAuthService } from '../../shared';
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
     AvatarModule,
     AvatarGroupModule,

@@ -1,12 +1,13 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { ServiceInfoService } from './service-info.service';
 import { IServiceInfo } from './service-info.model';
-import { AccordionModule } from 'primeng/accordion';
+import { AccordionModule } from '@openng/optimus-ui/accordion';
 
 @Component({
     selector: 'app-service-info',
     imports: [AccordionModule],
     templateUrl: './service-info.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './service-info.component.scss'
 })
 export class ServiceInfoComponent implements OnInit {

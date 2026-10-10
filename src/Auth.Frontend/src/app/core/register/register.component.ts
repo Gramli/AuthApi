@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LoginOrRegisterComponent, UserAuthService } from '../../shared';
 import { Router } from '@angular/router';
 import { IRegisterUser, SubmitedUser } from '../../shared/model/user.model';
-import { CardModule } from 'primeng/card';
+import { CardModule } from '@openng/optimus-ui/card';
 import { RouterLink } from '@angular/router';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
+import { ToastModule } from '@openng/optimus-ui/toast';
+import { MessageService } from '@openng/optimus-ui/api';
+import { ButtonModule } from '@openng/optimus-ui/button';
 
 @Component({
     selector: 'app-register',
@@ -19,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
         ToastModule,
         ButtonModule,
     ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class RegisterComponent {
