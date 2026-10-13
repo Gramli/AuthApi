@@ -33,7 +33,7 @@
     "@angular/build": "^22.2.2",
     "@angular/cli": "^22.2.2",
     "@angular/compiler-cli": "^22.2.2",
-    "@types/jasmine": "~6.0.0",
+    "@types/jasmine": "~7.0.0",
     "jasmine-core": "~5.13.0",
     "jsdom": "^28.1.0",
     "typescript": "~6.0.3",
